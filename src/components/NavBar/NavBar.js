@@ -49,7 +49,7 @@ export default function NavBar() {
         </a>
       </div>
       {windowSize < 1000 ? (
-        <div className='hambugerMenu'>
+        <div className='sidebar'>
           <HambugerMenu/>
         </div>
       ) : (
