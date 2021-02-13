@@ -1,12 +1,21 @@
 import axios from 'axios';
 
+const baseURL = 'https://api.spacexdata.com/v4';
+
 export const fetchUpcomingMission = async () => {
-    try{
-        const response = await axios.get(
-          'https://api.spacexdata.com/v4/launches/next'
-        );
-        return (response.data)
-    } catch (error){
-        console.log(error)
-    }
-}
+  try {
+    const response = await axios.get(`${baseURL}/launches/next`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getLaunchSiteInfo = async (id) => {
+  try {
+    const response = await axios.get(`${baseURL}/launchpads/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
