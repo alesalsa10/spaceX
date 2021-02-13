@@ -28,3 +28,19 @@
   height: 60px;
   line-height: 60px;
 }
+
+@media only screen and (max-width: 400px) {
+  .dateContainer {
+    grid-template-columns: repeat(4, 60px);
+    grid-column-gap: 10px;
+  }
+  .part{
+    width: 25px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .dateContainer {
+    grid-template-columns: repeat(4, 65px);
+  }
+}

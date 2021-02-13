@@ -1,66 +1,64 @@
-.navBarContainer{
-    color: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 50%;
-    align-items: baseline;
-    justify-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
+.navBarContainer {
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 50%;
+  align-items: baseline;
+  justify-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
 }
 
-.missionsButtonDiv{
-    justify-self: end;
-    margin-right: 1rem;
+.missionsButtonDiv {
+  justify-self: end;
+  margin-right: 1rem;
 }
 
-
-a.link{
-    text-decoration: none;
-    color: white;
-    position: relative;
+a.link {
+  text-decoration: none;
+  color: white;
+  position: relative;
 }
 
-a.link:before{
-  content: "";
+a.link:before {
+  content: '';
   position: absolute;
   width: 100%;
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #FFF;
+  background-color: #fff;
   visibility: hidden;
   transform: scaleX(0);
   transition: all 0.3s ease-in-out;
 }
 
 a.link:hover:before {
-    visibility: visible;
-    transform: scaleX(1);
+  visibility: visible;
+  transform: scaleX(1);
 }
 
-.sidebar{
-    align-self: center;
-    justify-self: end;
-    /* padding: 1rem; */
-    height: 100vh;
-    cursor: pointer;
-    text-align: right;
-    position: absolute;
-    top:0;
-    right:0;
-    margin: 0;
-    padding: 0;
-    width: 100vh;
+.sidebar {
+  align-self: center;
+  justify-self: end;
+  height: 100vh;
+  cursor: pointer;
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  width: 100vh;
 }
 
 @media only screen and (max-width: 1600px) {
-    .navBarContainer{
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 20%;
-    }
+  .navBarContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 20%;
   }
+}
 
-  @media only screen and (max-width: 1000px) {
-    .navBarContainer{
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media only screen and (max-width: 1000px) {
+  .navBarContainer {
+    grid-template-columns: repeat(2, 1fr);
   }
+}

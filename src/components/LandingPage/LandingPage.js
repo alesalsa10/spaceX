@@ -8,6 +8,10 @@ export default function LandingPage() {
   const [data, setData] = useState();
   const [showMore, setShowMore] = useState(false);
 
+  const handleShowMore = () => {
+    setShowMore(true)
+  }
+
   useEffect(() => {
     async function fetchData() {
       const response = await fetchUpcomingMission();
@@ -20,14 +24,16 @@ export default function LandingPage() {
   return (
     <>
       {data !== undefined ? (
-        <div className='upcomingMissionContainer slide-up-fade-in'>
-          <div className='name'>
-            <h3>UPCOMING</h3>
-            <h1 className='missionName'>{data.name.toUpperCase()} MISSION</h1>
-            <Button text={'MORE'} />
-          </div>
-          <div className='timeToMission'>
-            <DateFormatter end={data.date_utc} />
+        <div className='mainMissionContainer'>
+          <div className='upcomingMissionContainer slide-up-fade-in'>
+            <div className='name'>
+              <h3>UPCOMING</h3>
+              <h1 className='missionName'>{data.name.toUpperCase()} MISSION</h1>
+              <Button text={'MORE'} onClick={handleShowMore}/>
+            </div>
+            <div className='timeToMission'>
+              <DateFormatter end={data.date_utc} />
+            </div>
           </div>
         </div>
       ) : (
