@@ -1,22 +1,23 @@
 import React from 'react';
 import './HamburgerMenu.css';
 import { stack as Menu } from 'react-burger-menu';
+import {Link} from 'react-router-dom'
 
 export default function HambugerMenu() {
   return (
     <Menu right outerContainerId={'outer-container'}  >
-      <a className='menu-item links' href='#'>
+      <Link className='menu-item links' to='/'>
         MISSIONS
-      </a>
-      <a className='menu-item links' href='#'>
+      </Link>
+      <Link className='menu-item links' to='/'>
         FALCON 9
-      </a>
-      <a className='menu-item links' href='#'>
+      </Link>
+      <Link className='menu-item links' to='/'>
         FALCON HEAVY
-      </a>
-      <a className='menu-item links' href='#'>
+      </Link>
+      <Link className='menu-item links' to='/'>
         STARSHIP
-      </a>
+      </Link>
     </Menu>
   );
 }

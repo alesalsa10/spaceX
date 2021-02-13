@@ -1,0 +1,30 @@
+.dateContainer {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  align-items: baseline;
+  justify-items: center;
+  justify-content: space-between;
+  grid-column-gap: 15px;
+}
+
+.timeParts {
+  width: 100%;
+  text-align: center;
+}
+
+.time {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 5px;
+  align-items: baseline;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.part {
+  background-color: rgba(153, 157, 163, 0.3);
+  width: 35px;
+  height: 60px;
+  line-height: 60px;
+}

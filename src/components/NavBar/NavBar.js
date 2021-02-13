@@ -23,7 +23,7 @@ export default function NavBar() {
   return (
     <nav className='navBarContainer'>
       <div className='logo'>
-        <a href='#'>
+        <Link to='/'>
           <svg
             enableBackground='new 0 0 331.644 40.825'
             height='40.825'
@@ -46,7 +46,7 @@ export default function NavBar() {
               fill='#a7a9ac'
             />
           </svg>
-        </a>
+        </Link>
       </div>
       {windowSize < 1000 ? (
         <div className='sidebar'>
@@ -55,29 +55,29 @@ export default function NavBar() {
       ) : (
         <>
           <div className='falcol9'>
-            <a href='#' className='link'>
+            <Link  to='/' className='link'>
               FALCON 9
-            </a>
+            </Link>
           </div>
           <div className='falconHeavy'>
-            <a href='#' className='link'>
+            <Link  to='/' className='link'>
               FALCON HEAVY
-            </a>
+            </Link>
           </div>
           <div className='dragon'>
-            <a href='#' className='link'>
+            <Link  to='/' className='link'>
               DRAGON
-            </a>
+            </Link>
           </div>
           <div className='starship'>
-            <a href='#' className='link'>
+            <Link to='/' className='link'>
               STARSHIP
-            </a>
+            </Link>
           </div>
           <div className='missionsButtonDiv'>
-            <a href='#'>
-              <Button />
-            </a>
+            <Link  to='/'>
+              <Button text={'MISSIONS'}/>
+            </Link>
           </div>
         </>
       )}
