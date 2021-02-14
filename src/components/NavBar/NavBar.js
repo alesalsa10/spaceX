@@ -6,6 +6,8 @@ import HambugerMenu from '../HamburgerMenu/HambugerMenu';
 
 export default function NavBar() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  
+
 
     React.useEffect(() => {
       function handleResize() {
@@ -50,11 +52,11 @@ export default function NavBar() {
       </div>
       {windowSize < 1000 ? (
         <div className='sidebar'>
-          <HambugerMenu/>
+          <HambugerMenu />
         </div>
       ) : (
         <>
-          <div className='falcol9'>
+          <div className='falcon9'>
             <Link  to='/' className='link'>
               FALCON 9
             </Link>

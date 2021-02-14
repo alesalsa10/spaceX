@@ -11,7 +11,7 @@ export default function LandingPage() {
   const [reUsedStatus, setReUsedStatus] = useState();
   const [orbit, setOrbit] = useState();
 
-  const handleShowMore = (e) => {
+  const handleShowMore = () => {
     setShowMore(!showMore);
   };
 

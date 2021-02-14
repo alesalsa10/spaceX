@@ -46,15 +46,14 @@ a.link:hover:before {
 .sidebar {
   align-self: center;
   justify-self: end;
-  height: 100vh;
   cursor: pointer;
   text-align: right;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   margin: 0;
   padding: 0;
-  /* width: 70vw; */
+  width: 100%;
 }
 
 @media only screen and (max-width: 1600px) {

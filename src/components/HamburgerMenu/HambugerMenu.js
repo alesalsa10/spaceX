@@ -1,9 +1,9 @@
 import React from 'react';
 import './HamburgerMenu.css';
 import { stack as Menu } from 'react-burger-menu';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-export default function HambugerMenu() {
+const HambugerMenu = () => {
   return (
     <Menu right outerContainerId={'outer-container'}>
       <Link className='menu-item links' to='/'>
@@ -23,4 +23,6 @@ export default function HambugerMenu() {
       </Link>
     </Menu>
   );
-}
+};
+
+export default HambugerMenu;

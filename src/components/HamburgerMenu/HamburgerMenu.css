@@ -3,7 +3,7 @@
   position: fixed;
   width: 36px;
   height: 30px;
-  top:1rem;
+  top: 1rem;
   right: 1rem;
 }
 
@@ -21,12 +21,13 @@
 .bm-cross-button {
   height: 30px;
   width: 30px;
+  margin-right: 2.5em !important;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
   background: #bdc3c7;
-  height: 25px !important
+  height: 25px !important;
 }
 
 /*
@@ -66,20 +67,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 
-.menu-item{
+.menu-item {
   border-bottom: 2px solid grey;
   margin-bottom: 1rem;
+  padding-right: 0.5em;
 }
 
-a.links{
-    text-decoration: none;
-    color: white;
-    position: relative;
+a.links {
+  text-decoration: none;
+  color: white;
+  position: relative;
 }
 
-a.links:focus{
+a.links:focus {
   outline: none;
 }
-
-
-

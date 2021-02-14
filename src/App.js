@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 function App() {
   
   return (
-    <div className='App'>
+    <div className='App' id='outer-container'>
       <Router>
         <NavBar />
         <Switch>
