@@ -8,8 +8,11 @@ body{
     background: url('./images/spacexImage.jpg');
     font-family: 'Roboto', sans-serif;
     background-size: cover;
-    height: 100vh;
 }
+
+/* .App{
+    height: calc(100vh);
+} */
 
 
 

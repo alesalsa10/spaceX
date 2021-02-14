@@ -18,12 +18,12 @@
 }
 
 .activeMore {
-  margin-top: 50px;
+  margin-top: 150px;
   transition: margin-top 1s;
 }
 
 .notActiveMore {
-  margin-top: 200px;
+  margin-top: 250px;
   transition: margin-top 1s;
 }
 
@@ -40,7 +40,6 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1.5rem;
-  
 }
 
 .activeInfoContainer {
@@ -50,7 +49,7 @@
 
 .notActiveInfoContainer {
   opacity: 0;
-  transition: opacity 1s;
+  transition: all 1s;
 }
 
 .infoRow {
@@ -61,12 +60,25 @@
   line-height: 50px;
 }
 
-.nextMissionInfo{
+.nextMissionInfo {
   justify-self: end;
 }
 
 .data {
   justify-self: end;
+}
+
+@media only screen and (max-width: 450px) {
+  .missionInfoContainer {
+    font-size: small;
+    padding: 0.5rem;
+  }
+  .leftColumn {
+    width: 100%;
+  }
+  .rightColumn {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -75,13 +87,36 @@
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
   }
   .missionName {
     font-size: 1.5rem;
   }
   .name {
     margin-top: 2rem;
+  }
+  .missionInfoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+  }
+  .leftColumn {
+    width: 90%;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid grey;
+  }
+  .rightColumn {
+    width: 90%;
+  }
+  .activeMore {
+    margin-top: 80px;
+    transition: margin-top 1s;
+  }
+
+  .notActiveMore {
+    margin-top: 150px;
+    transition: margin-top 1s;
   }
 }
 
@@ -98,9 +133,6 @@
   .missionName {
     font-size: 1.5rem;
   }
-  /* .name{
-      margin-top: 2rem;
-  } */
   .mainMissionContainer {
     width: 80%;
   }

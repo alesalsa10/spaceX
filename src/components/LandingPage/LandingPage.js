@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUpcomingMission, getLaunchSiteInfo } from '../../Data/fetchData';
+import { fetchUpcomingMission, getLaunchSiteInfo, getPayLoadInfo } from '../../Data/fetchData';
 import './LandingPage.css';
 import Button from '../Button/Button';
 import DateFormatter from '../Date/DateFormatter';
@@ -8,8 +8,10 @@ export default function LandingPage() {
   const [nextMissionInfo, setNextMissionInfo] = useState();
   const [showMore, setShowMore] = useState(false);
   const [launchPadName, setLaunchPadName] = useState();
+  const [reUsedStatus, setReUsedStatus] = useState();
+  const [orbit, setOrbit] = useState();
 
-  const handleShowMore = () => {
+  const handleShowMore = (e) => {
     setShowMore(!showMore);
   };
 
@@ -18,10 +20,21 @@ export default function LandingPage() {
       const upcomingMission = await fetchUpcomingMission();
       console.log(upcomingMission);
       setNextMissionInfo(upcomingMission);
+
       let launchPadID = await upcomingMission.launchpad;
       const launchSite = await getLaunchSiteInfo(launchPadID);
-      let name = await launchSite.name;
-      setLaunchPadName(name) ;
+      console.log(launchSite)
+      let name = await launchSite.name.toUpperCase();
+      setLaunchPadName(name);
+
+      let payloadsID = await upcomingMission.payloads;
+      const payLoadInfo = await getPayLoadInfo(payloadsID);
+      console.log(payLoadInfo)
+      let reUsed = payLoadInfo.reused.toString().toUpperCase();
+      setReUsedStatus(reUsed)
+
+      let OrbitInfo = await payLoadInfo.regime.toUpperCase();
+      setOrbit(OrbitInfo)
     }
     fetchnextMissionInfo();
   }, []);
@@ -69,7 +82,7 @@ export default function LandingPage() {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric',
-                    })}
+                    }).toUpperCase()}
                   </h4>
                 </div>
               </div>
@@ -78,7 +91,7 @@ export default function LandingPage() {
                   <h4>LAUNCH SITE</h4>
                 </div>
                 <div className='nextMissionInfo'>
-                  <h4> {launchPadName ? launchPadName : 0} </h4>
+                  <h4> {launchPadName} </h4>
                 </div>
               </div>
               <div className='infoRow'>
@@ -94,7 +107,7 @@ export default function LandingPage() {
                   <h4>REUSED</h4>
                 </div>
                 <div className='nextMissionInfo'>
-                  <h4>2</h4>
+                  <h4>{reUsedStatus}</h4>
                 </div>
               </div>
               <div className='infoRow'>
@@ -102,7 +115,7 @@ export default function LandingPage() {
                   <h4>PAYLOAD ORBIT</h4>{' '}
                 </div>
                 <div className='nextMissionInfo'>
-                  <h4>2</h4>
+                  <h4>{orbit}</h4>
                 </div>
               </div>
               <div className='infoRow'>

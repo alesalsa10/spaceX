@@ -14,3 +14,11 @@
 .missionButton:hover{
     background-size: 100% 100%;
 }
+
+.missionButton:focus{
+    outline: none;
+}
+
+.missionButton:hover{
+    cursor: pointer;
+}
