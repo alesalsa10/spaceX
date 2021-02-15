@@ -1,0 +1,36 @@
+.vehicleContainer{
+    width: 60%;
+    color: white;
+    margin: 150px auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+}
+
+.vehicleH4{
+    padding-bottom: 0.5rem
+}
+
+.vehicleRow{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid grey;
+
+}
+
+.imperial{
+    color: grey
+}
+
+.right{
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.vehicleDescription{
+    padding-right: 0.5rem;
+}
+

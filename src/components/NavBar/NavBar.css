@@ -2,16 +2,19 @@
   color: white;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 50%;
-  align-items: baseline;
+  align-items:center;
   justify-items: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
   width: 100%;
   height: 100px;
+  background-color: black;
+  height: 70px;
+  padding: 1rem;
 }
 
 .missionsButtonDiv {
@@ -55,6 +58,7 @@ a.link:hover:before {
   padding: 0;
   width: 100%;
 }
+
 
 @media only screen and (max-width: 1600px) {
   .navBarContainer {

@@ -28,3 +28,21 @@ export const getPayLoadInfo = async (id) => {
     console.log(error);
   }
 };
+
+export const getAllRocketOrDragons = async (vehicle) => {
+  try{
+    const response = await  axios.get(`${baseURL}/${vehicle}`)
+    return response.data
+  }catch(error){
+    console.log(error)
+  }
+}
+
+export const getRocketOrDragonByID = async (vehicle, id) => {
+  try{
+    const response = await axios.get(`${baseURL}/${vehicle}/${id}`);
+    return response.data;
+  }catch(error){
+    console.log(error)
+  }
+}

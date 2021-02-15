@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUpcomingMission, getLaunchSiteInfo, getPayLoadInfo } from '../../Data/fetchData';
+import {
+  fetchUpcomingMission,
+  getLaunchSiteInfo,
+  getPayLoadInfo,
+} from '../../Data/fetchData';
 import './LandingPage.css';
 import Button from '../Button/Button';
 import DateFormatter from '../Date/DateFormatter';
@@ -18,23 +22,20 @@ export default function LandingPage() {
   useEffect(() => {
     async function fetchnextMissionInfo() {
       const upcomingMission = await fetchUpcomingMission();
-      console.log(upcomingMission);
       setNextMissionInfo(upcomingMission);
 
       let launchPadID = await upcomingMission.launchpad;
       const launchSite = await getLaunchSiteInfo(launchPadID);
-      console.log(launchSite)
       let name = await launchSite.name.toUpperCase();
       setLaunchPadName(name);
 
       let payloadsID = await upcomingMission.payloads;
       const payLoadInfo = await getPayLoadInfo(payloadsID);
-      console.log(payLoadInfo)
       let reUsed = payLoadInfo.reused.toString().toUpperCase();
-      setReUsedStatus(reUsed)
+      setReUsedStatus(reUsed);
 
       let OrbitInfo = await payLoadInfo.regime.toUpperCase();
-      setOrbit(OrbitInfo)
+      setOrbit(OrbitInfo);
     }
     fetchnextMissionInfo();
   }, []);
@@ -50,7 +51,9 @@ export default function LandingPage() {
           >
             <div className='name'>
               <h3>UPCOMING</h3>
-              <h1 className='missionName'>{nextMissionInfo.name.toUpperCase()} MISSION</h1>
+              <h1 className='missionName'>
+                {nextMissionInfo.name.toUpperCase()} MISSION
+              </h1>
               <Button
                 text={showMore ? 'CLOSE' : 'SEE MORE'}
                 onClick={handleShowMore}
@@ -60,29 +63,33 @@ export default function LandingPage() {
               <DateFormatter end={nextMissionInfo.date_utc} />
             </div>
           </div>
-          {/* {showMore ? ( */}
           <div
             className={`${'missionInfoContainer'}  ${
-              showMore
-                ? 'activeInfoContainer '
-                : 'notActiveInfoContainer'
+              showMore ? 'activeInfoContainer ' : 'notActiveInfoContainer'
             }`}
           >
             <div className='leftColumn'>
-              <h2>{nextMissionInfo.name.toUpperCase()}</h2>
+              <h2 className='leftColumnMissionMame' >{nextMissionInfo.name.toUpperCase()}</h2>
+              <p className='missionDetails'>
+                {
+                  nextMissionInfo.details !== undefined ? nextMissionInfo.details : 'Check back later for more details'
+                }
+              </p>
             </div>
             <div className='rightColumn'>
-              <div className='infoRow'>
+              <div className='infoRow first'>
                 <div className='title'>
                   <h4>SCHEDULED LAUNCH</h4>
                 </div>
                 <div className='nextMissionInfo'>
                   <h4>
-                    {new Date(nextMissionInfo.date_utc).toLocaleDateString('default', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    }).toUpperCase()}
+                    {new Date(nextMissionInfo.date_utc)
+                      .toLocaleDateString('default', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })
+                      .toUpperCase()}
                   </h4>
                 </div>
               </div>
@@ -128,9 +135,6 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-          {/* ) : ( */}
-          ''
-          {/* )} */}
         </div>
       ) : (
         ''

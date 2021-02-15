@@ -68,6 +68,10 @@
   justify-self: end;
 }
 
+.missionDetails{
+  margin-right: 0.5rem;
+}
+
 @media only screen and (max-width: 450px) {
   .missionInfoContainer {
     font-size: small;
@@ -103,8 +107,6 @@
   }
   .leftColumn {
     width: 90%;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid grey;
   }
   .rightColumn {
     width: 90%;
@@ -117,6 +119,24 @@
   .notActiveMore {
     margin-top: 150px;
     transition: margin-top 1s;
+  }
+  .leftColumnMissionMame{
+    margin-bottom: 0.2rem;
+    border-bottom: 1px solid grey;
+    height: 50px;
+    line-height: 50px;
+  }
+  .missionDetails{
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    height: 100%;
+    display: block; 
+  }
+  .infoRow{
+    font-size: small;
+  }
+  .first{
+    border-top: 1px solid grey;
   }
 }
 

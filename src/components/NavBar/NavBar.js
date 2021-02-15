@@ -57,22 +57,22 @@ export default function NavBar() {
       ) : (
         <>
           <div className='falcon9'>
-            <Link  to='/' className='link'>
+            <Link  to='/vehicles/falcon9' className='link'>
               FALCON 9
             </Link>
           </div>
           <div className='falconHeavy'>
-            <Link  to='/' className='link'>
+            <Link  to='/vehicles/falconheavy' className='link'>
               FALCON HEAVY
             </Link>
           </div>
           <div className='dragon'>
-            <Link  to='/' className='link'>
+            <Link  to='/vehicles/dragon' className='link'>
               DRAGON
             </Link>
           </div>
           <div className='starship'>
-            <Link to='/' className='link'>
+            <Link to='/vehicles/starship' className='link'>
               STARSHIP
             </Link>
           </div>
