@@ -1,36 +1,86 @@
-.vehicleContainer{
-    width: 60%;
-    color: white;
-    margin: 150px auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
+.vehicleContainer {
+  width: 60%;
+  color: white;
+  margin: 150px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
 }
 
-.vehicleH4{
-    padding-bottom: 0.5rem
+@keyframes fadein {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 150px;
+  }
 }
 
-.vehicleRow{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 50px;
-    line-height: 50px;
-    border-bottom: 1px solid grey;
-
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 150px;
+  }
 }
 
-.imperial{
-    color: grey
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 150px;
+  }
 }
 
-.right{
-    text-align: right;
-    padding-right: 0.5rem;
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 150px;
+  }
 }
 
-.vehicleDescription{
-    padding-right: 0.5rem;
+.vehicleH4 {
+  padding-bottom: 0.5rem;
 }
 
+.vehicleRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid grey;
+}
+
+.imperial {
+  color: grey;
+}
+
+.right {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.vehicleDescription {
+  padding-right: 0.5rem;
+}
