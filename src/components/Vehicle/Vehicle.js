@@ -59,10 +59,16 @@ export default function Vehicle() {
           metricLaunchPayloadVol: info.launch_payload_vol.cubic_meters,
           imperialLaunchPayloadVol: info.launch_payload_vol.cubic_feet,
           crewCapacity: info.crew_capacity,
+          metricReturnPayloadMass: info.return_payload_mass.kg,
+          imperialReturnPayloadMass: info.return_payload_mass.lb,
+          metricReturnPayloadVol: info.return_payload_vol.cubic_meters,
+          imperialReturnPayloadVol: info.return_payload_vol.cubic_feet,
+
 
           firstFlight: info.first_flight,
           thrustersNumbers: `${info.thrusters[0].amount} + ${info.thrusters[1].amount}`,
-          thrustersTypes: `${info.thrusters[0].type} + ${info.thrusters[1].type}`
+          engines: `${info.thrusters[0].type} + ${info.thrusters[1].type}`,
+          costPerLaunch: `$${info.cost_per_launch / 1000000}m`,
         };
         setData(dataObj);
       } else {
@@ -83,7 +89,8 @@ export default function Vehicle() {
 
           firstFlight: info.first_flight,
           engineNumber: info.engines.number,
-          engineType: info.engines.type.toUpperCase()
+          engineType: info.engines.type.toUpperCase(),
+          constPerLaunch: `$${info.cost_per_launch / 1000000}`,
         };
         setData(dataObj);
       }
@@ -127,23 +134,7 @@ export default function Vehicle() {
             </div>
             <div className='vehicleRow'>
               <div className='left'>
-                <h4>MASS</h4>
-              </div>
-              <div className='right'>
-                <p>
-                  <span>{data.totalMetricMass} kg</span>
-                  <span className='imperial'>
-                    {' '}
-                    / {data.totalImperialMass} lb
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div className='vehicleRow'>
-              <div className='left'>
-                <h4>
-                  {name === 'dragon' ? 'LAUNCH PAYLOAD MASS' : 'PAYLOAD TO LEO'}
-                </h4>
+                <h4>{name === 'dragon' ? 'LAUNCH PAYLOAD MASS' : 'MASS'}</h4>
               </div>
               <div className='right'>
                 <p>
@@ -151,10 +142,36 @@ export default function Vehicle() {
                     {' '}
                     {name === 'dragon'
                       ? data.metricLaunchPayloadMass
-                      : data.metricPayloadToLEO}{' '}
+                      : data.totalImperialMass}{' '}
                     kg
                   </span>
 
+                  <span className='imperial'>
+                    {' '}
+                    /
+                    {name === 'dragon'
+                      ? data.totalMetricMass
+                      : data.totalImperialMass}{' '}
+                    lb
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className='vehicleRow'>
+              <div className='left'>
+                <h4>
+                  {name === 'dragon' ? 'RETURN PAYLOAD MASS' : 'PAYLOAD TO LEO'}
+                </h4>
+              </div>
+              <div className='right'>
+                <p>
+                  <span>
+                    {' '}
+                    {name === 'dragon'
+                      ? data.metricReturnPayloadMass
+                      : data.metricPayloadToLEO}{' '}
+                    kg
+                  </span>
                   <span className='imperial'>
                     {' '}
                     /
@@ -194,13 +211,20 @@ export default function Vehicle() {
             <div className='vehicleRow'>
               <div className='left'>
                 <h4>
-                  {name === 'dragon' ? 'CREW CAPACITY' : 'PAYLOAD TO MARS'}
+                  {name === 'dragon'
+                    ? 'RETURN PAYLOAD VOLUME'
+                    : 'PAYLOAD TO MARS'}
                 </h4>
               </div>
               <div className='right'>
                 <p>
                   {name === 'dragon' ? (
-                    <span>{data.crewCapacity}</span>
+                    <>
+                      <span>{data.metricReturnPayloadVol} m3</span>
+                      <span className="imperial">
+                      {' '} / {data.imperialReturnPayloadVol} ft3
+                      </span>
+                    </>
                   ) : (
                     <>
                       <span>{data.metricPayloadToMars} kg</span>
