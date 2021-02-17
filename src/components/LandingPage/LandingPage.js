@@ -23,6 +23,7 @@ export default function LandingPage() {
     async function fetchnextMissionInfo() {
       const upcomingMission = await fetchUpcomingMission();
       setNextMissionInfo(upcomingMission);
+      console.log(upcomingMission)
 
       let launchPadID = await upcomingMission.launchpad;
       const launchSite = await getLaunchSiteInfo(launchPadID);
@@ -52,7 +53,7 @@ export default function LandingPage() {
             <div className='name'>
               <h3>UPCOMING</h3>
               <h1 className='missionName'>
-                {nextMissionInfo.name.toUpperCase()} MISSION
+                {nextMissionInfo.name.toUpperCase()}
               </h1>
               <Button
                 text={showMore ? 'CLOSE' : 'SEE MORE'}
@@ -72,7 +73,7 @@ export default function LandingPage() {
               <h2 className='leftColumnMissionMame' >{nextMissionInfo.name.toUpperCase()}</h2>
               <p className='missionDetails'>
                 {
-                  nextMissionInfo.details !== undefined ? nextMissionInfo.details : 'Check back later for more details'
+                  nextMissionInfo.details ? nextMissionInfo.details : 'Check back later for more details'
                 }
               </p>
             </div>

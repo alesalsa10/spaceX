@@ -9,16 +9,16 @@ const HambugerMenu = () => {
       <Link className='menu-item links' to='/'>
         MISSIONS
       </Link>
-      <Link className='menu-item links' to='/'>
+      <Link className='menu-item links' to='/vehicles/falcon9'>
         FALCON 9
       </Link>
-      <Link className='menu-item links' to='/'>
+      <Link className='menu-item links' to='/vehicles/falconheavy'>
         FALCON HEAVY
       </Link>
-      <Link className='menu-item links' to='/'>
+      <Link className='menu-item links' to='/vehicles/dragon'>
         DRAGON
       </Link>
-      <Link className='menu-item links' to='/'>
+      <Link className='menu-item links' to='/vehicles/starship'>
         STARSHIP
       </Link>
     </Menu>
