@@ -84,3 +84,53 @@
 .vehicleDescription {
   padding-right: 0.5rem;
 }
+
+.nextRow {
+  display: grid;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid grey;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.item {
+  flex-grow: 1;
+}
+
+.backArrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-right: 15px solid white;
+  border-bottom: 15px solid transparent;
+}
+
+.nextArrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-left: 15px solid white;
+  border-bottom: 15px solid transparent;
+  margin-left: auto;
+}
+
+.next{
+  margin-left: auto;
+}
+.circlesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.circle {
+  color: white;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  border: 1px solid white;
+}
+
+.circleLeft{
+  justify-self: end;
+  margin-right: 0.5rem;
+}
