@@ -154,3 +154,47 @@
   align-content: space-around;
   justify-content: space-between;
 }
+
+.slider {
+  -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: slider 1s; /* Firefox < 16 */
+  -ms-animation: slider 1s; /* Internet Explorer */
+  -o-animation: slider 1s; /* Opera < 12.1 */
+  animation: slider 1s;
+}
+
+@keyframes slider {
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0.5rem;
+  }
+}
+
+@-moz-keyframes slider {
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0.5rem;
+  }
+}
+
+@-ms-keyframes slider {
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0.5rem;
+  }
+}
+
+@-webkit-keyframes slider{
+  from {
+    margin-left: 120%;
+  }
+  to {
+    margin-left: 0.5rem;
+  }
+}
