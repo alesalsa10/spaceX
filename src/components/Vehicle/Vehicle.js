@@ -332,18 +332,21 @@ export default function Vehicle() {
                     </p>
                   </div>
                 </div>
-
-                <div className='buttonsRow'>
-                  <div className='button'>
-                    <Button text={'FIRST FLIGHT'} />
+                {data.numberOfLaunhes !== 0 ? (
+                  <div className='buttonsRow'>
+                    <div className='button'>
+                      <Button text={'FIRST FLIGHT'} />
+                    </div>
+                    <div className='button'>
+                      <Button text={'FIRST LANDING'} />
+                    </div>
+                    <div className='button'>
+                      <Button text={'LATEST MISSION'} />
+                    </div>
                   </div>
-                  <div className='button'>
-                    <Button text={'FIRST LANDING'} />
-                  </div>
-                  <div className='button'>
-                    <Button text={'LATEST MISSION'} />
-                  </div>
-                </div>
+                ) : (
+                  ''
+                )}
               </>
             )}
 
