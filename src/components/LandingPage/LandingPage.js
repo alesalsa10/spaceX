@@ -12,7 +12,8 @@ export default function LandingPage() {
   const [nextMissionInfo, setNextMissionInfo] = useState();
   const [showMore, setShowMore] = useState(false);
   const [launchPadName, setLaunchPadName] = useState();
-  const [reUsedStatus, setReUsedStatus] = useState();
+  const [payloadName, setPayloadName] = useState();
+  const [payloadType, setPayloadtype] = useState();
   const [orbit, setOrbit] = useState();
 
   const handleShowMore = () => {
@@ -32,8 +33,13 @@ export default function LandingPage() {
 
       let payloadsID = await upcomingMission.payloads;
       const payLoadInfo = await getPayLoadInfo(payloadsID);
-      let reUsed = payLoadInfo.reused.toString().toUpperCase();
-      setReUsedStatus(reUsed);
+      console.log(payLoadInfo)
+
+      let loadName = payLoadInfo.name.toString().toUpperCase();
+      setPayloadName(loadName);
+
+      let type = payLoadInfo.type.toString().toUpperCase();
+      setPayloadtype(type)
 
       let OrbitInfo = await payLoadInfo.regime.toUpperCase();
       setOrbit(OrbitInfo);
@@ -70,11 +76,13 @@ export default function LandingPage() {
             }`}
           >
             <div className='leftColumn'>
-              <h2 className='leftColumnMissionMame' >{nextMissionInfo.name.toUpperCase()}</h2>
+              <h2 className='leftColumnMissionMame'>
+                {nextMissionInfo.name.toUpperCase()}
+              </h2>
               <p className='missionDetails'>
-                {
-                  nextMissionInfo.details ? nextMissionInfo.details : 'Check back later for more details'
-                }
+                {nextMissionInfo.details
+                  ? nextMissionInfo.details
+                  : 'Check back later for more details'}
               </p>
             </div>
             <div className='rightColumn'>
@@ -112,10 +120,18 @@ export default function LandingPage() {
               </div>
               <div className='infoRow'>
                 <div className='title'>
-                  <h4>REUSED</h4>
+                  <h4>PAYLOAD NAME</h4>
                 </div>
                 <div className='nextMissionInfo'>
-                  <h4>{reUsedStatus}</h4>
+                  <h4>{payloadName}</h4>
+                </div>
+              </div>
+              <div className='infoRow'>
+                <div className='title'>
+                  <h4>PAYLOAD TYPE</h4>{' '}
+                </div>
+                <div className='nextMissionInfo'>
+                  <h4>{payloadType}</h4>
                 </div>
               </div>
               <div className='infoRow'>
@@ -124,14 +140,6 @@ export default function LandingPage() {
                 </div>
                 <div className='nextMissionInfo'>
                   <h4>{orbit}</h4>
-                </div>
-              </div>
-              <div className='infoRow'>
-                <div className='title'>
-                  <h4>LANDING SITE</h4>{' '}
-                </div>
-                <div className='nextMissionInfo'>
-                  <h4>2</h4>
                 </div>
               </div>
             </div>

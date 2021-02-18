@@ -4,6 +4,8 @@ import './Vehicle.css';
 import {
   getAllRocketOrDragons,
   getRocketOrDragonByID,
+  numberOfLaunchesByVehicle,
+  getAllDragon2Launches,
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 
@@ -33,15 +35,36 @@ export default function Vehicle() {
           if (name === 'falcon9' && rocket.name === 'Falcon 9') {
             let id = await rocket.id;
             const response = await getRocketOrDragonByID('rockets', id);
-            return response;
+            const res2 = await numberOfLaunchesByVehicle(id);
+
+            const responseObj = {
+              rocketOrDragonInfo: response,
+              numberOfLaunhes: res2.totalDocs,
+            };
+
+            return responseObj;
           } else if (name === 'starship' && rocket.name === 'Starship') {
             let id = await rocket.id;
             const response = await getRocketOrDragonByID('rockets', id);
-            return response;
+            const res2 = await numberOfLaunchesByVehicle(id);
+
+            const responseObj = {
+              rocketOrDragonInfo: response,
+              numberOfLaunhes: res2.totalDocs,
+            };
+
+            return responseObj;
           } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
             let id = await rocket.id;
             const response = await getRocketOrDragonByID('rockets', id);
-            return response;
+            const res2 = await numberOfLaunchesByVehicle(id);
+
+            const responseObj = {
+              rocketOrDragonInfo: response,
+              numberOfLaunhes: res2.totalDocs,
+            };
+
+            return responseObj;
           }
         }
       } else if (name === 'dragon') {
@@ -50,68 +73,85 @@ export default function Vehicle() {
           if (name === 'dragon' && dragon.name === 'Dragon 2') {
             let id = await dragon.id;
             const response = await getRocketOrDragonByID('dragons', id);
-            return response;
+            const res2 = await getAllDragon2Launches();
+
+            let initialCount = 0;
+            res2.docs.forEach((item) => {
+              initialCount += item.launches.length;
+            });
+            const responseObj = {
+              rocketOrDragonInfo: response,
+              numberOfLaunhes: initialCount,
+            };
+
+            return responseObj;
           }
         }
       }
     }
     async function updateData() {
       let info = await fetchData();
-      console.log(info);
+      const { rocketOrDragonInfo, numberOfLaunhes } = info;
       if (name === 'dragon') {
         let dataObj = {
-          name: info.name.toUpperCase(),
-          description: info.description,
-          metricHeight: info.height_w_trunk.meters,
-          imperialHeight: info.height_w_trunk.feet,
-          diameter: info.diameter,
-          totalMetricMass: info.dry_mass_kg,
-          totalImperialMass: info.dry_mass_lb,
-          metricLaunchPayloadMass: info.launch_payload_mass.kg,
+          name: rocketOrDragonInfo.name.toUpperCase(),
+          description: rocketOrDragonInfo.description,
+          metricHeight: rocketOrDragonInfo.height_w_trunk.meters,
+          imperialHeight: rocketOrDragonInfo.height_w_trunk.feet,
+          diameter: rocketOrDragonInfo.diameter,
+          totalMetricMass: rocketOrDragonInfo.dry_mass_kg,
+          totalImperialMass: rocketOrDragonInfo.dry_mass_lb,
+          metricLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.kg,
 
-          imperialLaunchPayloadMass: info.launch_payload_mass.lb,
-          metricLaunchPayloadVol: info.launch_payload_vol.cubic_meters,
-          imperialLaunchPayloadVol: info.launch_payload_vol.cubic_feet,
-          crewCapacity: info.crew_capacity,
-          metricReturnPayloadMass: info.return_payload_mass.kg,
-          imperialReturnPayloadMass: info.return_payload_mass.lb,
-          metricReturnPayloadVol: info.return_payload_vol.cubic_meters,
-          imperialReturnPayloadVol: info.return_payload_vol.cubic_feet,
+          imperialLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.lb,
+          metricLaunchPayloadVol:
+            rocketOrDragonInfo.launch_payload_vol.cubic_meters,
+          imperialLaunchPayloadVol:
+            rocketOrDragonInfo.launch_payload_vol.cubic_feet,
+          crewCapacity: rocketOrDragonInfo.crew_capacity,
+          metricReturnPayloadMass: rocketOrDragonInfo.return_payload_mass.kg,
+          imperialReturnPayloadMass: rocketOrDragonInfo.return_payload_mass.lb,
+          metricReturnPayloadVol:
+            rocketOrDragonInfo.return_payload_vol.cubic_meters,
+          imperialReturnPayloadVol:
+            rocketOrDragonInfo.return_payload_vol.cubic_feet,
 
-          firstLaunch: new Date(info.first_flight)
+          firstLaunch: new Date(rocketOrDragonInfo.first_flight)
             .toLocaleDateString('default', {
               month: 'short',
               day: 'numeric',
               year: 'numeric',
             })
             .toUpperCase(),
-          engineNumber: `${info.thrusters[0].amount} + ${info.thrusters[1].amount}`,
-          engineType: `${info.thrusters[0].type} + ${info.thrusters[1].type}`,
-          costPerLaunch: `$${info.cost_per_launch / 1000000}m`,
+          engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
+          engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
+          costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000}m`,
+          numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
       } else {
         let dataObj = {
-          name: info.name.toUpperCase(),
-          description: info.description,
-          metricHeight: info.height.meters,
-          imperialHeight: info.height.feet,
-          diameter: info.diameter,
-          totalMetricMass: info.mass.kg,
-          totalImperialMass: info.mass.lb,
+          name: rocketOrDragonInfo.name.toUpperCase(),
+          description: rocketOrDragonInfo.description,
+          metricHeight: rocketOrDragonInfo.height.meters,
+          imperialHeight: rocketOrDragonInfo.height.feet,
+          diameter: rocketOrDragonInfo.diameter,
+          totalMetricMass: rocketOrDragonInfo.mass.kg,
+          totalImperialMass: rocketOrDragonInfo.mass.lb,
 
-          payloadWeights: info.payload_weights,
+          payloadWeights: rocketOrDragonInfo.payload_weights,
 
-          firstLaunch: new Date(info.first_flight)
+          firstLaunch: new Date(rocketOrDragonInfo.first_flight)
             .toLocaleDateString('default', {
               month: 'short',
               day: 'numeric',
               year: 'numeric',
             })
             .toUpperCase(),
-          engineNumber: info.engines.number,
-          engineType: info.engines.type.toUpperCase(),
-          costPerLaunch: `$${info.cost_per_launch / 1000000}`,
+          engineNumber: rocketOrDragonInfo.engines.number,
+          engineType: rocketOrDragonInfo.engines.type.toUpperCase(),
+          costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000} m`,
+          numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
       }
@@ -267,13 +307,32 @@ export default function Vehicle() {
                   </div>
                 </div>
                 <div className='vehicleRow'>
-                  <div className='left'></div>
-                  <div className='right'></div>
+                  <div className='left'>
+                    <h4>
+                      {name === 'dragon' ? 'CREW CAPACITY' : 'COST PER LAUNCH'}
+                    </h4>
+                  </div>
+                  <div className='right'>
+                    <p>
+                      {name === 'dragon'
+                        ? data.crewCapacity
+                        : data.costPerLaunch}
+                    </p>
+                  </div>
                 </div>
                 <div className='vehicleRow'>
-                  <div className='left'></div>
-                  <div className='right'></div>
+                  <div className='left'>
+                    <h4>TOTAL LAUNCHES</h4>
+                  </div>
+                  <div className='right'>
+                    <p>
+                      {data.numberOfLaunhes === 0
+                        ? 'NO LAUNCHES'
+                        : data.numberOfLaunhes}
+                    </p>
+                  </div>
                 </div>
+
                 <div className='buttonsRow'>
                   <div className='button'>
                     <Button text={'FIRST FLIGHT'} />
