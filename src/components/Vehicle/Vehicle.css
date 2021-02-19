@@ -155,46 +155,89 @@
   justify-content: space-between;
 }
 
-.slider {
+.nextSlider {
   -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: slider 1s; /* Firefox < 16 */
   -ms-animation: slider 1s; /* Internet Explorer */
   -o-animation: slider 1s; /* Opera < 12.1 */
-  animation: slider 1s;
+  animation: next 1s;
 }
 
-@keyframes slider {
+@keyframes next {
   from {
-    margin-left: 120%;
+    margin-left: 100%;
   }
   to {
     margin-left: 0.5rem;
   }
 }
 
-@-moz-keyframes slider {
+@-moz-keyframes next {
   from {
-    margin-left: 120%;
+    margin-left: 100%;
   }
   to {
     margin-left: 0.5rem;
   }
 }
 
-@-ms-keyframes slider {
+@-ms-keyframes next {
   from {
-    margin-left: 120%;
+    margin-left: 100%;
   }
   to {
     margin-left: 0.5rem;
   }
 }
 
-@-webkit-keyframes slider{
+@-webkit-keyframes next{
   from {
-    margin-left: 120%;
+    opacity: 0;
+    margin-left: 100%;
   }
   to {
+    opacity: 1;
     margin-left: 0.5rem;
+  }
+}
+
+.backSlider{
+  -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: slider 1s; /* Firefox < 16 */
+  -ms-animation: slider 1s; /* Internet Explorer */
+  -o-animation: slider 1s; /* Opera < 12.1 */
+  animation: back 1s;
+}
+
+@keyframes back{
+  from {
+    margin-right: 100%
+  }
+  to{
+    margin-right: 0.5rem;
+  }
+}
+@-moz-keyframes back{
+  from {
+    margin-right: 100%
+  }
+  to{
+    margin-right: 0.5rem;
+  }
+}
+@-ms-keyframes back{
+  from {
+    margin-right: 100%
+  }
+  to{
+    margin-right: 0.5rem;
+  }
+}
+@-webkit-keyframes back{
+  from {
+    margin-right: 100%
+  }
+  to{
+    margin-right: 0.5rem;
   }
 }

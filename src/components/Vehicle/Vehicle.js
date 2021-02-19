@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -12,23 +12,42 @@ import Button from '../Button/Button';
 export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
+
   const [isSlider, setIsSlider] = useState(false);
+  const [sliderClass, setSliderClass] = useState(0);
 
   let { name } = useParams();
 
-  const handleNextClick = () => {
-    if (pageNumber === 1) {
+  const handleNextClick = (e) => {
+    if(parseInt(e.target.id) === 1 && pageNumber === 1){
       setPageNumber(2);
-    } else {
+      setSliderClass('backSlider')
+    } else if (parseInt(e.target.id) === 1 && pageNumber === 2){
+      setPageNumber(1)
+      setSliderClass('backSlider')
+    } else if (parseInt(e.target.id) === 2 && pageNumber === 2){
       setPageNumber(1);
+      setSliderClass('nextSlider')
+    } else if(parseInt(e.target.id) === 2 && pageNumber === 1) {
+      setPageNumber(2);
+      setSliderClass('nextSlider')
     }
-    setIsSlider(true)
+    
   };
 
   const cirlcePageSelector = (e) => {
     setPageNumber(parseInt(e.target.id));
-    setIsSlider(true)
+    if (parseInt(e.target.id) === 1 && pageNumber === 1) {
+      setSliderClass('backSlider');
+    } else if (parseInt(e.target.id) === 1 && pageNumber === 2) {
+      setSliderClass('backSlider');
+    } else if (parseInt(e.target.id) === 2 && pageNumber === 2) {
+      setSliderClass('nextSlider');
+    } else if (parseInt(e.target.id) === 2 && pageNumber === 1) {
+      setSliderClass('nextSlider');
+    }
   };
+
 
   useEffect(() => {
     async function fetchData() {
@@ -174,7 +193,7 @@ export default function Vehicle() {
             </div>
           </div>
           <div className='rightColumn '>
-            <div className={`${isSlider ? 'slider': ''}`} key={pageNumber}>
+            <div className={sliderClass} key={pageNumber}>
               {pageNumber === 1 ? (
                 <>
                   <div className='vehicleRow '>
@@ -361,6 +380,7 @@ export default function Vehicle() {
                 <div
                   className='backArrow arrows'
                   onClick={handleNextClick}
+                  id={1}
                 ></div>
               </div>
 
@@ -385,6 +405,7 @@ export default function Vehicle() {
                 <div
                   className='nextArrow arrows'
                   onClick={handleNextClick}
+                  id={2}
                 ></div>
               </div>
             </div>
