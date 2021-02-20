@@ -8,17 +8,18 @@ import {
   getAllDragon2Launches,
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
+import Dragon from '../../images/dragon2.png';
+import Falcon9 from '../../images/falcon9.png';
+import Falconheavy from '../../images/falconHeavy.png';
+import Starship from '../../images/starship.png';
 
 export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
-
   const [sliderClass, setSliderClass] = useState(0);
-  
 
   let { name } = useParams();
-  const preName = usePrevious(name)
-
+  const preName = usePrevious(name);
 
   function usePrevious(value) {
     const ref = useRef();
@@ -29,26 +30,26 @@ export default function Vehicle() {
   }
 
   useEffect(() => {
-    if(preName !== name){
-      setSliderClass('')
+    if (preName !== name) {
+      setSliderClass('');
+      setPageNumber(1);
     }
-  }, [name])
+  }, [name]);
 
   const handleNextClick = (e) => {
-    if(parseInt(e.target.id) === 1 && pageNumber === 1){
+    if (parseInt(e.target.id) === 1 && pageNumber === 1) {
       setPageNumber(2);
-      setSliderClass('backSlider')
-    } else if (parseInt(e.target.id) === 1 && pageNumber === 2){
-      setPageNumber(1)
-      setSliderClass('backSlider')
-    } else if (parseInt(e.target.id) === 2 && pageNumber === 2){
+      setSliderClass('backSlider');
+    } else if (parseInt(e.target.id) === 1 && pageNumber === 2) {
       setPageNumber(1);
-      setSliderClass('nextSlider')
-    } else if(parseInt(e.target.id) === 2 && pageNumber === 1) {
+      setSliderClass('backSlider');
+    } else if (parseInt(e.target.id) === 2 && pageNumber === 2) {
+      setPageNumber(1);
+      setSliderClass('nextSlider');
+    } else if (parseInt(e.target.id) === 2 && pageNumber === 1) {
       setPageNumber(2);
-      setSliderClass('nextSlider')
+      setSliderClass('nextSlider');
     }
-    
   };
 
   const cirlcePageSelector = (e) => {
@@ -64,7 +65,6 @@ export default function Vehicle() {
     }
   };
 
-
   useEffect(() => {
     async function fetchData() {
       if (name === 'falcon9' || name === 'starship' || name === 'falconheavy') {
@@ -73,6 +73,7 @@ export default function Vehicle() {
           if (name === 'falcon9' && rocket.name === 'Falcon 9') {
             let id = await rocket.id;
             const response = await getRocketOrDragonByID('rockets', id);
+            console.log(response);
             const res2 = await numberOfLaunchesByVehicle(id);
 
             const responseObj = {
@@ -133,7 +134,6 @@ export default function Vehicle() {
       if (name === 'dragon') {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
-          description: rocketOrDragonInfo.description,
           metricHeight: rocketOrDragonInfo.height_w_trunk.meters,
           imperialHeight: rocketOrDragonInfo.height_w_trunk.feet,
           diameter: rocketOrDragonInfo.diameter,
@@ -169,7 +169,6 @@ export default function Vehicle() {
       } else {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
-          description: rocketOrDragonInfo.description,
           metricHeight: rocketOrDragonInfo.height.meters,
           imperialHeight: rocketOrDragonInfo.height.feet,
           diameter: rocketOrDragonInfo.diameter,
@@ -201,14 +200,15 @@ export default function Vehicle() {
     <>
       {data !== undefined ? (
         <div className='vehicleContainer' key={name}>
-          <div className='leftColumn'>
-            <div className='vehicleName'>
-              <h4 className='vehicleH4'>{data.name}</h4>
-              <p className='vehicleDescription'>{data.description}</p>
+          <div className='leftCol '>
+            <div className='nameSection'>
+              <h2 className='vehicleName'>{data.name}</h2>
+              <h1 className='overview'>OVERVIEW</h1>
             </div>
-          </div>
-          <div className='rightColumn '>
-            <div className={sliderClass} key={pageNumber}>
+            <div
+              className={`${sliderClass} ${'sliderContainer'}`}
+              key={pageNumber}
+            >
               {pageNumber === 1 ? (
                 <>
                   <div className='vehicleRow '>
@@ -372,8 +372,14 @@ export default function Vehicle() {
                       </p>
                     </div>
                   </div>
+
                   {data.numberOfLaunhes !== 0 ? (
-                    <div className='buttonsRow'>
+                    <div
+                      className='buttonsRow'
+                      style={{
+                        height: name !== 'falconheavy' ? '100px' : '150px',
+                      }}
+                    >
                       <div className='button'>
                         <Button text={'FIRST FLIGHT'} />
                       </div>
@@ -390,7 +396,10 @@ export default function Vehicle() {
                 </>
               )}
             </div>
-            <div className='nextRow'>
+            <div
+              className='nextRow'
+              style={{ marginTop: data.numberOfLaunhes === 0  && pageNumber === 2 ? '100px' : '0' }}
+            >
               <div className='item'>
                 <div
                   className='backArrow arrows'
@@ -424,6 +433,20 @@ export default function Vehicle() {
                 ></div>
               </div>
             </div>
+          </div>
+          <div className='imageDiv'>
+            <img
+              src={`${
+                name === 'dragon'
+                  ? Dragon
+                  : name === 'falcon9'
+                  ? Falcon9
+                  : name === 'starship'
+                  ? Starship
+                  : Falconheavy
+              }`}
+              alt=''
+            />
           </div>
         </div>
       ) : (
