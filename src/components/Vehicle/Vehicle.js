@@ -6,6 +6,7 @@ import {
   getRocketOrDragonByID,
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
+  getLaunchByDate
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 import Dragon from '../../images/dragon2.png';
@@ -17,6 +18,7 @@ export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [sliderClass, setSliderClass] = useState(0);
+  const [ids, setId] = useState();
 
   let { name } = useParams();
   const preName = usePrevious(name);
@@ -65,6 +67,17 @@ export default function Vehicle() {
     }
   };
 
+
+  const handleFirstMission = async (id) => {
+    const response = await getLaunchByDate(id, 'asc');
+    console.log(response)
+  }
+
+  const handleLatestMission = async(id) => {
+    const response = await getLaunchByDate(id, 'desc');
+    console.log(response)
+  }
+
   useEffect(() => {
     async function fetchData() {
       if (name === 'falcon9' || name === 'starship' || name === 'falconheavy') {
@@ -72,6 +85,7 @@ export default function Vehicle() {
         for await (let rocket of allRockets) {
           if (name === 'falcon9' && rocket.name === 'Falcon 9') {
             let id = await rocket.id;
+            setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             console.log(response);
             const res2 = await numberOfLaunchesByVehicle(id);
@@ -84,6 +98,7 @@ export default function Vehicle() {
             return responseObj;
           } else if (name === 'starship' && rocket.name === 'Starship') {
             let id = await rocket.id;
+            setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             const res2 = await numberOfLaunchesByVehicle(id);
 
@@ -95,6 +110,7 @@ export default function Vehicle() {
             return responseObj;
           } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
             let id = await rocket.id;
+            setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             const res2 = await numberOfLaunchesByVehicle(id);
 
@@ -379,15 +395,14 @@ export default function Vehicle() {
                       style={{
                         height: name !== 'falconheavy' ? '100px' : '150px',
                       }}
+
+                      /* work on this, it should not be hard corded as it currently is */
                     >
                       <div className='button'>
-                        <Button text={'FIRST FLIGHT'} />
+                        <Button text={'FIRST FLIGHT'} onClick={()=> handleFirstMission(ids)}/>
                       </div>
-                      <div className='button'>
-                        <Button text={'FIRST LANDING'} />
-                      </div>
-                      <div className='button'>
-                        <Button text={'LATEST MISSION'} />
+                      <div className='button2'>
+                        <Button text={'LATEST MISSION'}  onClick={()=>handleLatestMission(ids)} />
                       </div>
                     </div>
                   ) : (
@@ -436,6 +451,7 @@ export default function Vehicle() {
           </div>
           <div className='imageDiv'>
             <img
+              className='vehicleImage'
               src={`${
                 name === 'dragon'
                   ? Dragon
@@ -445,7 +461,7 @@ export default function Vehicle() {
                   ? Starship
                   : Falconheavy
               }`}
-              alt=''
+              alt={name + 'image'}
             />
           </div>
         </div>

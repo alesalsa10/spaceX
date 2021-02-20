@@ -2,9 +2,6 @@
   width: 60%;
   color: white;
   margin: 150px auto;
-  /* display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr; */
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: minmax(min-content, max-content);
@@ -13,6 +10,7 @@
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
+  height: 500px;
 }
 
 @keyframes fadein {
@@ -187,13 +185,17 @@
 
 .buttonsRow {
   display: grid;
-  grid-template-columns: repeat(3, 150px);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   align-content: space-around;
   justify-content: space-between;
   position: relative;
   align-items: center;
   /* height: 150px; */
+}
+
+.button2{
+  justify-self: end;
 }
 
 .nextSlider {
@@ -303,4 +305,8 @@
 
 .imageDiv{
   justify-self: end;
+}
+
+.vehicleImage{
+  height: 500px
 }
