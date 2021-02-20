@@ -135,8 +135,32 @@
 }
 
 .selectedPage {
-  background-color: white;
+  animation: selected 1s;
+  -webkit-animation: selected 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: selected 1s; /* Firefox < 16 */
+  -ms-animation: selected 1s; /* Internet Explorer */
+  -o-animation: selected 1s; /* Opera < 12.1 */
+  animation-fill-mode: forwards;
 }
+
+@keyframes selected {
+  to{background-color: white;}
+}
+
+
+@-webkit-keyframes selected {
+  to{background-color: white}
+}
+
+@-moz-keyframes selected{
+  to{background-color: white;}
+}
+
+@-o-keyframes selected{
+  to{background-color: white;}
+}
+
+
 
 .arrows {
   cursor: pointer;
@@ -157,47 +181,54 @@
 
 .nextSlider {
   -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: slider 1s; /* Firefox < 16 */
-  -ms-animation: slider 1s; /* Internet Explorer */
-  -o-animation: slider 1s; /* Opera < 12.1 */
+  -moz-animation: slider 0.5s; /* Firefox < 16 */
+  -ms-animation: slider 0.5s; /* Internet Explorer */
+  -o-animation: slider 0.5s; /* Opera < 12.1 */
   animation: next 1s;
+  position: relative;
 }
 
 @keyframes next {
   from {
-    margin-left: 100%;
+    opacity: 0;
+    left: 10%
   }
   to {
-    margin-left: 0.5rem;
+    opacity: 1;
+    left: 0
   }
 }
 
 @-moz-keyframes next {
   from {
-    margin-left: 100%;
+    opacity: 0;
+    left: 10%
   }
   to {
-    margin-left: 0.5rem;
+    opacity: 1;
+    left: 0
   }
 }
 
 @-ms-keyframes next {
   from {
-    margin-left: 100%;
+    opacity: 0;
+    left: 10%
   }
   to {
-    margin-left: 0.5rem;
+    opacity: 1;
+    left: 0
   }
 }
 
 @-webkit-keyframes next{
   from {
     opacity: 0;
-    margin-left: 100%;
+    left: 10%
   }
   to {
     opacity: 1;
-    margin-left: 0.5rem;
+    left: 0
   }
 }
 
@@ -207,37 +238,46 @@
   -ms-animation: slider 1s; /* Internet Explorer */
   -o-animation: slider 1s; /* Opera < 12.1 */
   animation: back 1s;
+  position: relative;
 }
 
 @keyframes back{
   from {
-    margin-right: 100%
+    opacity: 0;
+    right: 10%
   }
-  to{
-    margin-right: 0.5rem;
+  to {
+    opacity: 1;
+    right: 0
   }
 }
 @-moz-keyframes back{
   from {
-    margin-right: 100%
+    opacity: 0;
+    right: 10%
   }
-  to{
-    margin-right: 0.5rem;
+  to {
+    opacity: 1;
+    right: 0
   }
 }
 @-ms-keyframes back{
   from {
-    margin-right: 100%
+    opacity: 0;
+    right: 10%
   }
-  to{
-    margin-right: 0.5rem;
+  to {
+    opacity: 1;
+    right: 0
   }
 }
 @-webkit-keyframes back{
   from {
-    margin-right: 100%
+    opacity: 0;
+    right: 10%
   }
-  to{
-    margin-right: 0.5rem;
+  to {
+    opacity: 1;
+    right: 0
   }
 }

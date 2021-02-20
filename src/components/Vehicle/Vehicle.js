@@ -13,10 +13,26 @@ export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
 
-  const [isSlider, setIsSlider] = useState(false);
   const [sliderClass, setSliderClass] = useState(0);
+  
 
   let { name } = useParams();
+  const preName = usePrevious(name)
+
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
+  useEffect(() => {
+    if(preName !== name){
+      setSliderClass('')
+    }
+  }, [name])
 
   const handleNextClick = (e) => {
     if(parseInt(e.target.id) === 1 && pageNumber === 1){
@@ -147,7 +163,6 @@ export default function Vehicle() {
             .toUpperCase(),
           engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
           engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
-          costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000}m`,
           numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
