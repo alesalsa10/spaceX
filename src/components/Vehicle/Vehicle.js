@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import ModalVideo from 'react-modal-video';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -7,7 +8,7 @@ import {
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
   getLaunchByDate,
-  getLaunchById
+  getLaunchById,
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 import Dragon from '../../images/dragon2.png';
@@ -22,6 +23,7 @@ export default function Vehicle() {
   const [ids, setId] = useState();
   const [firstLaunchId, setFirstLaunchId] = useState();
   const [latestLaunchId, setLatestLaunch] = useState();
+  const [isOpen, setOpen] = useState(false);
 
   let { name } = useParams();
   const preName = usePrevious(name);
@@ -71,26 +73,27 @@ export default function Vehicle() {
   };
 
   const handleFirstMission = async (id) => {
-    /* const response = await getLaunchByDate(id, 'asc');
-    console.log(response); */
-    if(name === 'dragon'){
+    setOpen(true);
+    if (name === 'dragon') {
       const response = await getLaunchById(firstLaunchId);
-      console.log(response)
-    }else {
+      console.log(response);
+      let id = await response.links.youtube_id;
+      setFirstLaunchId(id);
+    } else {
       const response = await getLaunchByDate(id, 'asc');
-      console.log(response)
+      setId(response)
     }
   };
 
   const handleLatestMission = async (id) => {
-    /* const response = await getLaunchByDate(id, 'desc');
-    console.log(response); */
+    setOpen(true);
     if (name === 'dragon') {
       const response = await getLaunchById(latestLaunchId);
-      console.log(response);
+      let id = await response.links.youtube_id;
+      setFirstLaunchId(id)
     } else {
       const response = await getLaunchByDate(id, 'desc');
-      console.log(response);
+      setId(response)
     }
   };
 
@@ -124,7 +127,6 @@ export default function Vehicle() {
             let id = await rocket.id;
             setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
-            console.log(response);
             const res2 = await numberOfLaunchesByVehicle(id);
 
             const responseObj = {
@@ -140,10 +142,9 @@ export default function Vehicle() {
         for await (let dragon of allDragons) {
           if (name === 'dragon' && dragon.name === 'Dragon 2') {
             let id = await dragon.id;
-
             const response = await getRocketOrDragonByID('dragons', id);
-
             const res2 = await getAllDragon2Launches();
+
             console.log(res2);
 
             let initialCount = 0;
@@ -152,25 +153,27 @@ export default function Vehicle() {
             });
 
             let firstLaunchArrayId;
-            for (let i = 0; i < res2.docs.length; i++){
-              if(res2.docs[i].launches !== undefined || res2.docs[i].length !== 0){
+            for (let i = 0; i < res2.docs.length; i++) {
+              if (
+                res2.docs[i].launches !== undefined ||
+                res2.docs[i].length !== 0
+              ) {
                 firstLaunchArrayId = res2.docs[i].launches[0];
-                console.log(firstLaunchArrayId)
-                break
+                console.log(firstLaunchArrayId);
+                break;
               }
             }
-            setFirstLaunchId(firstLaunchArrayId)
+            setFirstLaunchId(firstLaunchArrayId);
 
             let lastLaunchArrayId;
-            for (let i = res2.docs.length - 1; i >= 0; i --){
-              if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0){
+            for (let i = res2.docs.length - 1; i >= 0; i--) {
+              if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0) {
                 lastLaunchArrayId = res2.docs[i].launches[0];
                 console.log(lastLaunchArrayId);
-                break
+                break;
               }
             }
-            setLatestLaunch(lastLaunchArrayId)
-
+            setLatestLaunch(lastLaunchArrayId);
             const responseObj = {
               rocketOrDragonInfo: response,
               numberOfLaunhes: initialCount,
@@ -231,9 +234,7 @@ export default function Vehicle() {
           diameter: rocketOrDragonInfo.diameter,
           totalMetricMass: rocketOrDragonInfo.mass.kg,
           totalImperialMass: rocketOrDragonInfo.mass.lb,
-
           payloadWeights: rocketOrDragonInfo.payload_weights,
-
           firstLaunch: new Date(rocketOrDragonInfo.first_flight)
             .toLocaleDateString('en-US', options)
             .toUpperCase(),
@@ -251,6 +252,13 @@ export default function Vehicle() {
 
   return (
     <>
+      {/* {ids !== undefined ? <ModalVideo
+        channel='youtube'
+        autoplay
+        isOpen={isOpen}
+        videoId={ids}
+        onClose={() => setOpen(false)}
+      />: ''} */}
       {data !== undefined ? (
         <div className='vehicleContainer' key={name}>
           <div className='leftCol '>
