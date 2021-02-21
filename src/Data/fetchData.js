@@ -63,6 +63,7 @@ export const getAllDragon2Launches = async () => {
   }
 };
 
+
 export const numberOfLaunchesByVehicle = async (id) => {
   try {
     const response = await axios.post(`${baseURL}/launches/query`, {
@@ -90,8 +91,17 @@ export const getLaunchByDate = async (id, order) => {
       },
       options: { limit: 1, sort: { date_unix: order } },
     });
-    return response.data;
+    return response.data.docs[0].links.youtube_id;
   } catch (error) {
     console.log(error);
   }
 };
+
+export const getLaunchById = async (id) => {
+  try{
+    const response = await axios.get(`${baseURL}/launches/${id}`)
+    return response.data;
+  }catch(error){
+    console.log(error)
+  }
+}

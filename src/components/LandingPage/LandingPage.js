@@ -24,7 +24,6 @@ export default function LandingPage() {
     async function fetchnextMissionInfo() {
       const upcomingMission = await fetchUpcomingMission();
       setNextMissionInfo(upcomingMission);
-      console.log(upcomingMission)
 
       let launchPadID = await upcomingMission.launchpad;
       const launchSite = await getLaunchSiteInfo(launchPadID);
@@ -33,13 +32,13 @@ export default function LandingPage() {
 
       let payloadsID = await upcomingMission.payloads;
       const payLoadInfo = await getPayLoadInfo(payloadsID);
-      console.log(payLoadInfo)
+      console.log(payLoadInfo);
 
       let loadName = payLoadInfo.name.toString().toUpperCase();
       setPayloadName(loadName);
 
       let type = payLoadInfo.type.toString().toUpperCase();
-      setPayloadtype(type)
+      setPayloadtype(type);
 
       let OrbitInfo = await payLoadInfo.regime.toUpperCase();
       setOrbit(OrbitInfo);

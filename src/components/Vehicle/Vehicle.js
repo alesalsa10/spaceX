@@ -6,7 +6,8 @@ import {
   getRocketOrDragonByID,
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
-  getLaunchByDate
+  getLaunchByDate,
+  getLaunchById
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 import Dragon from '../../images/dragon2.png';
@@ -19,6 +20,8 @@ export default function Vehicle() {
   const [pageNumber, setPageNumber] = useState(1);
   const [sliderClass, setSliderClass] = useState(0);
   const [ids, setId] = useState();
+  const [firstLaunchId, setFirstLaunchId] = useState();
+  const [latestLaunchId, setLatestLaunch] = useState();
 
   let { name } = useParams();
   const preName = usePrevious(name);
@@ -67,16 +70,29 @@ export default function Vehicle() {
     }
   };
 
-
   const handleFirstMission = async (id) => {
-    const response = await getLaunchByDate(id, 'asc');
-    console.log(response)
-  }
+    /* const response = await getLaunchByDate(id, 'asc');
+    console.log(response); */
+    if(name === 'dragon'){
+      const response = await getLaunchById(firstLaunchId);
+      console.log(response)
+    }else {
+      const response = await getLaunchByDate(id, 'asc');
+      console.log(response)
+    }
+  };
 
-  const handleLatestMission = async(id) => {
-    const response = await getLaunchByDate(id, 'desc');
-    console.log(response)
-  }
+  const handleLatestMission = async (id) => {
+    /* const response = await getLaunchByDate(id, 'desc');
+    console.log(response); */
+    if (name === 'dragon') {
+      const response = await getLaunchById(latestLaunchId);
+      console.log(response);
+    } else {
+      const response = await getLaunchByDate(id, 'desc');
+      console.log(response);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -87,14 +103,11 @@ export default function Vehicle() {
             let id = await rocket.id;
             setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
-            console.log(response);
             const res2 = await numberOfLaunchesByVehicle(id);
-
             const responseObj = {
               rocketOrDragonInfo: response,
               numberOfLaunhes: res2.totalDocs,
             };
-
             return responseObj;
           } else if (name === 'starship' && rocket.name === 'Starship') {
             let id = await rocket.id;
@@ -106,12 +119,12 @@ export default function Vehicle() {
               rocketOrDragonInfo: response,
               numberOfLaunhes: res2.totalDocs,
             };
-
             return responseObj;
           } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
             let id = await rocket.id;
             setId(id);
             const response = await getRocketOrDragonByID('rockets', id);
+            console.log(response);
             const res2 = await numberOfLaunchesByVehicle(id);
 
             const responseObj = {
@@ -127,13 +140,37 @@ export default function Vehicle() {
         for await (let dragon of allDragons) {
           if (name === 'dragon' && dragon.name === 'Dragon 2') {
             let id = await dragon.id;
+
             const response = await getRocketOrDragonByID('dragons', id);
+
             const res2 = await getAllDragon2Launches();
+            console.log(res2);
 
             let initialCount = 0;
             res2.docs.forEach((item) => {
               initialCount += item.launches.length;
             });
+
+            let firstLaunchArrayId;
+            for (let i = 0; i < res2.docs.length; i++){
+              if(res2.docs[i].launches !== undefined || res2.docs[i].length !== 0){
+                firstLaunchArrayId = res2.docs[i].launches[0];
+                console.log(firstLaunchArrayId)
+                break
+              }
+            }
+            setFirstLaunchId(firstLaunchArrayId)
+
+            let lastLaunchArrayId;
+            for (let i = res2.docs.length - 1; i >= 0; i --){
+              if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0){
+                lastLaunchArrayId = res2.docs[i].launches[0];
+                console.log(lastLaunchArrayId);
+                break
+              }
+            }
+            setLatestLaunch(lastLaunchArrayId)
+
             const responseObj = {
               rocketOrDragonInfo: response,
               numberOfLaunhes: initialCount,
@@ -144,6 +181,14 @@ export default function Vehicle() {
         }
       }
     }
+
+    let options = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      timeZone: 'UTC',
+    };
+
     async function updateData() {
       let info = await fetchData();
       const { rocketOrDragonInfo, numberOfLaunhes } = info;
@@ -171,11 +216,7 @@ export default function Vehicle() {
             rocketOrDragonInfo.return_payload_vol.cubic_feet,
 
           firstLaunch: new Date(rocketOrDragonInfo.first_flight)
-            .toLocaleDateString('default', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })
+            .toLocaleDateString('en-US', options)
             .toUpperCase(),
           engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
           engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
@@ -194,11 +235,7 @@ export default function Vehicle() {
           payloadWeights: rocketOrDragonInfo.payload_weights,
 
           firstLaunch: new Date(rocketOrDragonInfo.first_flight)
-            .toLocaleDateString('default', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })
+            .toLocaleDateString('en-US', options)
             .toUpperCase(),
           engineNumber: rocketOrDragonInfo.engines.number,
           engineType: rocketOrDragonInfo.engines.type.toUpperCase(),
@@ -393,16 +430,20 @@ export default function Vehicle() {
                     <div
                       className='buttonsRow'
                       style={{
-                        height: name !== 'falconheavy' ? '100px' : '150px',
+                        height: data.numberOfLaunhes === 0 ? '150px' : '100px',
                       }}
-
-                      /* work on this, it should not be hard corded as it currently is */
                     >
                       <div className='button'>
-                        <Button text={'FIRST FLIGHT'} onClick={()=> handleFirstMission(ids)}/>
+                        <Button
+                          text={'FIRST FLIGHT'}
+                          onClick={() => handleFirstMission(ids)}
+                        />
                       </div>
                       <div className='button2'>
-                        <Button text={'LATEST MISSION'}  onClick={()=>handleLatestMission(ids)} />
+                        <Button
+                          text={'LATEST MISSION'}
+                          onClick={() => handleLatestMission(ids)}
+                        />
                       </div>
                     </div>
                   ) : (
@@ -413,7 +454,12 @@ export default function Vehicle() {
             </div>
             <div
               className='nextRow'
-              style={{ marginTop: data.numberOfLaunhes === 0  && pageNumber === 2 ? '100px' : '0' }}
+              style={{
+                marginTop:
+                  data.numberOfLaunhes === 0 && pageNumber === 2
+                    ? '100px'
+                    : '0',
+              }}
             >
               <div className='item'>
                 <div
