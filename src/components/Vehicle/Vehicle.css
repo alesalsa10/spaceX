@@ -310,3 +310,14 @@
 .vehicleImage{
   height: 400px
 }
+
+.ReactModal__Content{
+  background: none !important;
+  outline: none !important;
+  border: none !important
+}
+
+.embebedVideo{
+  width: 600px;
+  height: 500px;
+}

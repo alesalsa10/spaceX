@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import ModalVideo from 'react-modal-video';
+import Modal from 'react-modal';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -20,10 +20,11 @@ export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [sliderClass, setSliderClass] = useState(0);
-  const [ids, setId] = useState();
+  const [rocketId, setRocketId] = useState();
+  const [videoId, setVideoId] = useState();
   const [firstLaunchId, setFirstLaunchId] = useState();
   const [latestLaunchId, setLatestLaunch] = useState();
-  const [isOpen, setOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   let { name } = useParams();
   const preName = usePrevious(name);
@@ -42,6 +43,17 @@ export default function Vehicle() {
       setPageNumber(1);
     }
   }, [name]);
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
   const handleNextClick = (e) => {
     if (parseInt(e.target.id) === 1 && pageNumber === 1) {
@@ -73,27 +85,33 @@ export default function Vehicle() {
   };
 
   const handleFirstMission = async (id) => {
-    setOpen(true);
+    setIsOpen(true);
     if (name === 'dragon') {
-      const response = await getLaunchById(firstLaunchId);
-      console.log(response);
-      let id = await response.links.youtube_id;
-      setFirstLaunchId(id);
+      const dragonResponse = await getLaunchById(firstLaunchId);
+      console.log(dragonResponse);
+      let videoId = await dragonResponse.links.youtube_id;
+      setVideoId(videoId);
+      console.log(videoId);
     } else {
-      const response = await getLaunchByDate(id, 'asc');
-      setId(response)
+      console.log(id);
+      const rocketResponse = await getLaunchByDate(id, 'asc');
+      console.log(rocketResponse);
+      setVideoId(rocketResponse);
     }
   };
 
   const handleLatestMission = async (id) => {
-    setOpen(true);
+    setIsOpen(true);
     if (name === 'dragon') {
-      const response = await getLaunchById(latestLaunchId);
-      let id = await response.links.youtube_id;
-      setFirstLaunchId(id)
+      const dragonResponse = await getLaunchById(latestLaunchId);
+      let videoId = await dragonResponse.links.youtube_id;
+      setVideoId(videoId);
+      console.log(videoId);
     } else {
-      const response = await getLaunchByDate(id, 'desc');
-      setId(response)
+      console.log(id);
+      const rocketResponse = await getLaunchByDate(id, 'desc');
+      console.log(rocketResponse);
+      setVideoId(rocketResponse);
     }
   };
 
@@ -104,7 +122,7 @@ export default function Vehicle() {
         for await (let rocket of allRockets) {
           if (name === 'falcon9' && rocket.name === 'Falcon 9') {
             let id = await rocket.id;
-            setId(id);
+            setRocketId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             const res2 = await numberOfLaunchesByVehicle(id);
             const responseObj = {
@@ -114,7 +132,7 @@ export default function Vehicle() {
             return responseObj;
           } else if (name === 'starship' && rocket.name === 'Starship') {
             let id = await rocket.id;
-            setId(id);
+            setRocketId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             const res2 = await numberOfLaunchesByVehicle(id);
 
@@ -125,7 +143,7 @@ export default function Vehicle() {
             return responseObj;
           } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
             let id = await rocket.id;
-            setId(id);
+            setRocketId(id);
             const response = await getRocketOrDragonByID('rockets', id);
             const res2 = await numberOfLaunchesByVehicle(id);
 
@@ -159,7 +177,7 @@ export default function Vehicle() {
                 res2.docs[i].length !== 0
               ) {
                 firstLaunchArrayId = res2.docs[i].launches[0];
-                console.log(firstLaunchArrayId);
+                //console.log(firstLaunchArrayId);
                 break;
               }
             }
@@ -169,7 +187,7 @@ export default function Vehicle() {
             for (let i = res2.docs.length - 1; i >= 0; i--) {
               if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0) {
                 lastLaunchArrayId = res2.docs[i].launches[0];
-                console.log(lastLaunchArrayId);
+                //console.log(lastLaunchArrayId);
                 break;
               }
             }
@@ -252,13 +270,25 @@ export default function Vehicle() {
 
   return (
     <>
-      {/* {ids !== undefined ? <ModalVideo
-        channel='youtube'
-        autoplay
-        isOpen={isOpen}
-        videoId={ids}
-        onClose={() => setOpen(false)}
-      />: ''} */}
+      {videoId !== undefined && rocketId !== undefined ? (
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setIsOpen(false)}
+          style={customStyles}
+          contentLabel='Video Modal'
+          shouldCloseOnOverlayClick={true}
+          ariaHideApp={false}
+        >
+          <iframe
+            title='Mission video'
+            className='embebedVideo'
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+          ></iframe>
+        </Modal>
+      ) : (
+        ''
+      )}
+
       {data !== undefined ? (
         <div className='vehicleContainer' key={name}>
           <div className='leftCol '>
@@ -444,13 +474,13 @@ export default function Vehicle() {
                       <div className='button'>
                         <Button
                           text={'FIRST FLIGHT'}
-                          onClick={() => handleFirstMission(ids)}
+                          onClick={() => handleFirstMission(rocketId)}
                         />
                       </div>
                       <div className='button2'>
                         <Button
                           text={'LATEST MISSION'}
-                          onClick={() => handleLatestMission(ids)}
+                          onClick={() => handleLatestMission(rocketId)}
                         />
                       </div>
                     </div>
