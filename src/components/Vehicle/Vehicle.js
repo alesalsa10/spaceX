@@ -361,7 +361,9 @@ export default function Vehicle() {
                   {name !== 'dragon' && data.payloadWeights !== undefined ? (
                     data.payloadWeights.map((payload) => (
                       <div className='vehicleRow ' key={payload.id}>
-                        <h4>{`PAYLOAD TO ${payload.id.toUpperCase()}`}</h4>
+                        <div className='left'>
+                          <h4>{`PAYLOAD TO ${payload.id.toUpperCase()}`}</h4>
+                        </div>
                         <div className='right'>
                           <p>
                             <span>{`${payload.kg} kg`}</span>
@@ -468,7 +470,7 @@ export default function Vehicle() {
                     <div
                       className='buttonsRow'
                       style={{
-                        height: data.numberOfLaunhes === 0 ? '150px' : '100px',
+                        height: name === 'falconheavy' ? '150px' : '100px',
                       }}
                     >
                       <div className='button'>

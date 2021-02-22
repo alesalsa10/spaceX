@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size .3s, color .3s;
-    width: 150px;
+    width: 140px;
 }
 
 .missionButton:hover{

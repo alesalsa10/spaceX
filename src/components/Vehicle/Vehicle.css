@@ -10,7 +10,7 @@
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
-  height: 500px;
+  /* height: 500px; */
 }
 
 @keyframes fadein {
@@ -77,7 +77,6 @@
   padding-right: 0.5rem;
 }
 
-
 .nextRow {
   display: grid;
   align-items: center;
@@ -127,11 +126,11 @@
   margin-right: 0.5rem;
 }
 
-.vehicleName{
+.vehicleName {
   margin-bottom: 0.5rem;
 }
 
-.overview{
+.overview {
   margin-bottom: 1rem;
 }
 
@@ -145,20 +144,27 @@
 }
 
 @keyframes selected {
-  to{background-color: white;}
+  to {
+    background-color: white;
+  }
 }
-
 
 @-webkit-keyframes selected {
-  to{background-color: white}
+  to {
+    background-color: white;
+  }
 }
 
-@-moz-keyframes selected{
-  to{background-color: white;}
+@-moz-keyframes selected {
+  to {
+    background-color: white;
+  }
 }
 
-@-o-keyframes selected{
-  to{background-color: white;}
+@-o-keyframes selected {
+  to {
+    background-color: white;
+  }
 }
 
 .arrows {
@@ -169,10 +175,9 @@
   cursor: pointer;
 }
 
-.sliderContainer{
+.sliderContainer {
   position: relative;
   display: grid;
-  
 }
 
 .vehicleRow {
@@ -194,7 +199,7 @@
   /* height: 150px; */
 }
 
-.button2{
+.button2 {
   justify-self: end;
 }
 
@@ -205,119 +210,174 @@
   -o-animation: slider 0.5s; /* Opera < 12.1 */
   animation: next 1s;
   position: relative;
-  
 }
 
 @keyframes next {
   from {
     opacity: 0;
-    left: 10%
+    left: 10%;
   }
   to {
     opacity: 1;
-    left: 0
+    left: 0;
   }
 }
 
 @-moz-keyframes next {
   from {
     opacity: 0;
-    left: 10%
+    left: 10%;
   }
   to {
     opacity: 1;
-    left: 0
+    left: 0;
   }
 }
 
 @-ms-keyframes next {
   from {
     opacity: 0;
-    left: 10%
+    left: 10%;
   }
   to {
     opacity: 1;
-    left: 0
+    left: 0;
   }
 }
 
-@-webkit-keyframes next{
+@-webkit-keyframes next {
   from {
     opacity: 0;
-    left: 10%
+    left: 10%;
   }
   to {
     opacity: 1;
-    left: 0
+    left: 0;
   }
 }
 
-.backSlider{
+.backSlider {
   -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: slider 1s; /* Firefox < 16 */
   -ms-animation: slider 1s; /* Internet Explorer */
   -o-animation: slider 1s; /* Opera < 12.1 */
   animation: back 1s;
   position: relative;
+}
+
+@keyframes back {
+  from {
+    opacity: 0;
+    right: 10%;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+@-moz-keyframes back {
+  from {
+    opacity: 0;
+    right: 10%;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+@-ms-keyframes back {
+  from {
+    opacity: 0;
+    right: 10%;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+@-webkit-keyframes back {
+  from {
+    opacity: 0;
+    right: 10%;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+.imageDiv {
+  justify-self: end;
+  align-self: center;
+}
+
+.vehicleImage {
+  height: 350px;
   
 }
 
-@keyframes back{
-  from {
-    opacity: 0;
-    right: 10%
-  }
-  to {
-    opacity: 1;
-    right: 0
-  }
-}
-@-moz-keyframes back{
-  from {
-    opacity: 0;
-    right: 10%
-  }
-  to {
-    opacity: 1;
-    right: 0
-  }
-}
-@-ms-keyframes back{
-  from {
-    opacity: 0;
-    right: 10%
-  }
-  to {
-    opacity: 1;
-    right: 0
-  }
-}
-@-webkit-keyframes back{
-  from {
-    opacity: 0;
-    right: 10%
-  }
-  to {
-    opacity: 1;
-    right: 0
-  }
-}
-
-.imageDiv{
-  justify-self: end;
-}
-
-.vehicleImage{
-  height: 400px
-}
-
-.ReactModal__Content{
+.ReactModal__Content {
   background: none !important;
   outline: none !important;
-  border: none !important
+  border: none !important;
 }
 
-.embebedVideo{
-  width: 600px;
+.embebedVideo {
+  width: 900px;
   height: 500px;
+}
+
+
+@media only screen  and  (max-width: 500px) {
+  .vehicleContainer{
+    width: 85%  ;
+    display: grid;
+    grid-template-columns: 1fr;    
+  }
+  .vehicleImage{
+    height: 250px;
+  }
+  .embebedVideo{
+    width:300px  ;
+    height: 300px ;
+  }
+  .left{
+    font-size: smaller;
+  }
+  .right{
+    font-size: smaller;
+  }
+  .imageDiv{
+    align-self: center;
+    justify-self: center;
+  }
+}
+
+
+@media only screen  and (min-width: 501px) and (max-width: 1000px) {
+  .vehicleContainer {
+    width: 65%;
+    grid-template-columns: 1fr;
+  }
+  .imageDiv{
+    align-self: center;
+    justify-self: center;
+  }
+  .embebedVideo{
+    width: 80vw;
+    height: 450px;
+  }
+}
+
+@media only screen  and (min-width: 1001px) and (max-width: 1250px) {
+  .left{
+    font-size: small;
+  }
+  .vehicleContainer{
+    grid-template-columns: 1.5fr 0.5fr;
+  }
+  .embebedVideo{
+    width: 70vw;
+    height: 450px;
+  }
 }
