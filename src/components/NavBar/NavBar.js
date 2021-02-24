@@ -77,7 +77,7 @@ export default function NavBar() {
             </Link>
           </div>
           <div className='missionsButtonDiv'>
-            <Link  to='/'>
+            <Link  to='/missions'>
               <Button text={'MISSIONS'}/>
             </Link>
           </div>

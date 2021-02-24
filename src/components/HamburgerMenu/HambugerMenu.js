@@ -29,7 +29,7 @@ const HambugerMenu = () => {
       right
       outerContainerId={'outer-container'}
     >
-      <Link className='menu-item links' to='/' onClick={handleOnClose}>
+      <Link className='menu-item links' to='/missions' onClick={handleOnClose}>
         MISSIONS
       </Link>
       <Link

@@ -1,0 +1,31 @@
+.allMissionsContainer {
+  /* the animation are currently on the vehicles css */
+  color: white;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+  margin: 150px auto;
+}
+
+.infoHeader {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: auto;
+  align-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainInfo {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  width: 100%;
+}
+
+.dropDownItems{
+    background-color: #005288;
+    width: 140px;
+}

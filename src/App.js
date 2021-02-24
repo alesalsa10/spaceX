@@ -3,6 +3,7 @@ import './app.css';
 import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
 import Vehicle from './components/Vehicle/Vehicle';
+import Missions from './components/Missions/Missions'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={LandingPage} />
           <Route path='/vehicles/:name' component={Vehicle} />
+          <Route path = '/missions' component={Missions}/>
         </Switch>
       </Router>
     </div>

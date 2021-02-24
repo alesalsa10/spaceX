@@ -63,7 +63,6 @@ export const getAllDragon2Launches = async () => {
   }
 };
 
-
 export const numberOfLaunchesByVehicle = async (id) => {
   try {
     const response = await axios.post(`${baseURL}/launches/query`, {
@@ -98,10 +97,52 @@ export const getLaunchByDate = async (id, order) => {
 };
 
 export const getLaunchById = async (id) => {
-  try{
-    const response = await axios.get(`${baseURL}/launches/${id}`)
+  try {
+    const response = await axios.get(`${baseURL}/launches/${id}`);
     return response.data;
-  }catch(error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
-}
+};
+
+export const getAllRockets = async () => {
+  try {
+    let rocketNames = [];
+    const response = await axios.get(`${baseURL}/rockets`);
+    response.data.forEach((rocket) => {
+      rocketNames.push({ name: rocket.name, id: rocket.id });
+    });
+    return rocketNames;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllLaunchpads = async () => {
+  try {
+    let launchPadArray = [];
+    const response = await axios.get(`${baseURL}/launchpads`);
+    response.data.forEach((launchpad) => {
+      launchPadArray.push({ name: launchpad.name, id: launchpad.id });
+    });
+    return launchPadArray;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllLaunches = async () => {
+  try {
+    const response = await axios.post(`${baseURL}/launches/query`, {
+      query: {
+        upcoming: false,
+      },
+      options: { 
+        pagination: false 
+      },
+    });
+    return response.data.docs;
+  } catch (error) {
+    console.log(error);
+  }
+};
