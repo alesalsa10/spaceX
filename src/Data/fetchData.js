@@ -131,17 +131,89 @@ export const getAllLaunchpads = async () => {
   }
 };
 
-export const getAllLaunches = async () => {
+export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
+
+  let queryObject = {
+    upcoming: false
+  }
+
+  if(rocketId !== ''){
+    //rocket, launchpad, and outcome
+    if (launchPadId !== '' && outcome !== '') {
+      console.log('here')
+      queryObject = {
+        ...queryObject,
+        rocket: rocketId,
+        launchpad: launchPadId,
+        success: outcome,
+      };
+      //rocket, and launchpad
+    } else if (launchPadId !== '') {
+      console.log('here');
+      queryObject = {
+        ...queryObject,
+        rocket: rocketId,
+        launchpad: launchPadId,
+      };
+      //rocket and outcome
+    } else if (outcome !== '') {
+      console.log('here');
+      queryObject = {
+        ...queryObject,
+        rocket: rocketId,
+        success: outcome,
+      };
+    }else {
+      console.log('here');
+      queryObject = {
+        ...queryObject,
+        rocket: rocketId,
+      };
+    }
+    //no rocket
+  }else if (rocketId === ''){
+    //only launchpad and outcome
+    if(launchPadId !== '' && outcome !== ''){
+      console.log('here');
+      queryObject = {
+        ...queryObject,
+        launchpad: launchPadId,
+        success: outcome
+      };
+    }
+    //only outcome
+    else if (launchPadId === ''){
+      if(outcome !== ''){
+        queryObject = {
+          ...queryObject,
+          success: outcome,
+        };
+      }
+      //only launchpad
+    }else if (outcome !== ''){
+      console.log('here');
+      queryObject = {
+        ...queryObject,
+        launchpad: launchPadId,
+      };
+    }
+  }else {
+    console.log('here');
+    queryObject = {
+      ...queryObject,
+    };
+  }
+
+
   try {
+    console.log(queryObject)
     const response = await axios.post(`${baseURL}/launches/query`, {
-      query: {
-        upcoming: false,
-      },
+      query: queryObject,
       options: { 
         pagination: false 
       },
     });
-    return response.data.docs;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

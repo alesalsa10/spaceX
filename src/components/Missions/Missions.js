@@ -91,12 +91,12 @@ export default function Missions() {
       setLaunchPads(launchPads);
       console.log(launchPads);
 
-      const allLaunches = await getAllLaunches();
+      const allLaunches = await getAllLaunches( filterValues.rocketId, filterValues.launchPadId, filterValues.outcome );
       setLaunches(allLaunches);
       console.log(allLaunches);
     }
     fetchData();
-  }, []);
+  }, [filterValues]);
 
   return (
     <div className='allMissionsContainer'>

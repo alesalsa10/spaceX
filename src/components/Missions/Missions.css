@@ -83,7 +83,6 @@
 
 .dropdownRight {
   background-color: #005288;
-  /* cursor: pointer; */
   position: relative;
   z-index: 10;
 }
@@ -121,16 +120,12 @@
 .filterValues{
   height: 40px;
   line-height: 40px;
-  margin-right: 0.5rem;
   background-color: #005288;
   display: inline-block;
   vertical-align: top;
   width: 140px;
   text-align: center;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
 }
 
-.firstFilterValue{
-  margin-left: 1rem !important;
-}
 
