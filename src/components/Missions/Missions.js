@@ -20,13 +20,16 @@ export default function Missions() {
     rocketId: '',
     launchPadId: '',
     outcome: '',
+    rocketName: '',
+    launchPadName: '',
+    outcomeName: '',
   });
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
     setIsVehicleFilter(false);
     setIsOutcome(false);
-    setIsLaunchSite(false)
+    setIsLaunchSite(false);
   };
 
   const handleFilterParameter = (e) => {
@@ -49,23 +52,33 @@ export default function Missions() {
     let id = e.target.id;
     let filterType = e.target.className.split(' ');
     filterType = filterType[1];
-    
-    if (filterType === 'rocket'){
-      setFilterValues({...filterValues, rocketId: id})
-    }
-    else if(filterType === 'launchpad'){
-      setFilterValues({ ...filterValues, launchPadId: id });
-    }
-    else if(filterType === 'outcome'){
-      setFilterValues({...filterValues, outcome: id})
+    let name = e.currentTarget.innerHTML;
+
+    if (filterType === 'rocket') {
+      setFilterValues({
+        ...filterValues,
+        rocketId: id,
+        rocketName: e.currentTarget.innerHTML,
+      });
+    } else if (filterType === 'launchpad') {
+      setFilterValues({
+        ...filterValues,
+        launchPadId: id,
+        launchPadName: name,
+      });
+    } else if (filterType === 'outcome') {
+      let successBoolean = id === 'true' ? true : false;
+      setFilterValues({ ...filterValues, outcome: successBoolean, outcomeName: name });
     } else {
       setFilterValues({
         rocketId: '',
         launchPadId: '',
-        outcome: ''
-      })
+        outcome: '',
+        rocketName: '',
+        launchPadName: '',
+        outcomeName:''
+      });
     }
-
   };
 
   useEffect(() => {
@@ -100,9 +113,44 @@ export default function Missions() {
             </div> */}
 
       <div className='filter'>
-        <Buttton text={'FILTER'} onClick={handleOpenFilter} />
+        <div className='filterButtonDiv'>
+          <div className='filterItem'>
+            <Buttton
+              text={'FILTER'}
+              onClick={handleOpenFilter}
+              className={'button'}
+            />
+          </div>
+          <div className='filterItem'>
+            {filterValues.rocketName !== '' ? (
+              <h4 className='filterValues firstFilterValue'>
+                {filterValues.rocketName}
+              </h4>
+            ) : (
+              ''
+            )}
+            {filterValues.launchPadName !== '' ? (
+              <h4 className='filterValues'>{filterValues.launchPadName}</h4>
+            ) : (
+              ''
+            )}
+
+            {filterValues.outcomeName !== '' ? (
+              <h4 className='filterValues'>
+                {filterValues.outcomeName.toString().toUpperCase()}
+              </h4>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
         <div
-          style={{height: isFilterOpen && launchPads !== undefined ? `calc(40px * ${launchPads.length +1})`: '0' }}
+          style={{
+            height:
+              isFilterOpen && launchPads !== undefined
+                ? `calc(40px * ${launchPads.length + 1})`
+                : '0',
+          }}
           className={`${'dropDownItems'} ${
             isFilterOpen ? 'activeFilter' : 'noneActiveFilter'
           } `}
@@ -163,7 +211,7 @@ export default function Missions() {
                     id={launchpad.id}
                     onClick={handleFilterSelection}
                   >
-                    {launchpad.name}
+                    {launchpad.name.toUpperCase()}
                   </h4>
                 ))}
               </div>
@@ -200,7 +248,9 @@ export default function Missions() {
             </div>
           </div>
           <div className='clearFilter '>
-            <h4 id='clearFilter' onClick={handleFilterSelection}  >CLEAR FILTER</h4>
+            <h4 id='clearFilter' onClick={handleFilterSelection}>
+              CLEAR FILTER
+            </h4>
           </div>
         </div>
       </div>

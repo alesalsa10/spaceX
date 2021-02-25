@@ -93,6 +93,7 @@
   width: 140px;
   height: 40px;
   line-height: 40px;
+  cursor: pointer;
 }
 
 .selectionItem{
@@ -105,3 +106,31 @@
   height: 80px;
   cursor: pointer;
 }
+
+.filterButtonDiv{
+  display: grid;
+  grid-template-columns: 140px auto;
+  height: 40px;
+}
+
+.filterItem{
+  height: 40px;
+}
+
+
+.filterValues{
+  height: 40px;
+  line-height: 40px;
+  margin-right: 0.5rem;
+  background-color: #005288;
+  display: inline-block;
+  vertical-align: top;
+  width: 140px;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+
+.firstFilterValue{
+  margin-left: 1rem !important;
+}
+
