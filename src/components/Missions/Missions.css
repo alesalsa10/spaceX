@@ -25,7 +25,83 @@
   width: 100%;
 }
 
-.dropDownItems{
-    background-color: #005288;
-    width: 140px;
+.dropDownItems {
+  text-align: center;
+  margin-bottom: 1rem;
+  height: auto;
+}
+
+.noneActiveFilter {
+  -moz-transition: height .5s;
+  -ms-transition: height .5s;
+  -o-transition: height .5s;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+  height: 0px;
+  overflow: hidden;
+}
+
+.activeFilter{
+  -moz-transition: height .5s;
+  -ms-transition: height .5s;
+  -o-transition: height .5s;
+  -webkit-transition: height .5s;
+  transition: height .5s;
+  height: 200px;
+}
+
+.nonActiveSelection{
+   -moz-transition: height .5s, width 0.5s ;
+  -ms-transition: height .5s, width 0.5s ;
+  -o-transition: height .5s, width 0.5s ;
+  -webkit-transition: height, .5s width 0.5s ;
+  transition: height .5s, width 0.5s ;
+  width: 0;
+  overflow: hidden;
+}
+
+.activeSelection{
+  -moz-transition: height .5s, width 0.5s ;
+  -ms-transition: height .5s, width 0.5s ;
+  -o-transition: height .5s, width 0.5s ;
+  -webkit-transition: height .5s, width 0.5s ;
+  transition: height .5s, width 0.5s ;
+  width: 140px;
+}
+
+.dropdownContent {
+  display: grid;
+  grid-template-columns: 140px 140px;
+  grid-auto-rows: 50px;
+}
+
+.dropdowLeft {
+  width: 140px;
+  background-color: #005288;
+  height: 50px;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.dropdownRight {
+  background-color: #005288;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.clearFilter {
+  background-color: #005288;
+  width: 140px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.selectionItem{
+  height: 50px;
+  line-height: 50px;
+}
+
+#outcome{
+  height: 100px
 }

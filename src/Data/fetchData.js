@@ -110,7 +110,7 @@ export const getAllRockets = async () => {
     let rocketNames = [];
     const response = await axios.get(`${baseURL}/rockets`);
     response.data.forEach((rocket) => {
-      rocketNames.push({ name: rocket.name, id: rocket.id });
+      rocketNames.push({ name: rocket.name.toUpperCase(), id: rocket.id });
     });
     return rocketNames;
   } catch (error) {
