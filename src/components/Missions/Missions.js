@@ -16,19 +16,56 @@ export default function Missions() {
   const [isVehicleFilter, setIsVehicleFilter] = useState(false);
   const [isOutcome, setIsOutcome] = useState(false);
   const [isLaunchSite, setIsLaunchSite] = useState(false);
+  const [filterValues, setFilterValues] = useState({
+    rocketId: '',
+    launchPadId: '',
+    outcome: '',
+  });
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
+    setIsVehicleFilter(false);
+    setIsOutcome(false);
+    setIsLaunchSite(false)
   };
 
   const handleFilterParameter = (e) => {
     if (e.target.id === 'vehicle') {
       setIsVehicleFilter(!isVehicleFilter);
+      setIsLaunchSite(false);
+      setIsOutcome(false);
     } else if (e.target.id === 'launchSite') {
       setIsLaunchSite(!isLaunchSite);
+      setIsVehicleFilter(false);
+      setIsOutcome(false);
     } else if (e.target.id === 'outcome') {
       setIsOutcome(!isOutcome);
+      setIsVehicleFilter(false);
+      setIsLaunchSite(false);
     }
+  };
+
+  const handleFilterSelection = (e) => {
+    let id = e.target.id;
+    let filterType = e.target.className.split(' ');
+    filterType = filterType[1];
+    
+    if (filterType === 'rocket'){
+      setFilterValues({...filterValues, rocketId: id})
+    }
+    else if(filterType === 'launchpad'){
+      setFilterValues({ ...filterValues, launchPadId: id });
+    }
+    else if(filterType === 'outcome'){
+      setFilterValues({...filterValues, outcome: id})
+    } else {
+      setFilterValues({
+        rocketId: '',
+        launchPadId: '',
+        outcome: ''
+      })
+    }
+
   };
 
   useEffect(() => {
@@ -65,6 +102,7 @@ export default function Missions() {
       <div className='filter'>
         <Buttton text={'FILTER'} onClick={handleOpenFilter} />
         <div
+          style={{height: isFilterOpen && launchPads !== undefined ? `calc(40px * ${launchPads.length +1})`: '0' }}
           className={`${'dropDownItems'} ${
             isFilterOpen ? 'activeFilter' : 'noneActiveFilter'
           } `}
@@ -80,14 +118,19 @@ export default function Missions() {
                 style={{
                   height: !isVehicleFilter
                     ? '0'
-                    : `calc(50px * ${rockets.length})`,
+                    : `calc(40px * ${rockets.length})`,
                 }}
                 className={`${'dropdownRight'} ${
                   isVehicleFilter ? 'activeSelection' : 'nonActiveSelection'
                 } `}
               >
                 {rockets.map((rocket) => (
-                  <h4 className='selectionItem' key={rocket.id}>
+                  <h4
+                    className={`${'selectionItem'} ${'rocket'} `}
+                    key={rocket.id}
+                    id={rocket.id}
+                    onClick={handleFilterSelection}
+                  >
                     {rocket.name}
                   </h4>
                 ))}
@@ -107,14 +150,19 @@ export default function Missions() {
                 style={{
                   height: !isLaunchSite
                     ? '0'
-                    : `calc(50px * ${launchPads.length})`,
+                    : `calc(40px * ${launchPads.length})`,
                 }}
                 className={`${'dropdownRight'} ${
                   isLaunchSite ? 'activeSelection' : 'nonActiveSelection'
                 } `}
               >
                 {launchPads.map((launchpad) => (
-                  <h4 className='selectionItem' key={launchpad.id}>
+                  <h4
+                    className='selectionItem launchpad'
+                    key={launchpad.id}
+                    id={launchpad.id}
+                    onClick={handleFilterSelection}
+                  >
                     {launchpad.name}
                   </h4>
                 ))}
@@ -135,12 +183,24 @@ export default function Missions() {
                 isOutcome ? 'activeSelection' : 'nonActiveSelection'
               } `}
             >
-              <h4 className='selectionItem'>SUCCESS</h4>
-              <h4 className='selectionItem'>FAILURE</h4>
+              <h4
+                className='selectionItem outcome '
+                onClick={handleFilterSelection}
+                id='true'
+              >
+                SUCCESS
+              </h4>
+              <h4
+                className='selectionItem outcome '
+                onClick={handleFilterSelection}
+                id='false'
+              >
+                FAILURE
+              </h4>
             </div>
           </div>
           <div className='clearFilter '>
-            <h4>CLEAR FILTER</h4>
+            <h4 id='clearFilter' onClick={handleFilterSelection}  >CLEAR FILTER</h4>
           </div>
         </div>
       </div>
