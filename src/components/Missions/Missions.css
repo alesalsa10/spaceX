@@ -128,4 +128,24 @@
   margin-left: 1rem;
 }
 
+.upArrow{
+  width: 0;
+  height: 0;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid white;
+  margin-left: auto;
+  cursor: pointer;
+  margin-bottom: 2rem ;
+}
+
+.downArrow{
+  width: 0;
+  height: 0;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-top: 15px solid white;
+  margin-left: auto;
+  cursor: pointer;
+}
 

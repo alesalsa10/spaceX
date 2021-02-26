@@ -24,6 +24,24 @@ export default function Missions() {
     launchPadName: '',
     outcomeName: '',
   });
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const handleNextAndBack = (e) => {
+    let id = e.target.id;
+    if (id === 'next') {
+      if (pageNumber === launches.length - 1) {
+        setPageNumber(0);
+      } else {
+        setPageNumber(pageNumber + 1);
+      }
+    } else {
+      if (pageNumber === 0) {
+        setPageNumber(launches.length - 1);
+      } else {
+        setPageNumber(pageNumber - 1);
+      }
+    }
+  };
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -68,7 +86,11 @@ export default function Missions() {
       });
     } else if (filterType === 'outcome') {
       let successBoolean = id === 'true' ? true : false;
-      setFilterValues({ ...filterValues, outcome: successBoolean, outcomeName: name });
+      setFilterValues({
+        ...filterValues,
+        outcome: successBoolean,
+        outcomeName: name,
+      });
     } else {
       setFilterValues({
         rocketId: '',
@@ -76,24 +98,41 @@ export default function Missions() {
         outcome: '',
         rocketName: '',
         launchPadName: '',
-        outcomeName:''
+        outcomeName: '',
       });
     }
+  };
+
+  const splitArrray = (arr) => {
+    let newArray = [];
+    if (arr.length <= 8) {
+      newArray[0] = arr.slice(0, arr.length);
+    } else {
+      for (let i = 0; i <= arr.length; i += 8) {
+        newArray.push(arr.slice(i, i + 8));
+      }
+    }
+    return newArray;
   };
 
   useEffect(() => {
     async function fetchData() {
       const rockets = await getAllRockets();
       setRockets(rockets);
-      console.log(rockets);
 
       const launchPads = await getAllLaunchpads();
       setLaunchPads(launchPads);
-      console.log(launchPads);
 
-      const allLaunches = await getAllLaunches( filterValues.rocketId, filterValues.launchPadId, filterValues.outcome );
-      setLaunches(allLaunches);
+      const allLaunches = await getAllLaunches(
+        filterValues.rocketId,
+        filterValues.launchPadId,
+        filterValues.outcome
+      );
       console.log(allLaunches);
+
+      let launches = splitArrray(allLaunches);
+      setLaunches(launches);
+      console.log(launches);
     }
     fetchData();
   }, [filterValues]);
@@ -255,10 +294,16 @@ export default function Missions() {
         </div>
       </div>
 
-      {/* <div className='mainInfo'>
-        <div className='selectorCol'>something here</div>
-        <div className='information'>something else</div>
-      </div> */}
+      <div className='mainInfo'>
+        <div className="selectorCol">
+              <div className="upArrow"  id={'next'}onClick={handleNextAndBack} ></div>
+              
+              <div className="downArrow" onClick={handleNextAndBack} ></div>
+        </div>
+        <div className="information">
+
+        </div>
+      </div>
     </div>
   );
 }

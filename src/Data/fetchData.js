@@ -140,7 +140,6 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
   if(rocketId !== ''){
     //rocket, launchpad, and outcome
     if (launchPadId !== '' && outcome !== '') {
-      console.log('here')
       queryObject = {
         ...queryObject,
         rocket: rocketId,
@@ -149,7 +148,6 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
       };
       //rocket, and launchpad
     } else if (launchPadId !== '') {
-      console.log('here');
       queryObject = {
         ...queryObject,
         rocket: rocketId,
@@ -157,14 +155,12 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
       };
       //rocket and outcome
     } else if (outcome !== '') {
-      console.log('here');
       queryObject = {
         ...queryObject,
         rocket: rocketId,
         success: outcome,
       };
     }else {
-      console.log('here');
       queryObject = {
         ...queryObject,
         rocket: rocketId,
@@ -174,31 +170,28 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
   }else if (rocketId === ''){
     //only launchpad and outcome
     if(launchPadId !== '' && outcome !== ''){
-      console.log('here');
       queryObject = {
         ...queryObject,
         launchpad: launchPadId,
         success: outcome
       };
     }
-    //only outcome
-    else if (launchPadId === ''){
-      if(outcome !== ''){
+    //if launchpad exists
+    else if (launchPadId !== ''){
+      //if(outcome !== ''){
         queryObject = {
           ...queryObject,
-          success: outcome,
+          launchpad: launchPadId,
         };
-      }
+      //}
       //only launchpad
     }else if (outcome !== ''){
-      console.log('here');
       queryObject = {
         ...queryObject,
-        launchpad: launchPadId,
+        success: outcome,
       };
     }
   }else {
-    console.log('here');
     queryObject = {
       ...queryObject,
     };
@@ -213,7 +206,7 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
         pagination: false 
       },
     });
-    return response.data;
+    return response.data.docs;
   } catch (error) {
     console.log(error);
   }
