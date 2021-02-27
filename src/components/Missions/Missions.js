@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loader from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import './Missions.css';
 import {
@@ -11,7 +12,7 @@ import Buttton from '../Button/Button';
 export default function Missions() {
   const [rockets, setRockets] = useState();
   const [launchPads, setLaunchPads] = useState();
-  const [launches, setLaunches] = useState();
+  const [launches, setLaunches] = useState('loading');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isVehicleFilter, setIsVehicleFilter] = useState(false);
   const [isOutcome, setIsOutcome] = useState(false);
@@ -294,16 +295,56 @@ export default function Missions() {
         </div>
       </div>
 
-      <div className='mainInfo'>
-        <div className="selectorCol">
-              <div className="upArrow"  id={'next'}onClick={handleNextAndBack} ></div>
-              
-              <div className="downArrow" onClick={handleNextAndBack} ></div>
-        </div>
-        <div className="information">
+      {launches === 'loading' ? (
+        <Loader
+          type='Puff'
+          color='#00BFFF'
+          height={100}
+          width={100}
+          timeout={3000} //3 secs
+        />
+      ) : launches.length === 0 ? (
+        <div>nothing found</div>
+      ) : (
+        <div className='mainInfo'>
+          <div className='selectorCol'>
+            <div
+              className='upArrow'
+              id={'next'}
+              onClick={handleNextAndBack}
+            ></div>
 
+            <div className='downArrow' onClick={handleNextAndBack}></div>
+          </div>
+          <div className='information'>
+            <div className='missionRowHeader'>
+              <div className='topRowItem'>FLIGHT NO</div>
+              <div className='topRowItem'>VEHICLE</div>
+              <div className='topRowItem'>DATE</div>
+              <div className='topRowItem'>LAUNCH SITE</div>
+              <div className='topRowItem'>PAYLOAD</div>
+              <div className='topRowItem'>CUSTOMER</div>
+              <div className='topRowItem'>OUTCOME</div>
+            </div>
+            {launches[pageNumber].map((launch, index) => (
+              <div
+                className={` ${'informationRow'} ${
+                  index % 2 === 0 ? 'darkItem' : ''
+                }`}
+                key={index}
+              >
+                <div className='infoItem'>{launch.flight_number}</div>
+                <div className='infoItem'>some</div>
+                <div className='infoItem'>some</div>
+                <div className='infoItem'>some</div>
+                <div className='infoItem'>spm</div>
+                <div className='infoItem'>some</div>
+                <div className='infoItem'>{launch.success === true ? 'SUCCESS' : 'FAILURE'}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
