@@ -21,9 +21,19 @@
 
 .mainInfo {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  width: 100%;
+  grid-template-columns: 50px 1fr;
+  width: 80%;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 500px;
 }
+
+.darkItem{
+  background-color: rgba(0,0,0,0.5);
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
 
 .dropDownItems {
   text-align: center;
@@ -128,15 +138,14 @@
   margin-left: 1rem;
 }
 
-.mainInfo{
-  background-color: rgba(0, 0, 0, 0.4);
-  display: grid;
-  grid-template-columns: 100px, 1fr;
-}
+
+  
 
 .missionRowHeader{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  height: 50px;
+  line-height: 50px;
 }
 
 .informationRow{
@@ -145,11 +154,34 @@
   height: 50px;
 }
 
+.information{
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.information:last-child{
+  border-bottom: 1px solid grey;
+}
+
 .infoItem{
   height: 50px;
   line-height: 50px;
 }
 
+.upArrowContainer{
+  height: 50px;
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.downArrowContainer{
+  height: 50px;
+  display: grid;
+  justify-content: center;
+  align-items:center
+}
 
 .upArrow{
   width: 0;
@@ -159,7 +191,6 @@
   border-bottom: 15px solid white;
   margin-left: auto;
   cursor: pointer;
-  margin-bottom: 2rem ;
 }
 
 .downArrow{
@@ -170,5 +201,21 @@
   border-top: 15px solid white;
   margin-left: auto;
   cursor: pointer;
+}
+
+.selectorCol{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.circlesCont{
+  margin-right: 1rem;
+  height: 350px;
+  display: grid;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  justify-items: center;
+  margin: auto;
 }
 

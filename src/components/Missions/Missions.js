@@ -102,6 +102,7 @@ export default function Missions() {
         outcomeName: '',
       });
     }
+    setLaunches('loading')
   };
 
   const splitArrray = (arr) => {
@@ -303,18 +304,32 @@ export default function Missions() {
           width={100}
           timeout={3000} //3 secs
         />
-      ) : launches.length === 0 ? (
+      ) : launches[0].length === 0 ? (
         <div>nothing found</div>
       ) : (
         <div className='mainInfo'>
           <div className='selectorCol'>
-            <div
-              className='upArrow'
-              id={'next'}
-              onClick={handleNextAndBack}
-            ></div>
+            <div className='upArrowContainer'>
+              <div
+                className='upArrow'
+                id={'back'}
+                onClick={handleNextAndBack}
+              ></div>
+            </div>
 
-            <div className='downArrow' onClick={handleNextAndBack}></div>
+            <div className='circlesCont'>
+              {launches.map((launch, index) => (
+                <div className={`${'circle'} ${index === pageNumber ? 'selectedPage' : ''} `} key={index} id={index}></div>
+              ))}
+            </div>
+
+            <div className='downArrowContainer'>
+              <div
+                className='downArrow'
+                id={'next'}
+                onClick={handleNextAndBack}
+              ></div>
+            </div>
           </div>
           <div className='information'>
             <div className='missionRowHeader'>
@@ -334,12 +349,16 @@ export default function Missions() {
                 key={index}
               >
                 <div className='infoItem'>{launch.flight_number}</div>
-                <div className='infoItem'>some</div>
+                <div className='infoItem'>
+                  {launch.rocket.name.toUpperCase()}
+                </div>
                 <div className='infoItem'>some</div>
                 <div className='infoItem'>some</div>
                 <div className='infoItem'>spm</div>
                 <div className='infoItem'>some</div>
-                <div className='infoItem'>{launch.success === true ? 'SUCCESS' : 'FAILURE'}</div>
+                <div className='infoItem'>
+                  {launch.success === true ? 'SUCCESS' : 'FAILURE'}
+                </div>
               </div>
             ))}
           </div>
