@@ -202,9 +202,9 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
     console.log(queryObject)
     const response = await axios.post(`${baseURL}/launches/query`, {
       query: queryObject,
-      options: { 
+      options: {
         pagination: false,
-        populate: ['rocket', 'payloads']
+        populate: ['rocket', 'payloads', ['launchpad']],
       },
     });
     return response.data.docs;

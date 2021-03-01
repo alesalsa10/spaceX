@@ -26,6 +26,7 @@ export default function Missions() {
     outcomeName: '',
   });
   const [pageNumber, setPageNumber] = useState(0);
+  
 
   const handleNextAndBack = (e) => {
     let id = e.target.id;
@@ -102,7 +103,11 @@ export default function Missions() {
         outcomeName: '',
       });
     }
-    setLaunches('loading')
+    setLaunches('loading');
+    setIsLaunchSite(false);
+    setIsVehicleFilter(false);
+    setIsOutcome(false);
+    setIsFilterOpen(false)
   };
 
   const splitArrray = (arr) => {
@@ -115,6 +120,21 @@ export default function Missions() {
       }
     }
     return newArray;
+  };
+
+  const handleCirclePageClick = e => {
+    setPageNumber(parseInt(e.target.id));
+  }
+
+  const clearAllfilters = () =>{
+    
+  }
+
+  let options = {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
   };
 
   useEffect(() => {
@@ -153,216 +173,230 @@ export default function Missions() {
                 </div>
             </div> */}
 
-      <div className='filter'>
-        <div className='filterButtonDiv'>
-          <div className='filterItem'>
-            <Buttton
-              text={'FILTER'}
-              onClick={handleOpenFilter}
-              className={'button'}
-            />
-          </div>
-          <div className='filterItem'>
-            {filterValues.rocketName !== '' ? (
-              <h4 className='filterValues firstFilterValue'>
-                {filterValues.rocketName}
-              </h4>
-            ) : (
-              ''
-            )}
-            {filterValues.launchPadName !== '' ? (
-              <h4 className='filterValues'>{filterValues.launchPadName}</h4>
-            ) : (
-              ''
-            )}
-
-            {filterValues.outcomeName !== '' ? (
-              <h4 className='filterValues'>
-                {filterValues.outcomeName.toString().toUpperCase()}
-              </h4>
-            ) : (
-              ''
-            )}
-          </div>
+      {launches === 'loading' ? (
+        <div className='spinner'>
+          <Loader type='TailSpin' color='#005288' height={100} width={100} />
         </div>
-        <div
-          style={{
-            height:
-              isFilterOpen && launchPads !== undefined
-                ? `calc(40px * ${launchPads.length + 1})`
-                : '0',
-          }}
-          className={`${'dropDownItems'} ${
-            isFilterOpen ? 'activeFilter' : 'noneActiveFilter'
-          } `}
-        >
-          <div className='vehicles dropdownContent'>
-            <div className='dropdowLeft'>
-              <h4 id='vehicle' onClick={handleFilterParameter}>
-                VEHICLE
-              </h4>
-            </div>
-            {rockets !== undefined ? (
-              <div
-                style={{
-                  height: !isVehicleFilter
-                    ? '0'
-                    : `calc(40px * ${rockets.length})`,
-                }}
-                className={`${'dropdownRight'} ${
-                  isVehicleFilter ? 'activeSelection' : 'nonActiveSelection'
-                } `}
-              >
-                {rockets.map((rocket) => (
-                  <h4
-                    className={`${'selectionItem'} ${'rocket'} `}
-                    key={rocket.id}
-                    id={rocket.id}
-                    onClick={handleFilterSelection}
-                  >
-                    {rocket.name}
-                  </h4>
-                ))}
+      ) : launches[0].length === 0 ? (
+        <div className='noResultsFound'>
+          <h3 className="noResultsHeader">OH NO!</h3>
+          <h5>LOOKS LIKE NO RESULTS WERE FOUND FOR THIS SELECTION</h5>
+          <h5 onClick={clearAllfilters}  >ClEAR FILTERS AND TRY AGAIN</h5>
+        </div>
+      ) : (
+        <>
+          <div className='filter'>
+            <div className='filterButtonDiv'>
+              <div className='filterItem'>
+                <Buttton
+                  text={'FILTER'}
+                  onClick={handleOpenFilter}
+                  className={'button'}
+                />
               </div>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className='launchSite dropdownContent'>
-            <div className='dropdowLeft'>
-              <h4 id='launchSite' onClick={handleFilterParameter}>
-                LAUNCH SITE
-              </h4>
-            </div>
-            {launchPads !== undefined ? (
-              <div
-                style={{
-                  height: !isLaunchSite
-                    ? '0'
-                    : `calc(40px * ${launchPads.length})`,
-                }}
-                className={`${'dropdownRight'} ${
-                  isLaunchSite ? 'activeSelection' : 'nonActiveSelection'
-                } `}
-              >
-                {launchPads.map((launchpad) => (
-                  <h4
-                    className='selectionItem launchpad'
-                    key={launchpad.id}
-                    id={launchpad.id}
-                    onClick={handleFilterSelection}
-                  >
-                    {launchpad.name.toUpperCase()}
+              <div className='filterItem'>
+                {filterValues.rocketName !== '' ? (
+                  <h4 className='filterValues firstFilterValue'>
+                    {filterValues.rocketName}
                   </h4>
-                ))}
+                ) : (
+                  ''
+                )}
+                {filterValues.launchPadName !== '' ? (
+                  <h4 className='filterValues'>{filterValues.launchPadName}</h4>
+                ) : (
+                  ''
+                )}
+
+                {filterValues.outcomeName !== '' ? (
+                  <h4 className='filterValues'>
+                    {filterValues.outcomeName.toString().toUpperCase()}
+                  </h4>
+                ) : (
+                  ''
+                )}
               </div>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className='outcome dropdownContent'>
-            <div className='dropdowLeft'>
-              <h4 id='outcome' onClick={handleFilterParameter}>
-                OUTCOME
-              </h4>
             </div>
             <div
-              id='outcome'
-              className={`${'dropdownRight'} ${
-                isOutcome ? 'activeSelection' : 'nonActiveSelection'
+              style={{
+                height:
+                  isFilterOpen && launchPads !== undefined
+                    ? `calc(40px * ${launchPads.length + 1})`
+                    : '0',
+              }}
+              className={`${'dropDownItems'} ${
+                isFilterOpen ? 'activeFilter' : 'noneActiveFilter'
               } `}
             >
-              <h4
-                className='selectionItem outcome '
-                onClick={handleFilterSelection}
-                id='true'
-              >
-                SUCCESS
-              </h4>
-              <h4
-                className='selectionItem outcome '
-                onClick={handleFilterSelection}
-                id='false'
-              >
-                FAILURE
-              </h4>
-            </div>
-          </div>
-          <div className='clearFilter '>
-            <h4 id='clearFilter' onClick={handleFilterSelection}>
-              CLEAR FILTER
-            </h4>
-          </div>
-        </div>
-      </div>
-
-      {launches === 'loading' ? (
-        <Loader
-          type='Puff'
-          color='#00BFFF'
-          height={100}
-          width={100}
-          timeout={3000} //3 secs
-        />
-      ) : launches[0].length === 0 ? (
-        <div>nothing found</div>
-      ) : (
-        <div className='mainInfo'>
-          <div className='selectorCol'>
-            <div className='upArrowContainer'>
-              <div
-                className='upArrow'
-                id={'back'}
-                onClick={handleNextAndBack}
-              ></div>
-            </div>
-
-            <div className='circlesCont'>
-              {launches.map((launch, index) => (
-                <div className={`${'circle'} ${index === pageNumber ? 'selectedPage' : ''} `} key={index} id={index}></div>
-              ))}
-            </div>
-
-            <div className='downArrowContainer'>
-              <div
-                className='downArrow'
-                id={'next'}
-                onClick={handleNextAndBack}
-              ></div>
-            </div>
-          </div>
-          <div className='information'>
-            <div className='missionRowHeader'>
-              <div className='topRowItem'>FLIGHT NO</div>
-              <div className='topRowItem'>VEHICLE</div>
-              <div className='topRowItem'>DATE</div>
-              <div className='topRowItem'>LAUNCH SITE</div>
-              <div className='topRowItem'>PAYLOAD</div>
-              <div className='topRowItem'>CUSTOMER</div>
-              <div className='topRowItem'>OUTCOME</div>
-            </div>
-            {launches[pageNumber].map((launch, index) => (
-              <div
-                className={` ${'informationRow'} ${
-                  index % 2 === 0 ? 'darkItem' : ''
-                }`}
-                key={index}
-              >
-                <div className='infoItem'>{launch.flight_number}</div>
-                <div className='infoItem'>
-                  {launch.rocket.name.toUpperCase()}
+              <div className='vehicles dropdownContent'>
+                <div className='dropdowLeft'>
+                  <h4 id='vehicle' onClick={handleFilterParameter}>
+                    VEHICLE
+                  </h4>
                 </div>
-                <div className='infoItem'>some</div>
-                <div className='infoItem'>some</div>
-                <div className='infoItem'>spm</div>
-                <div className='infoItem'>some</div>
-                <div className='infoItem'>
-                  {launch.success === true ? 'SUCCESS' : 'FAILURE'}
+                {rockets !== undefined ? (
+                  <div
+                    style={{
+                      height: !isVehicleFilter
+                        ? '0'
+                        : `calc(40px * ${rockets.length})`,
+                    }}
+                    className={`${'dropdownRight'} ${
+                      isVehicleFilter ? 'activeSelection' : 'nonActiveSelection'
+                    } `}
+                  >
+                    {rockets.map((rocket) => (
+                      <h4
+                        className={`${'selectionItem'} ${'rocket'} `}
+                        key={rocket.id}
+                        id={rocket.id}
+                        onClick={handleFilterSelection}
+                      >
+                        {rocket.name}
+                      </h4>
+                    ))}
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className='launchSite dropdownContent'>
+                <div className='dropdowLeft'>
+                  <h4 id='launchSite' onClick={handleFilterParameter}>
+                    LAUNCH SITE
+                  </h4>
+                </div>
+                {launchPads !== undefined ? (
+                  <div
+                    style={{
+                      height: !isLaunchSite
+                        ? '0'
+                        : `calc(40px * ${launchPads.length})`,
+                    }}
+                    className={`${'dropdownRight'} ${
+                      isLaunchSite ? 'activeSelection' : 'nonActiveSelection'
+                    } `}
+                  >
+                    {launchPads.map((launchpad) => (
+                      <h4
+                        className='selectionItem launchpad'
+                        key={launchpad.id}
+                        id={launchpad.id}
+                        onClick={handleFilterSelection}
+                      >
+                        {launchpad.name.toUpperCase()}
+                      </h4>
+                    ))}
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
+              <div className='outcome dropdownContent'>
+                <div className='dropdowLeft'>
+                  <h4 id='outcome' onClick={handleFilterParameter}>
+                    OUTCOME
+                  </h4>
+                </div>
+                <div
+                  id='outcome'
+                  className={`${'dropdownRight'} ${
+                    isOutcome ? 'activeSelection' : 'nonActiveSelection'
+                  } `}
+                >
+                  <h4
+                    className='selectionItem outcome '
+                    onClick={handleFilterSelection}
+                    id='true'
+                  >
+                    SUCCESS
+                  </h4>
+                  <h4
+                    className='selectionItem outcome '
+                    onClick={handleFilterSelection}
+                    id='false'
+                  >
+                    FAILURE
+                  </h4>
                 </div>
               </div>
-            ))}
+              <div className='clearFilter '>
+                <h4 id='clearFilter' onClick={handleFilterSelection}>
+                  CLEAR FILTER
+                </h4>
+              </div>
+            </div>
           </div>
-        </div>
+          <div className='mainInfo'>
+            <div className='selectorCol'>
+              <div className='upArrowContainer'>
+                <div
+                  className='upArrow'
+                  id={'back'}
+                  onClick={handleNextAndBack}
+                ></div>
+              </div>
+
+              <div className='circlesCont'>
+                {launches.map((launch, index) => (
+                  <div
+                    className={`${'circle'} ${
+                      index === pageNumber ? 'selectedPage' : ''
+                    } `}
+                    key={index}
+                    id={index}
+                    onClick={handleCirclePageClick}
+                  ></div>
+                ))}
+              </div>
+
+              <div className='downArrowContainer'>
+                <div
+                  className='downArrow'
+                  id={'next'}
+                  onClick={handleNextAndBack}
+                ></div>
+              </div>
+            </div>
+            <div className='information'>
+              <div className='missionRowHeader'>
+                <div className='topRowItem'>FLIGHT NO</div>
+                <div className='topRowItem'>VEHICLE</div>
+                <div className='topRowItem'>DATE</div>
+                <div className='topRowItem'>LAUNCH SITE</div>
+                <div className='topRowItem'>PAYLOAD</div>
+                <div className='topRowItem'>CUSTOMER</div>
+                <div className='topRowItem'>OUTCOME</div>
+              </div>
+              {launches[pageNumber].map((launch, index) => (
+                <div
+                  className={` ${'informationRow'} ${
+                    index % 2 === 0 ? 'darkItem' : ''
+                  }`}
+                  key={index}
+                >
+                  <div className='infoItem'>{launch.flight_number}</div>
+                  <div className='infoItem'>
+                    {launch.rocket.name.toUpperCase()}
+                  </div>
+                  <div className='infoItem'>
+                    {new Date(launch.date_local)
+                      .toLocaleDateString('en-US', options)
+                      .toUpperCase()}
+                  </div>
+                  <div className='infoItem'>
+                    {launch.launchpad.name.toUpperCase()}
+                  </div>
+                  <div className='infoItem'>spm</div>
+                  <div className='infoItem'>some</div>
+                  <div className='infoItem'>
+                    {launch.success === true ? 'SUCCESS' : 'FAILURE'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
