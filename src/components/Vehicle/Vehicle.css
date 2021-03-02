@@ -203,10 +203,10 @@
 }
 
 .nextSlider {
-  -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: slider 0.5s; /* Firefox < 16 */
-  -ms-animation: slider 0.5s; /* Internet Explorer */
-  -o-animation: slider 0.5s; /* Opera < 12.1 */
+  -webkit-animation: next 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: next 0.5s; /* Firefox < 16 */
+  -ms-animation: next 0.5s; /* Internet Explorer */
+  -o-animation: next 0.5s; /* Opera < 12.1 */
   animation: next 1s;
   position: relative;
 }

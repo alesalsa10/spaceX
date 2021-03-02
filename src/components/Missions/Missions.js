@@ -26,23 +26,7 @@ export default function Missions() {
     outcomeName: '',
   });
   const [pageNumber, setPageNumber] = useState(0);
-
-  const handleNextAndBack = (e) => {
-    let id = e.target.id;
-    if (id === 'next') {
-      if (pageNumber === launches.length - 1) {
-        setPageNumber(0);
-      } else {
-        setPageNumber(pageNumber + 1);
-      }
-    } else {
-      if (pageNumber === 0) {
-        setPageNumber(launches.length - 1);
-      } else {
-        setPageNumber(pageNumber - 1);
-      }
-    }
-  };
+  const [sliderClass, setSliderClass] = useState(0);
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -164,6 +148,44 @@ export default function Missions() {
     }
     fetchData();
   }, [filterValues]);
+
+  const handleNextAndBack = (e) => {
+    let id = e.target.id;
+    if (id === 'next') {
+      if (pageNumber === launches.length - 1) {
+        setPageNumber(0);
+        setSliderClass('slideFromBottom');
+      } else {
+        setPageNumber(pageNumber + 1);
+        setSliderClass('slideFromBottom');
+      }
+    } else {
+      if (pageNumber === 0) {
+        setPageNumber(launches.length - 1);
+        setSliderClass('slideFromTop');
+      } else {
+        setPageNumber(pageNumber - 1);
+        setSliderClass('slideFromTop');
+      }
+    }
+  };
+
+  const handleNextClick = (e) => {
+    let id = e.target.id;
+    if (parseInt(id) === 0 && pageNumber === 0) {
+      setPageNumber(launches[pageNumber]);
+      setSliderClass('backSlider');
+    } else if (parseInt(id) === 1 && pageNumber === 2) {
+      setPageNumber(1);
+      setSliderClass('backSlider');
+    } else if (parseInt(id) === 2 && pageNumber === 2) {
+      setPageNumber(1);
+      setSliderClass('nextSlider');
+    } else if (parseInt(id) === 2 && pageNumber === 1) {
+      setPageNumber(2);
+      setSliderClass('nextSlider');
+    }
+  };
 
   return (
     <div
@@ -344,11 +366,15 @@ export default function Missions() {
           <div className='mainInfo'>
             <div className='selectorCol'>
               <div className='upArrowContainer'>
-                <div
-                  className='upArrow'
-                  id={'back'}
-                  onClick={handleNextAndBack}
-                ></div>
+                {launches.length === 1 ? (
+                  <div className='upArrow disabledUpArrow' id={'back'}></div>
+                ) : (
+                  <div
+                    className='upArrow enabledUpArrow'
+                    id={'back'}
+                    onClick={handleNextAndBack}
+                  ></div>
+                )}
               </div>
 
               <div className='circlesCont'>
@@ -365,11 +391,20 @@ export default function Missions() {
               </div>
 
               <div className='downArrowContainer'>
-                <div
+                {/* <div
                   className='downArrow'
                   id={'next'}
                   onClick={handleNextAndBack}
-                ></div>
+                ></div> */}
+                {launches.length === 1 ? (
+                  <div className='downArrow disabledDownArrow' id={'next'}></div>
+                ) : (
+                  <div
+                    className='downArrow enabledDownArrow'
+                    id={'next'}
+                    onClick={handleNextAndBack}
+                  ></div>
+                )}
               </div>
             </div>
             <div className='information'>
@@ -382,42 +417,48 @@ export default function Missions() {
                 <div className='topRowItem'>CUSTOMER</div>
                 <div className='topRowItem'>OUTCOME</div>
               </div>
-              {launches[pageNumber].map((launch, index) => (
-                <div
-                  className={` ${'informationRow'} ${
-                    index % 2 === 0 ? 'darkItem' : ''
-                  }`}
-                  key={index}
-                >
-                  <div className='infoItem'>{launch.flight_number}</div>
-                  <div className='infoItem'>
-                    {launch.rocket.name.toUpperCase()}
+              <div className={`${sliderClass}`} key={pageNumber}>
+                {launches[pageNumber].map((launch, index) => (
+                  <div
+                    className={` ${'informationRow'} ${
+                      index % 2 === 0 ? 'darkItem' : ''
+                    } ${
+                      index === launches[pageNumber].length - 1
+                        ? 'lastItem'
+                        : ''
+                    } `}
+                    key={index}
+                  >
+                    <div className='infoItem'>{launch.flight_number}</div>
+                    <div className='infoItem'>
+                      {launch.rocket.name.toUpperCase()}
+                    </div>
+                    <div className='infoItem'>
+                      {new Date(launch.date_local)
+                        .toLocaleDateString('en-US', options)
+                        .toUpperCase()}
+                    </div>
+                    <div className='infoItem'>
+                      {launch.launchpad.name.toUpperCase()}
+                    </div>
+                    <div className='infoItem'>
+                      {launch.payloads.length === 0 ? (
+                        'NO PAYLOAD'
+                      ) : (
+                        <> {launch.payloads[0].name.toUpperCase()} </>
+                      )}
+                    </div>
+                    <div className='infoItem'>
+                      {launch.payloads[0].customers.length !== 0
+                        ? launch.payloads[0].customers[0].toUpperCase()
+                        : 'NO CUSTOMER AVAILABLE'}
+                    </div>
+                    <div className='infoItem'>
+                      {launch.success === true ? 'SUCCESS' : 'FAILURE'}
+                    </div>
                   </div>
-                  <div className='infoItem'>
-                    {new Date(launch.date_local)
-                      .toLocaleDateString('en-US', options)
-                      .toUpperCase()}
-                  </div>
-                  <div className='infoItem'>
-                    {launch.launchpad.name.toUpperCase()}
-                  </div>
-                  <div className='infoItem'>
-                    {launch.payloads.length === 0 ? (
-                      'NO PAYLOAD'
-                    ) : (
-                      <> {launch.payloads[0].name.toUpperCase()} </>
-                    )}
-                  </div>
-                  <div className='infoItem'>
-                    {launch.payloads[0].customers.length !== 0
-                      ? launch.payloads[0].customers[0].toUpperCase()
-                      : 'NO CUSTOMER AVAILABLE'}
-                  </div>
-                  <div className='infoItem'>
-                    {launch.success === true ? 'SUCCESS' : 'FAILURE'}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </>

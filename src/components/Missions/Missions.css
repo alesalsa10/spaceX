@@ -9,7 +9,7 @@
   margin: 150px auto;
 }
 
-.loadingContainer{
+.loadingContainer {
   margin-top: 150px;
 }
 
@@ -142,15 +142,19 @@
 
 .missionRowHeader {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: /* repeat(7, 1fr); */ 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
   height: 50px;
   line-height: 50px;
+  justify-content: space-between;
+  justify-items: center;
 }
 
 .informationRow {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: /* repeat(7, 1fr) */ 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
   height: 50px;
+  justify-content: space-between;
+  justify-items: center;
 }
 
 .information {
@@ -158,7 +162,7 @@
   margin-top: 1.5rem;
 }
 
-.information:last-child {
+.lastItem {
   border-bottom: 1px solid grey;
 }
 
@@ -187,9 +191,16 @@
   height: 0;
   border-right: 15px solid transparent;
   border-left: 15px solid transparent;
-  border-bottom: 15px solid white;
   margin-left: auto;
+}
+
+.enabledUpArrow {
   cursor: pointer;
+  border-bottom: 15px solid white;
+}
+
+.disabledUpArrow {
+  border-bottom: 15px solid grey;
 }
 
 .downArrow {
@@ -197,9 +208,16 @@
   height: 0;
   border-right: 15px solid transparent;
   border-left: 15px solid transparent;
-  border-top: 15px solid white;
   margin-left: auto;
+}
+
+.enabledDownArrow {
   cursor: pointer;
+  border-top: 15px solid white;
+}
+
+.disabledDownArrow {
+  border-top: 15px solid grey;
 }
 
 .selectorCol {
@@ -227,12 +245,12 @@
   right: 0;
 }
 
-.spinner{
+.spinner {
   margin: auto;
   text-align: center;
 }
 
-.noResultsFound{
+.noResultsFound {
   width: fit-content;
   border: 5px solid #005288;
   padding: 2rem;
@@ -240,15 +258,55 @@
   margin: auto;
 }
 
-.noResultsHeader{
+.noResultsHeader {
   margin-bottom: 1rem;
 }
 
-.noResultsH5{
+.noResultsH5 {
   margin-bottom: 0.5rem;
 }
 
-.clearAndTryAgain{
+.clearAndTryAgain {
   cursor: pointer;
   color: rgb(133, 110, 110);
+}
+
+.slideFromTop {
+  -webkit-animation: fromTop 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fromTop 0.5s; /* Firefox < 16 */
+  -ms-animation: fromTop 0.5s; /* Internet Explorer */
+  -o-animation: fromTop 0.5s; /* Opera < 12.1 */
+  animation: fromTop 0.5s;
+  position: relative;
+}
+
+@keyframes fromTop {
+  from {
+    opacity: 0;
+    margin-top: -5%;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+.slideFromBottom {
+  -webkit-animation: fromBottom 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fromBottom 0.5s; /* Firefox < 16 */
+  -ms-animation: fromBottom 0.5s; /* Internet Explorer */
+  -o-animation: fromBottom 0.5s; /* Opera < 12.1 */
+  animation: fromBottom 0.5s;
+  position: relative;
+}
+
+@keyframes fromBottom {
+  from {
+    opacity: 0;
+    bottom: -10%;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
 }
