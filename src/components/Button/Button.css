@@ -25,3 +25,15 @@
 .missionButton:hover{
     cursor: pointer;
 }
+
+@media only screen  and (max-width: 649px) {
+  .missionButton{
+    width: 90px;
+  }
+}
+
+@media only screen  and (max-width: 450px) {
+  .missionButton{
+    width: 75px;
+  }
+}

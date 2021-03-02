@@ -16,7 +16,7 @@
 .infoHeader {
   width: 60%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 100px;
   color:white;
   margin-left: auto;
@@ -123,8 +123,10 @@
 
 .filterButtonDiv {
   display: grid;
-  grid-template-columns: 140px auto;
+  grid-auto-columns: 140px;
+  grid-auto-flow: column;
   height: 40px;
+  gap: 5px;
 }
 
 .filterItem {
@@ -135,12 +137,11 @@
   height: 40px;
   line-height: 40px;
   background-color: #005288;
-  display: inline-block;
   vertical-align: top;
-  width: 140px;
   text-align: center;
-  margin-left: 1rem;
 }
+
+
 
 .missionRowHeader {
   display: grid;
@@ -169,67 +170,7 @@
   margin: auto;
 }
 
-@media only screen  and (min-width: 1000px) and (max-width: 1500px) {
-  .missionRowHeader{
-    font-size: small;
-  }
-  .informationRow{
-    font-size: small;
-  }
-  .filter{
-    width: 90%;
-  }
-  .mainInfo{
-    width: 90%;
-  }
-}
 
-
-@media only screen  and (min-width: 650px) and (max-width: 999px) {
-  .missionRowHeader{
-    font-size: small;
-    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
-  }
-  .informationRow{
-    font-size: small;
-    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
-  }
-  .filter{
-    width: 95%;
-  }
-  .mainInfo{
-    width: 95%;
-  }
-}
-
-@media only screen  and (max-width: 649px) {
-  .missionRowHeader{
-    font-size: x-small;
-    grid-template-columns: 0.5fr repeat(4, 1fr);
-  }
-  .informationRow{
-    font-size: x-small;
-    grid-template-columns: 0.5fr repeat(4, 1fr);
-  }
-  .filter{
-    width: 95%;
-  }
-  .mainInfo{
-    width: 95%;
-  }
-  .customer{
-    display: none;
-  }
-  .launchSite{
-    display: none;
-  }
-  .noResultsFound{
-    width: 80%;
-  }
-  .selectorCol{
-    width: 40px;
-  }
-}
 
 .information {
   margin-bottom: 1.5rem;
@@ -317,6 +258,7 @@
   left: 0;
   right: 0;
   z-index: 10;
+  margin-bottom: 1rem;
 }
 
 .spinner {
@@ -446,5 +388,120 @@
 }
 
 .infoHeaderValues{
-  font-size: 4rem
+  font-size: 4rem;
+  text-align: center;
 }
+
+@media only screen  and (min-width: 1000px) and (max-width: 1500px) {
+  .missionRowHeader{
+    font-size: small;
+  }
+  .informationRow{
+    font-size: small;
+  }
+  .filter{
+    width: 90%;
+  }
+  .mainInfo{
+    width: 90%;
+  }
+}
+
+
+@media only screen  and (min-width: 650px) and (max-width: 999px) {
+  .missionRowHeader{
+    font-size: small;
+    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
+  }
+  .informationRow{
+    font-size: small;
+    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
+  }
+  .filter{
+    width: 95%;
+  }
+  .mainInfo{
+    width: 95%;
+  }
+}
+
+@media only screen  and (max-width: 450px){
+ .filterButtonDiv{
+    grid-auto-columns: 75px;
+  }
+  .dropdowLeft{
+    width: 75px;
+    font-size: small;
+  }
+  .clearFilter{
+    width: 75px;
+    font-size: small;
+  }
+  .dropdownContent{
+    grid-template-columns: 75px 75px;
+  }
+  .dropdownRight{
+    font-size: small;
+  }
+  .filterValues{
+    font-size: small;
+  } 
+}
+
+@media only screen  and (min-width: 451px) and (max-width: 649px){
+ .filterButtonDiv{
+    grid-auto-columns: 90px;
+  }
+  .dropdowLeft{
+    width: 90px;
+    font-size: small;
+  }
+  .clearFilter{
+    width: 90px;
+    font-size: small;
+  }
+  .dropdownContent{
+    grid-template-columns: 90px 90px;
+  }
+  .dropdownRight{
+    font-size: small;
+  }
+  .filterValues{
+    font-size: small;
+  }
+}
+
+@media only screen  and (max-width: 649px) {
+  .missionRowHeader{
+    font-size: x-small;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+  }
+  .informationRow{
+    font-size: x-small;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+  }
+  .filter{
+    width: 95%;
+  }
+  .mainInfo{
+    width: 95%;
+  }
+  .customer{
+    display: none;
+  }
+  .launchSite{
+    display: none;
+  }
+  .noResultsFound{
+    width: 80%;
+  }
+  .selectorCol{
+    width: 40px;
+  }
+  .infoHeader{
+    width: 90%;
+  }
+  
+}
+
+

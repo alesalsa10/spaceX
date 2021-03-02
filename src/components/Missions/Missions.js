@@ -160,8 +160,8 @@ export default function Missions() {
         })
         return count
       });
-      console.log(count);
       setSuccessFulLandings(count)
+
 
       let launches = splitArrray(allLaunches);
       setLaunches(launches);
@@ -199,7 +199,11 @@ export default function Missions() {
         <div className='infoHeader'>
           <div className='totalLaunches'>
             <h1 className='infoHeaderValues'>
-              <CountUp end={totalLaunches} duration={2} />
+              <CountUp
+                end={totalLaunches}
+                duration={2}
+                className='numberSpan'
+              />
             </h1>
             <h4>TOTAL LAUNCHES</h4>
           </div>
@@ -208,9 +212,6 @@ export default function Missions() {
               <CountUp end={successfulLandings} duration={2} />
             </h1>
             <h4>TOTAL LANDINGS</h4>
-          </div>
-          <div className='reflownRockets'>
-            <h2>4</h2>
           </div>
         </div>
       ) : (
@@ -248,30 +249,36 @@ export default function Missions() {
                     className={'button'}
                   />
                 </div>
-                <div className='filterItem'>
-                  {filterValues.rocketName !== '' ? (
-                    <h4 className='filterValues firstFilterValue'>
+                {/* <div className='filterItem'> */}
+                {filterValues.rocketName !== '' ? (
+                  <div className='filterItem'>
+                    <h4 className='filterValues'>
                       {filterValues.rocketName}
                     </h4>
-                  ) : (
-                    ''
-                  )}
-                  {filterValues.launchPadName !== '' ? (
+                  </div>
+                ) : (
+                  ''
+                )}
+                {filterValues.launchPadName !== '' ? (
+                  <div className='filterItem'>
                     <h4 className='filterValues'>
                       {filterValues.launchPadName}
                     </h4>
-                  ) : (
-                    ''
-                  )}
+                  </div>
+                ) : (
+                  ''
+                )}
 
-                  {filterValues.outcomeName !== '' ? (
+                {filterValues.outcomeName !== '' ? (
+                  <div className='filterItem'>
                     <h4 className='filterValues'>
                       {filterValues.outcomeName.toString().toUpperCase()}
                     </h4>
-                  ) : (
-                    ''
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  ''
+                )}
+                {/* </div> */}
               </div>
               <div
                 style={{
@@ -438,48 +445,58 @@ export default function Missions() {
                   <div className='topRowItem'>OUTCOME</div>
                 </div>
                 <div className={`${sliderClass}`} key={pageNumber}>
-                  {launches[pageNumber].map((launch, index) => (
-                    <div
-                      className={` ${'informationRow'} ${
-                        index % 2 === 0 ? 'darkItem' : ''
-                      } ${
-                        index === launches[pageNumber].length - 1
-                          ? 'lastItem'
-                          : ''
-                      } `}
-                      key={index}
-                    >
-                      <div className='infoItem'>{launch.flight_number}</div>
-                      <div className='infoItem'>
-                        {launch.rocket.name.toUpperCase()}
-                      </div>
+                  {launches[pageNumber] !== undefined ||
+                  launches[pageNumber].length !== 0 ? (
+                    <>
+                      {launches[pageNumber].map((launch, index) => (
+                        <div
+                          className={` ${'informationRow'} ${
+                            index % 2 === 0 ? 'darkItem' : ''
+                          } ${
+                            index === launches[pageNumber].length - 1
+                              ? 'lastItem'
+                              : ''
+                          } `}
+                          key={index}
+                        >
+                          <div className='infoItem'>{launch.flight_number}</div>
+                          <div className='infoItem'>
+                            {launch.rocket.name.toUpperCase()}
+                          </div>
 
-                      <div className='infoItem'>
-                        {new Date(launch.date_local)
-                          .toLocaleDateString('en-US', options)
-                          .toUpperCase()}
-                      </div>
+                          <div className='infoItem'>
+                            {new Date(launch.date_local)
+                              .toLocaleDateString('en-US', options)
+                              .toUpperCase()}
+                          </div>
 
-                      <div className='infoItem launchSite'>
-                        {launch.launchpad.name.toUpperCase()}
-                      </div>
-                      <div className='infoItem'>
-                        {launch.payloads.length === 0 ? (
-                          'NO PAYLOAD'
-                        ) : (
-                          <div className='infoItem'> {launch.payloads[0].name.toUpperCase()} </div>
-                        )}
-                      </div>
-                      <div className='infoItem customer'>
-                        {launch.payloads[0].customers.length !== 0
-                          ? launch.payloads[0].customers[0].toUpperCase()
-                          : 'NO CUSTOMER AVAILABLE'}
-                      </div>
-                      <div className='infoItem'>
-                        {launch.success === true ? 'SUCCESS' : 'FAILURE'}
-                      </div>
-                    </div>
-                  ))}
+                          <div className='infoItem launchSite'>
+                            {launch.launchpad.name.toUpperCase()}
+                          </div>
+                          <div className='infoItem'>
+                            {launch.payloads.length === 0 ? (
+                              'NO PAYLOAD'
+                            ) : (
+                              <div className='infoItem'>
+                                {' '}
+                                {launch.payloads[0].name.toUpperCase()}{' '}
+                              </div>
+                            )}
+                          </div>
+                          <div className='infoItem customer'>
+                            {launch.payloads[0].customers.length !== 0
+                              ? launch.payloads[0].customers[0].toUpperCase()
+                              : 'NO CUSTOMER AVAILABLE'}
+                          </div>
+                          <div className='infoItem'>
+                            {launch.success === true ? 'SUCCESS' : 'FAILURE'}
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    ''
+                  )}
                 </div>
               </div>
             </div>
