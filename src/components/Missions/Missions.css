@@ -9,6 +9,10 @@
   margin: 150px auto;
 }
 
+.loadingContainer{
+  margin-top: 150px;
+}
+
 .infoHeader {
   width: 60%;
   display: grid;
@@ -226,4 +230,25 @@
 .spinner{
   margin: auto;
   text-align: center;
+}
+
+.noResultsFound{
+  width: fit-content;
+  border: 5px solid #005288;
+  padding: 2rem;
+  text-align: center;
+  margin: auto;
+}
+
+.noResultsHeader{
+  margin-bottom: 1rem;
+}
+
+.noResultsH5{
+  margin-bottom: 0.5rem;
+}
+
+.clearAndTryAgain{
+  cursor: pointer;
+  color: rgb(133, 110, 110);
 }

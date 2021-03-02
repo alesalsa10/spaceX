@@ -26,7 +26,6 @@ export default function Missions() {
     outcomeName: '',
   });
   const [pageNumber, setPageNumber] = useState(0);
-  
 
   const handleNextAndBack = (e) => {
     let id = e.target.id;
@@ -107,7 +106,7 @@ export default function Missions() {
     setIsLaunchSite(false);
     setIsVehicleFilter(false);
     setIsOutcome(false);
-    setIsFilterOpen(false)
+    setIsFilterOpen(false);
   };
 
   const splitArrray = (arr) => {
@@ -122,13 +121,20 @@ export default function Missions() {
     return newArray;
   };
 
-  const handleCirclePageClick = e => {
+  const handleCirclePageClick = (e) => {
     setPageNumber(parseInt(e.target.id));
-  }
+  };
 
-  const clearAllfilters = () =>{
-    
-  }
+  const clearAllfilters = () => {
+    setFilterValues({
+      rocketId: '',
+      launchPadId: '',
+      outcome: '',
+      rocketName: '',
+      launchPadName: '',
+      outcomeName: '',
+    });
+  };
 
   let options = {
     month: 'short',
@@ -160,7 +166,11 @@ export default function Missions() {
   }, [filterValues]);
 
   return (
-    <div className='allMissionsContainer'>
+    <div
+      className={`${
+        launches === 'loading' ? 'loadingContainer' : 'allMissionsContainer'
+      }`}
+    >
       {/* <div className="infoHeader">
                 <div className="totalLaunches">
                     <h2>5</h2>
@@ -179,9 +189,13 @@ export default function Missions() {
         </div>
       ) : launches[0].length === 0 ? (
         <div className='noResultsFound'>
-          <h3 className="noResultsHeader">OH NO!</h3>
-          <h5>LOOKS LIKE NO RESULTS WERE FOUND FOR THIS SELECTION</h5>
-          <h5 onClick={clearAllfilters}  >ClEAR FILTERS AND TRY AGAIN</h5>
+          <h1 className='noResultsHeader'>OH NO!</h1>
+          <h4 className='noResultsH5'>
+            NO RESULTS WERE FOUND FOR THIS SELECTION.
+          </h4>
+          <h4 onClick={clearAllfilters} className='clearAndTryAgain'>
+            CLEAR FILTERS AND TRY AGAIN.
+          </h4>
         </div>
       ) : (
         <>
@@ -387,8 +401,18 @@ export default function Missions() {
                   <div className='infoItem'>
                     {launch.launchpad.name.toUpperCase()}
                   </div>
-                  <div className='infoItem'>spm</div>
-                  <div className='infoItem'>some</div>
+                  <div className='infoItem'>
+                    {launch.payloads.length === 0 ? (
+                      'NO PAYLOAD'
+                    ) : (
+                      <> {launch.payloads[0].name.toUpperCase()} </>
+                    )}
+                  </div>
+                  <div className='infoItem'>
+                    {launch.payloads[0].customers.length !== 0
+                      ? launch.payloads[0].customers[0].toUpperCase()
+                      : 'NO CUSTOMER AVAILABLE'}
+                  </div>
                   <div className='infoItem'>
                     {launch.success === true ? 'SUCCESS' : 'FAILURE'}
                   </div>
