@@ -6,7 +6,7 @@
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
-  margin: 150px auto;
+  margin: 100px auto;
 }
 
 .loadingContainer {
@@ -17,10 +17,12 @@
   width: 60%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin: auto;
-  align-content: space-around;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: 100px;
+  color:white;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  justify-items: center;
 }
 
 .mainInfo {
@@ -144,17 +146,89 @@
   display: grid;
   grid-template-columns: /* repeat(7, 1fr); */ 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
   height: 50px;
-  line-height: 50px;
-  justify-content: space-between;
+  align-content: center;
   justify-items: center;
+  text-align: center;
 }
 
 .informationRow {
   display: grid;
-  grid-template-columns: /* repeat(7, 1fr) */ 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
+  grid-template-columns: 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
   height: 50px;
+  /* align-content: center; */
   justify-content: space-between;
   justify-items: center;
+  text-align: center;
+}
+
+.noResultsFound {
+  width: fit-content;
+  border: 5px solid #005288;
+  padding: 2rem;
+  text-align: center;
+  margin: auto;
+}
+
+@media only screen  and (min-width: 1000px) and (max-width: 1500px) {
+  .missionRowHeader{
+    font-size: small;
+  }
+  .informationRow{
+    font-size: small;
+  }
+  .filter{
+    width: 90%;
+  }
+  .mainInfo{
+    width: 90%;
+  }
+}
+
+
+@media only screen  and (min-width: 650px) and (max-width: 999px) {
+  .missionRowHeader{
+    font-size: small;
+    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
+  }
+  .informationRow{
+    font-size: small;
+    grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
+  }
+  .filter{
+    width: 95%;
+  }
+  .mainInfo{
+    width: 95%;
+  }
+}
+
+@media only screen  and (max-width: 649px) {
+  .missionRowHeader{
+    font-size: x-small;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+  }
+  .informationRow{
+    font-size: x-small;
+    grid-template-columns: 0.5fr repeat(4, 1fr);
+  }
+  .filter{
+    width: 95%;
+  }
+  .mainInfo{
+    width: 95%;
+  }
+  .customer{
+    display: none;
+  }
+  .launchSite{
+    display: none;
+  }
+  .noResultsFound{
+    width: 80%;
+  }
+  .selectorCol{
+    width: 40px;
+  }
 }
 
 .information {
@@ -167,8 +241,7 @@
 }
 
 .infoItem {
-  height: 50px;
-  line-height: 50px;
+  align-self: center;
 }
 
 .upArrowContainer {
@@ -243,6 +316,7 @@
   height: 40px;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 
 .spinner {
@@ -250,13 +324,7 @@
   text-align: center;
 }
 
-.noResultsFound {
-  width: fit-content;
-  border: 5px solid #005288;
-  padding: 2rem;
-  text-align: center;
-  margin: auto;
-}
+
 
 .noResultsHeader {
   margin-bottom: 1rem;
@@ -291,6 +359,39 @@
   }
 }
 
+@-o-keyframes fromTop{
+  from {
+    opacity: 0;
+    margin-top: -5%;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@-moz-keyframes fromTop{
+  from {
+    opacity: 0;
+    margin-top: -5%;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@-webkit-keyframes fromTop{
+  from {
+    opacity: 0;
+    margin-top: -5%;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
 .slideFromBottom {
   -webkit-animation: fromBottom 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fromBottom 0.5s; /* Firefox < 16 */
@@ -309,4 +410,41 @@
     opacity: 1;
     bottom: 0;
   }
+}
+
+@-o-keyframes fromBottom{
+  from {
+    opacity: 0;
+    bottom: -10%;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+@-moz-keyframes fromBottom{
+  from {
+    opacity: 0;
+    bottom: -10%;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+@-webkit-keyframes fromBottom{
+  from {
+    opacity: 0;
+    bottom: -10%;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+.infoHeaderValues{
+  font-size: 4rem
 }

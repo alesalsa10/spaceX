@@ -204,7 +204,7 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
       query: queryObject,
       options: {
         pagination: false,
-        populate: ['rocket', 'payloads', ['launchpad']],
+        populate: ['rocket', 'payloads', 'launchpad'],
       },
     });
     return response.data.docs;
