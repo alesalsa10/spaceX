@@ -1,7 +1,7 @@
 .vehicleContainer {
   width: 60%;
   color: white;
-  margin: 150px auto;
+  margin: 100px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: minmax(min-content, max-content);
@@ -58,6 +58,8 @@
     margin-top: 100px;
   }
 }
+
+
 
 .vehicleH4 {
   padding-bottom: 0.5rem;
@@ -179,6 +181,52 @@
   display: grid;
 }
 
+.fadeSlide{
+  animation: fadeSlide 1s;
+  -webkit-animation: fadeSlide 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadeSlide 1s; /* Firefox < 16 */
+  -ms-animation: fadeSlide 1s; /* Internet Explorer */
+  -o-animation: fadeSlide 1s; /* Opera < 12.1 */
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeSlide{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeSlide{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeSlide{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeSlide{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+
 .vehicleRow {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -202,108 +250,6 @@
   justify-self: end;
 }
 
-.nextSlider {
-  -webkit-animation: next 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: next 0.5s; /* Firefox < 16 */
-  -ms-animation: next 0.5s; /* Internet Explorer */
-  -o-animation: next 0.5s; /* Opera < 12.1 */
-  animation: next 1s;
-  position: relative;
-}
-
-@keyframes next {
-  from {
-    opacity: 0;
-    left: 10%;
-  }
-  to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-@-moz-keyframes next {
-  from {
-    opacity: 0;
-    left: 10%;
-  }
-  to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-@-ms-keyframes next {
-  from {
-    opacity: 0;
-    left: 10%;
-  }
-  to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-@-webkit-keyframes next {
-  from {
-    opacity: 0;
-    left: 10%;
-  }
-  to {
-    opacity: 1;
-    left: 0;
-  }
-}
-
-.backSlider {
-  -webkit-animation: slider 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: slider 1s; /* Firefox < 16 */
-  -ms-animation: slider 1s; /* Internet Explorer */
-  -o-animation: slider 1s; /* Opera < 12.1 */
-  animation: back 1s;
-  position: relative;
-}
-
-@keyframes back {
-  from {
-    opacity: 0;
-    right: 10%;
-  }
-  to {
-    opacity: 1;
-    right: 0;
-  }
-}
-@-moz-keyframes back {
-  from {
-    opacity: 0;
-    right: 10%;
-  }
-  to {
-    opacity: 1;
-    right: 0;
-  }
-}
-@-ms-keyframes back {
-  from {
-    opacity: 0;
-    right: 10%;
-  }
-  to {
-    opacity: 1;
-    right: 0;
-  }
-}
-@-webkit-keyframes back {
-  from {
-    opacity: 0;
-    right: 10%;
-  }
-  to {
-    opacity: 1;
-    right: 0;
-  }
-}
 
 .imageDiv {
   justify-self: end;
@@ -312,7 +258,6 @@
 
 .vehicleImage {
   height: 350px;
-  
 }
 
 .ReactModal__Content {
@@ -326,56 +271,54 @@
   height: 500px;
 }
 
-
-@media only screen  and  (max-width: 500px) {
-  .vehicleContainer{
-    width: 85%  ;
+@media only screen and (max-width: 500px) {
+  .vehicleContainer {
+    width: 85%;
     display: grid;
-    grid-template-columns: 1fr;    
+    grid-template-columns: 1fr;
   }
-  .vehicleImage{
+  .vehicleImage {
     height: 250px;
   }
-  .embebedVideo{
-    width:300px  ;
-    height: 300px ;
+  .embebedVideo {
+    width: 300px;
+    height: 300px;
   }
-  .left{
+  .left {
     font-size: smaller;
   }
-  .right{
+  .right {
     font-size: smaller;
   }
-  .imageDiv{
+  .imageDiv {
     align-self: center;
     justify-self: center;
   }
 }
 
-
-@media only screen  and (min-width: 501px) and (max-width: 1000px) {
+@media only screen and (min-width: 501px) and (max-width: 1000px) {
   .vehicleContainer {
     width: 65%;
     grid-template-columns: 1fr;
   }
-  .imageDiv{
+  .imageDiv {
     align-self: center;
     justify-self: center;
   }
-  .embebedVideo{
+  .embebedVideo {
     width: 80vw;
     height: 450px;
   }
 }
 
-@media only screen  and (min-width: 1001px) and (max-width: 1250px) {
-  .left{
+@media only screen and (min-width: 1001px) and (max-width: 1250px) {
+  .left {
     font-size: small;
   }
-  .vehicleContainer{
+  .vehicleContainer {
     grid-template-columns: 1.5fr 0.5fr;
   }
-  .embebedVideo{
+  .embebedVideo {
     width: 70vw;
     height: 450px;
   }

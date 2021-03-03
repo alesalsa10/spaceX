@@ -105,6 +105,23 @@ export const getLaunchById = async (id) => {
   }
 };
 
+export const launchById = async (launchId) => {
+  try{
+    const response = await axios.post(`${baseURL}/launches/query`, {
+      query: {
+        _id: launchId,
+      },
+      options: {
+        pagination: false,
+        populate: ['rocket', 'payloads', 'launchpad'],
+      },
+    });
+    return response.data.docs;
+  }catch(error){
+    console.log(error)
+  }
+}
+
 export const getAllRockets = async () => {
   try {
     let rocketNames = [];

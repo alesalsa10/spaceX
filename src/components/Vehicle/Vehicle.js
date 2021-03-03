@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Modal from 'react-modal';
+import Loader from 'react-loader-spinner';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -19,12 +20,12 @@ import Starship from '../../images/starship.png';
 export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
-  const [sliderClass, setSliderClass] = useState(0);
   const [rocketId, setRocketId] = useState();
   const [videoId, setVideoId] = useState();
   const [firstLaunchId, setFirstLaunchId] = useState();
   const [latestLaunchId, setLatestLaunch] = useState();
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [sliderClass, setSliderClass] = useState('');
 
   let { name } = useParams();
   const preName = usePrevious(name);
@@ -39,7 +40,6 @@ export default function Vehicle() {
 
   useEffect(() => {
     if (preName !== name) {
-      setSliderClass('');
       setPageNumber(1);
     }
   }, [name]);
@@ -56,32 +56,17 @@ export default function Vehicle() {
   };
 
   const handleNextClick = (e) => {
-    if (parseInt(e.target.id) === 1 && pageNumber === 1) {
-      setPageNumber(2);
-      setSliderClass('backSlider');
-    } else if (parseInt(e.target.id) === 1 && pageNumber === 2) {
-      setPageNumber(1);
-      setSliderClass('backSlider');
-    } else if (parseInt(e.target.id) === 2 && pageNumber === 2) {
-      setPageNumber(1);
-      setSliderClass('nextSlider');
-    } else if (parseInt(e.target.id) === 2 && pageNumber === 1) {
-      setPageNumber(2);
-      setSliderClass('nextSlider');
+    setSliderClass('fadeSlide')
+    if (pageNumber === 1){
+      setPageNumber(2)
+    }else{
+      setPageNumber(1)
     }
   };
 
   const cirlcePageSelector = (e) => {
+    setSliderClass('fadeSlight')
     setPageNumber(parseInt(e.target.id));
-    if (parseInt(e.target.id) === 1 && pageNumber === 1) {
-      setSliderClass('backSlider');
-    } else if (parseInt(e.target.id) === 1 && pageNumber === 2) {
-      setSliderClass('backSlider');
-    } else if (parseInt(e.target.id) === 2 && pageNumber === 2) {
-      setSliderClass('nextSlider');
-    } else if (parseInt(e.target.id) === 2 && pageNumber === 1) {
-      setSliderClass('nextSlider');
-    }
   };
 
   const handleFirstMission = async (id) => {
@@ -113,6 +98,11 @@ export default function Vehicle() {
       console.log(rocketResponse);
       setVideoId(rocketResponse);
     }
+  };
+
+  const closeModal = () => {
+    setVideoId();
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -270,24 +260,33 @@ export default function Vehicle() {
 
   return (
     <>
-      {videoId !== undefined && rocketId !== undefined ? (
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={() => setIsOpen(false)}
-          style={customStyles}
-          contentLabel='Video Modal'
-          shouldCloseOnOverlayClick={true}
-          ariaHideApp={false}
-        >
-          <iframe
-            title='Mission video'
-            className='embebedVideo'
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
-          ></iframe>
-        </Modal>
-      ) : (
-        ''
-      )}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel='Video Modal'
+        shouldCloseOnOverlayClick={true}
+        ariaHideApp={false}
+      >
+        <>
+          {videoId === undefined || rocketId === undefined ? (
+            <div className='spinner'>
+              <Loader
+                type='TailSpin'
+                color='#005288'
+                height={100}
+                width={100}
+              />
+            </div>
+          ) : (
+            <iframe
+              title='Mission video'
+              className='embebedVideo'
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+            ></iframe>
+          )}
+        </>
+      </Modal>
 
       {data !== undefined ? (
         <div className='vehicleContainer' key={name}>
@@ -296,10 +295,7 @@ export default function Vehicle() {
               <h2 className='vehicleName'>{data.name}</h2>
               <h1 className='overview'>OVERVIEW</h1>
             </div>
-            <div
-              className={`${sliderClass} ${'sliderContainer'}`}
-              key={pageNumber}
-            >
+            <div className={`  ${sliderClass} ${'sliderContainer'}`} key={pageNumber}>
               {pageNumber === 1 ? (
                 <>
                   <div className='vehicleRow '>

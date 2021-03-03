@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
 import './Missions.css';
 import {
   getAllRockets,
   getAllLaunchpads,
   getAllLaunches,
+  launchById,
+  getLaunchById,
 } from '../../Data/fetchData';
 import Buttton from '../Button/Button';
 import CountUp from 'react-countup';
-
+import Modal from 'react-modal';
 
 export default function Missions() {
   const [rockets, setRockets] = useState();
@@ -30,7 +31,18 @@ export default function Missions() {
   const [pageNumber, setPageNumber] = useState(0);
   const [sliderClass, setSliderClass] = useState(0);
   const [totalLaunches, setTotalLaunches] = useState();
-  const [successfulLandings, setSuccessFulLandings] = useState()
+  const [successfulLandings, setSuccessFulLandings] = useState();
+  const [launchId, setLaunchId] = useState();
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [launchInfo, setLaunchInfo] = useState();
+
+  const openModal = (e) => {
+    setLaunchId(e.target.id);
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setLaunchId();
+    setIsOpen(false)};
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -117,6 +129,7 @@ export default function Missions() {
   };
 
   const clearAllfilters = () => {
+    setLaunches('loading');
     setFilterValues({
       rocketId: '',
       launchPadId: '',
@@ -136,6 +149,15 @@ export default function Missions() {
 
   useEffect(() => {
     async function fetchData() {
+      const launch = await launchById(launchId);
+      setLaunchInfo(launch);
+      console.log(launch);
+    }
+    fetchData();
+  }, [launchId]);
+
+  useEffect(() => {
+    async function fetchData() {
       const rockets = await getAllRockets();
       setRockets(rockets);
 
@@ -151,17 +173,15 @@ export default function Missions() {
       setTotalLaunches(allLaunches.length);
 
       let count = 0;
-      allLaunches.forEach(item => {
-        item.cores.forEach(core => {
-          if(core.landing_success){
-            count ++  
+      allLaunches.forEach((item) => {
+        item.cores.forEach((core) => {
+          if (core.landing_success) {
+            count++;
           }
-          
-        })
-        return count
+        });
+        return count;
       });
-      setSuccessFulLandings(count)
-
+      setSuccessFulLandings(count);
 
       let launches = splitArrray(allLaunches);
       setLaunches(launches);
@@ -171,28 +191,60 @@ export default function Missions() {
   }, [filterValues]);
 
   const handleNextAndBack = (e) => {
+    setSliderClass('fadeSlide');
     let id = e.target.id;
     if (id === 'next') {
       if (pageNumber === launches.length - 1) {
         setPageNumber(0);
-        setSliderClass('slideFromBottom');
       } else {
         setPageNumber(pageNumber + 1);
-        setSliderClass('slideFromBottom');
       }
     } else {
       if (pageNumber === 0) {
         setPageNumber(launches.length - 1);
-        setSliderClass('slideFromTop');
       } else {
         setPageNumber(pageNumber - 1);
-        setSliderClass('slideFromTop');
       }
     }
   };
 
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
   return (
     <>
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel='Video Modal'
+        shouldCloseOnOverlayClick={true}
+        ariaHideApp={false}
+      >
+        <>
+          {launchInfo === undefined || launchId === undefined ? (
+            <div className='spinner'>
+              <Loader
+                type='TailSpin'
+                color='#005288'
+                height={100}
+                width={100}
+              />
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </>
+      </Modal>
+
       {totalLaunches > 0 &&
       successfulLandings !== undefined &&
       launches !== 'loading' ? (
@@ -252,9 +304,7 @@ export default function Missions() {
                 {/* <div className='filterItem'> */}
                 {filterValues.rocketName !== '' ? (
                   <div className='filterItem'>
-                    <h4 className='filterValues'>
-                      {filterValues.rocketName}
-                    </h4>
+                    <h4 className='filterValues'>{filterValues.rocketName}</h4>
                   </div>
                 ) : (
                   ''
@@ -452,12 +502,14 @@ export default function Missions() {
                         <div
                           className={` ${'informationRow'} ${
                             index % 2 === 0 ? 'darkItem' : ''
-                          } ${
+                          }  ${
                             index === launches[pageNumber].length - 1
                               ? 'lastItem'
                               : ''
                           } `}
                           key={index}
+                          id={launch.id}
+                          onClick={openModal}
                         >
                           <div className='infoItem'>{launch.flight_number}</div>
                           <div className='infoItem'>

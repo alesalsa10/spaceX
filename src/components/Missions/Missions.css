@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 100px;
-  color:white;
+  color: white;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
@@ -141,8 +141,6 @@
   text-align: center;
 }
 
-
-
 .missionRowHeader {
   display: grid;
   grid-template-columns: /* repeat(7, 1fr); */ 0.5fr 0.5fr 0.5fr repeat(3, 1fr) 0.5fr;
@@ -160,6 +158,7 @@
   justify-content: space-between;
   justify-items: center;
   text-align: center;
+  cursor: pointer;
 }
 
 .noResultsFound {
@@ -169,8 +168,6 @@
   text-align: center;
   margin: auto;
 }
-
-
 
 .information {
   margin-bottom: 1.5rem;
@@ -266,8 +263,6 @@
   text-align: center;
 }
 
-
-
 .noResultsHeader {
   margin-bottom: 1rem;
 }
@@ -281,227 +276,117 @@
   color: rgb(133, 110, 110);
 }
 
-.slideFromTop {
-  -webkit-animation: fromTop 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fromTop 0.5s; /* Firefox < 16 */
-  -ms-animation: fromTop 0.5s; /* Internet Explorer */
-  -o-animation: fromTop 0.5s; /* Opera < 12.1 */
-  animation: fromTop 0.5s;
-  position: relative;
-}
-
-@keyframes fromTop {
-  from {
-    opacity: 0;
-    margin-top: -5%;
-  }
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
-}
-
-@-o-keyframes fromTop{
-  from {
-    opacity: 0;
-    margin-top: -5%;
-  }
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
-}
-
-@-moz-keyframes fromTop{
-  from {
-    opacity: 0;
-    margin-top: -5%;
-  }
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
-}
-
-@-webkit-keyframes fromTop{
-  from {
-    opacity: 0;
-    margin-top: -5%;
-  }
-  to {
-    opacity: 1;
-    margin-top: 0;
-  }
-}
-
-.slideFromBottom {
-  -webkit-animation: fromBottom 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fromBottom 0.5s; /* Firefox < 16 */
-  -ms-animation: fromBottom 0.5s; /* Internet Explorer */
-  -o-animation: fromBottom 0.5s; /* Opera < 12.1 */
-  animation: fromBottom 0.5s;
-  position: relative;
-}
-
-@keyframes fromBottom {
-  from {
-    opacity: 0;
-    bottom: -10%;
-  }
-  to {
-    opacity: 1;
-    bottom: 0;
-  }
-}
-
-@-o-keyframes fromBottom{
-  from {
-    opacity: 0;
-    bottom: -10%;
-  }
-  to {
-    opacity: 1;
-    bottom: 0;
-  }
-}
-
-@-moz-keyframes fromBottom{
-  from {
-    opacity: 0;
-    bottom: -10%;
-  }
-  to {
-    opacity: 1;
-    bottom: 0;
-  }
-}
-
-@-webkit-keyframes fromBottom{
-  from {
-    opacity: 0;
-    bottom: -10%;
-  }
-  to {
-    opacity: 1;
-    bottom: 0;
-  }
-}
-
-.infoHeaderValues{
+.infoHeaderValues {
   font-size: 4rem;
   text-align: center;
 }
 
-@media only screen  and (min-width: 1000px) and (max-width: 1500px) {
-  .missionRowHeader{
+@media only screen and (min-width: 1000px) and (max-width: 1500px) {
+  .missionRowHeader {
     font-size: small;
   }
-  .informationRow{
+  .informationRow {
     font-size: small;
   }
-  .filter{
+  .filter {
     width: 90%;
   }
-  .mainInfo{
+  .mainInfo {
     width: 90%;
   }
 }
 
-
-@media only screen  and (min-width: 650px) and (max-width: 999px) {
-  .missionRowHeader{
+@media only screen and (min-width: 650px) and (max-width: 999px) {
+  .missionRowHeader {
     font-size: small;
     grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
   }
-  .informationRow{
+  .informationRow {
     font-size: small;
     grid-template-columns: 0.3fr 0.7fr 0.5fr repeat(3, 1fr) 0.5fr;
   }
-  .filter{
+  .filter {
     width: 95%;
   }
-  .mainInfo{
+  .mainInfo {
     width: 95%;
   }
 }
 
-@media only screen  and (max-width: 450px){
- .filterButtonDiv{
+@media only screen and (max-width: 450px) {
+  .filterButtonDiv {
     grid-auto-columns: 75px;
   }
-  .dropdowLeft{
+  .dropdowLeft {
     width: 75px;
     font-size: small;
   }
-  .clearFilter{
+  .clearFilter {
     width: 75px;
     font-size: small;
   }
-  .dropdownContent{
+  .dropdownContent {
     grid-template-columns: 75px 75px;
   }
-  .dropdownRight{
+  .dropdownRight {
     font-size: small;
   }
-  .filterValues{
+  .filterValues {
     font-size: small;
-  } 
+  }
 }
 
-@media only screen  and (min-width: 451px) and (max-width: 649px){
- .filterButtonDiv{
+@media only screen and (min-width: 451px) and (max-width: 649px) {
+  .filterButtonDiv {
     grid-auto-columns: 90px;
   }
-  .dropdowLeft{
+  .dropdowLeft {
     width: 90px;
     font-size: small;
   }
-  .clearFilter{
+  .clearFilter {
     width: 90px;
     font-size: small;
   }
-  .dropdownContent{
+  .dropdownContent {
     grid-template-columns: 90px 90px;
   }
-  .dropdownRight{
+  .dropdownRight {
     font-size: small;
   }
-  .filterValues{
+  .filterValues {
     font-size: small;
   }
 }
 
-@media only screen  and (max-width: 649px) {
-  .missionRowHeader{
+@media only screen and (max-width: 649px) {
+  .missionRowHeader {
     font-size: x-small;
     grid-template-columns: 0.5fr repeat(4, 1fr);
   }
-  .informationRow{
+  .informationRow {
     font-size: x-small;
     grid-template-columns: 0.5fr repeat(4, 1fr);
   }
-  .filter{
+  .filter {
     width: 95%;
   }
-  .mainInfo{
+  .mainInfo {
     width: 95%;
   }
-  .customer{
+  .customer {
     display: none;
   }
-  .launchSite{
+  .launchSite {
     display: none;
   }
-  .noResultsFound{
+  .noResultsFound {
     width: 80%;
   }
-  .selectorCol{
+  .selectorCol {
     width: 40px;
   }
-  .infoHeader{
+  .infoHeader {
     width: 90%;
   }
-  
 }
-
-
