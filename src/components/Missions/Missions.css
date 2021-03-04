@@ -391,52 +391,91 @@
   }
 }
 
-
 .ReactModal__Overlay {
   z-index: 11;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }
 
 
-.modalContainer{
+.modalContainer {
   width: 600px;
-  color:white;
+  height: 600px;
+  color: white;
   background-color: #005288;
-  padding: 1rem
+  padding: 1rem;
+  position: relative;
 }
 
-.headerRow{
+.headerRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-bottom: 1.5rem;
 }
 
-.launchOverview{
+.launchOverview {
   font-size: 2.5rem;
 }
 
-.launchName{
+.launchName {
   margin-bottom: 0.5rem;
 }
 
-.leftHeader{
+.leftHeader {
   align-self: center;
 }
 
-.rightHeader{
+.rightHeader {
   justify-self: end;
   align-self: center;
 }
 
-
-.patchLogo{
+.patchLogo {
   height: 100px;
   width: 100px;
 }
 
-.launchInfoRow{
+.launchInfoRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 50px;
   border-bottom: 1px solid grey;
   align-content: center;
+}
+
+.launchInfoRight{
+  justify-self: end;
+}
+
+#modalNextRow{
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+}
+
+.video{
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.missionVideo{
+  width: 90%;
+  height: 300px;
+}
+
+.missionButtonsDiv{
+  text-align: center;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }

@@ -10,6 +10,7 @@ import {
 import Buttton from '../Button/Button';
 import CountUp from 'react-countup';
 import Modal from 'react-modal';
+import Button from '../Button/Button';
 
 export default function Missions() {
   const [rockets, setRockets] = useState();
@@ -34,16 +35,23 @@ export default function Missions() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [launchId, setLaunchId] = useState();
   const [launchInfo, setLaunchInfo] = useState();
+  const [modalPageNumber, setModalPageNumer] = useState(1);
 
   const openModal = (e) => {
-    setLaunchId(e.target.id);
+    console.log(e.currentTarget.id);
+    setLaunchId(e.currentTarget.id);
     setIsOpen(true);
   };
   const closeModal = () => {
-    setLaunchId(undefined)
+    setModalPageNumer(1)
     setLaunchInfo(undefined);
     setIsOpen(false);
   };
+
+  const handleModalArrowClicks = (e) =>{
+    console.log(e.currentTarget.id)
+    setModalPageNumer(parseInt(e.currentTarget.id))
+  }
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -126,6 +134,7 @@ export default function Missions() {
   };
 
   const handleCirclePageClick = (e) => {
+    setSliderClass('fadeSlide');
     setPageNumber(parseInt(e.target.id));
   };
 
@@ -229,9 +238,10 @@ export default function Missions() {
         contentLabel='Video Modal'
         shouldCloseOnOverlayClick={true}
         ariaHideApp={false}
+        closeTimeoutMS={500}
       >
         <>
-          {launchInfo === undefined || launchId === undefined ? (
+          {launchInfo === undefined ? (
             <div className='spinner'>
               <Loader
                 type='TailSpin'
@@ -257,34 +267,116 @@ export default function Missions() {
                   />
                 </div>
               </div>
-              <div className='launchInfoContainer'>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>CORE</div>
-                  <div className='launchInfoRight'></div>
+              {modalPageNumber === 1 ? (
+                <div className='launchInfoContainer'>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>CORE</div>
+                    <div className='launchInfoRight'></div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>CORE SERIAL</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].cores[0].core.serial.toUpperCase()}
+                    </div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>REUSED</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].cores[0].reused.toString().toUpperCase()}
+                    </div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>STATIC FIRE</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].static_fire_data_utc !== null ? (
+                        <>
+                          {new Date(launchInfo[0].static_fire_date_utc)
+                            .toLocaleDateString('en-US', options)
+                            .toUpperCase()}
+                        </>
+                      ) : (
+                        'N/A'
+                      )}
+                    </div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>PAYLOAD ORBIT</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].payloads.length === 0
+                        ? 'N/A'
+                        : launchInfo[0].payloads[0].regime.toUpperCase()}
+                    </div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>LANDING SITE</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].cores[0].landpad === null ? (
+                        'N/A'
+                      ) : (
+                        <>{launchInfo[0].cores[0].landpad.name}</>
+                      )}
+                    </div>
+                  </div>
+                  <div className='launchInfoRow'>
+                    <div className='launchInfoLeft'>LANDING SUCCESS</div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].cores[0].landing_success === null ? (
+                        'N/A'
+                      ) : (
+                        <>
+                          {launchInfo[0].cores[0].landing_success
+                            .toString()
+                            .toUpperCase()}
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>CORE SERIAL</div>
-                  <div className='launchInfoRight'></div>
+              ) : (
+                <div className='launchInfoContainer'>
+                  <div className='video'>
+                    <iframe
+                      title='Mission video'
+                      className='missionVideo'
+                      src={`https://www.youtube.com/embed/${launchInfo[0].links.youtube_id}?autoplay=1&mute=1`}
+                    ></iframe>
+                  </div>
+                  <div className="missionButtonsDiv">
+                    <Button text='Wikipedia' />
+                  </div>
                 </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>REUSED</div>
-                  <div className='launchInfoRight'></div>
+              )}
+
+              <div className='nextRow' id='modalNextRow'>
+                <div className='item'>
+                  <div
+                    className='backArrow arrows'
+                    onClick={handleModalArrowClicks}
+                    id={1}
+                  ></div>
                 </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>STATIC FIRE</div>
-                  <div className='launchInfoRight'></div>
+
+                <div className='item circlesContainer'>
+                  <div
+                    className={`${'circle circleLeft'} ${
+                      pageNumber === 1 ? 'selectedPage' : ''
+                    }`}
+                    id={1}
+                  ></div>
+                  <div
+                    className={`${'circle'} ${
+                      pageNumber === 2 ? 'selectedPage' : ''
+                    } `}
+                    id={2}
+                  ></div>
                 </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>PAYLOAD ORBIT</div>
-                  <div className='launchInfoRight'></div>
-                </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>LANDING SITE</div>
-                  <div className='launchInfoRight'></div>
-                </div>
-                <div className='launchInfoRow'>
-                  <div className='launchInfoLeft'>LANDING SUCCESS</div>
-                  <div className='launchInfoRight'></div>
+
+                <div className='item next'>
+                  <div
+                    className='nextArrow arrows'
+                    onClick={handleModalArrowClicks}
+                    id={2}
+                  ></div>
                 </div>
               </div>
             </div>

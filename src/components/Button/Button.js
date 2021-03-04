@@ -5,7 +5,7 @@ export default function Button({text, onClick, className}) {
   return (
     <>
       <button className={`${'missionButton'} ${className} `} onClick={onClick}>
-        {text}
+        <h3>{text}</h3>
       </button>
     </>
   );

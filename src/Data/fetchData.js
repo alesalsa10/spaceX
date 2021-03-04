@@ -106,23 +106,23 @@ export const getLaunchById = async (id) => {
 };
 
 export const launchById = async (launchId) => {
-  try{
+  try {
     const response = await axios.post(`${baseURL}/launches/query`, {
       query: {
         _id: launchId,
       },
       options: {
         pagination: false,
-        populate: ['rocket', 'payloads', 'launchpad', 'cores.core'],
-        limit: 1
+        populate: ['payloads', 'cores.core', 'cores.landpad'],
+        limit: 1,
       },
     });
-    console.log(response.data.docs)
+    console.log(response.data.docs);
     return response.data.docs;
-  }catch(error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 export const getAllRockets = async () => {
   try {
@@ -151,12 +151,11 @@ export const getAllLaunchpads = async () => {
 };
 
 export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
-
   let queryObject = {
-    upcoming: false
-  }
+    upcoming: false,
+  };
 
-  if(rocketId !== ''){
+  if (rocketId !== '') {
     //rocket, launchpad, and outcome
     if (launchPadId !== '' && outcome !== '') {
       queryObject = {
@@ -179,46 +178,45 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
         rocket: rocketId,
         success: outcome,
       };
-    }else {
+    } else {
       queryObject = {
         ...queryObject,
         rocket: rocketId,
       };
     }
     //no rocket
-  }else if (rocketId === ''){
+  } else if (rocketId === '') {
     //only launchpad and outcome
-    if(launchPadId !== '' && outcome !== ''){
+    if (launchPadId !== '' && outcome !== '') {
       queryObject = {
         ...queryObject,
         launchpad: launchPadId,
-        success: outcome
+        success: outcome,
       };
     }
     //if launchpad exists
-    else if (launchPadId !== ''){
+    else if (launchPadId !== '') {
       //if(outcome !== ''){
-        queryObject = {
-          ...queryObject,
-          launchpad: launchPadId,
-        };
+      queryObject = {
+        ...queryObject,
+        launchpad: launchPadId,
+      };
       //}
       //only launchpad
-    }else if (outcome !== ''){
+    } else if (outcome !== '') {
       queryObject = {
         ...queryObject,
         success: outcome,
       };
     }
-  }else {
+  } else {
     queryObject = {
       ...queryObject,
     };
   }
 
-
   try {
-    console.log(queryObject)
+    console.log(queryObject);
     const response = await axios.post(`${baseURL}/launches/query`, {
       query: queryObject,
       options: {
