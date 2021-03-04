@@ -390,3 +390,53 @@
     width: 90%;
   }
 }
+
+
+.ReactModal__Overlay {
+  z-index: 11;
+}
+
+
+.modalContainer{
+  width: 600px;
+  color:white;
+  background-color: #005288;
+  padding: 1rem
+}
+
+.headerRow{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1.5rem;
+}
+
+.launchOverview{
+  font-size: 2.5rem;
+}
+
+.launchName{
+  margin-bottom: 0.5rem;
+}
+
+.leftHeader{
+  align-self: center;
+}
+
+.rightHeader{
+  justify-self: end;
+  align-self: center;
+}
+
+
+.patchLogo{
+  height: 100px;
+  width: 100px;
+}
+
+.launchInfoRow{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+  border-bottom: 1px solid grey;
+  align-content: center;
+}

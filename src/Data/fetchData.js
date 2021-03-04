@@ -113,9 +113,11 @@ export const launchById = async (launchId) => {
       },
       options: {
         pagination: false,
-        populate: ['rocket', 'payloads', 'launchpad'],
+        populate: ['rocket', 'payloads', 'launchpad', 'cores.core'],
+        limit: 1
       },
     });
+    console.log(response.data.docs)
     return response.data.docs;
   }catch(error){
     console.log(error)

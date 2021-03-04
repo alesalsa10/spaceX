@@ -6,7 +6,6 @@ import {
   getAllLaunchpads,
   getAllLaunches,
   launchById,
-  getLaunchById,
 } from '../../Data/fetchData';
 import Buttton from '../Button/Button';
 import CountUp from 'react-countup';
@@ -32,8 +31,8 @@ export default function Missions() {
   const [sliderClass, setSliderClass] = useState(0);
   const [totalLaunches, setTotalLaunches] = useState();
   const [successfulLandings, setSuccessFulLandings] = useState();
-  const [launchId, setLaunchId] = useState();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [launchId, setLaunchId] = useState();
   const [launchInfo, setLaunchInfo] = useState();
 
   const openModal = (e) => {
@@ -41,8 +40,10 @@ export default function Missions() {
     setIsOpen(true);
   };
   const closeModal = () => {
-    setLaunchId();
-    setIsOpen(false)};
+    setLaunchId(undefined)
+    setLaunchInfo(undefined);
+    setIsOpen(false);
+  };
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -149,9 +150,11 @@ export default function Missions() {
 
   useEffect(() => {
     async function fetchData() {
-      const launch = await launchById(launchId);
-      setLaunchInfo(launch);
-      console.log(launch);
+      if (launchId !== undefined) {
+        const launch = await launchById(launchId);
+        setLaunchInfo(launch);
+        console.log(launch);
+      }
     }
     fetchData();
   }, [launchId]);
@@ -169,7 +172,6 @@ export default function Missions() {
         filterValues.launchPadId,
         filterValues.outcome
       );
-      console.log(allLaunches);
       setTotalLaunches(allLaunches.length);
 
       let count = 0;
@@ -185,7 +187,6 @@ export default function Missions() {
 
       let launches = splitArrray(allLaunches);
       setLaunches(launches);
-      console.log(launches);
     }
     fetchData();
   }, [filterValues]);
@@ -240,7 +241,53 @@ export default function Missions() {
               />
             </div>
           ) : (
-            <div></div>
+            <div className='modalContainer'>
+              <div className='headerRow'>
+                <div className='leftHeader'>
+                  <h3 className='launchName'>
+                    {launchInfo[0].name.toUpperCase()}
+                  </h3>
+                  <h1 className='launchOverview'>OVERVIEW</h1>
+                </div>
+                <div className='rightHeader'>
+                  <img
+                    src={launchInfo[0].links.patch.small}
+                    alt='patch logo'
+                    className='patchLogo'
+                  />
+                </div>
+              </div>
+              <div className='launchInfoContainer'>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>CORE</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>CORE SERIAL</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>REUSED</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>STATIC FIRE</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>PAYLOAD ORBIT</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>LANDING SITE</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+                <div className='launchInfoRow'>
+                  <div className='launchInfoLeft'>LANDING SUCCESS</div>
+                  <div className='launchInfoRight'></div>
+                </div>
+              </div>
+            </div>
           )}
         </>
       </Modal>
@@ -526,14 +573,7 @@ export default function Missions() {
                             {launch.launchpad.name.toUpperCase()}
                           </div>
                           <div className='infoItem'>
-                            {launch.payloads.length === 0 ? (
-                              'NO PAYLOAD'
-                            ) : (
-                              <div className='infoItem'>
-                                {' '}
-                                {launch.payloads[0].name.toUpperCase()}{' '}
-                              </div>
-                            )}
+                            {launch.name.toUpperCase()}
                           </div>
                           <div className='infoItem customer'>
                             {launch.payloads[0].customers.length !== 0
