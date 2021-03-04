@@ -1,39 +1,53 @@
-.missionButton{
-    color:white;
-    border: 2px solid #005288;
-    cursor: pointer;
-    background: none;
-    background-image: linear-gradient(#005288, #005288);
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: 0% 100%;
-    transition: background-size .3s, color .3s;
-    width: 140px;
-    height: 40px;
-    line-height: 40px;
-    font-weight: 700;
+.missionButton {
+  color: white;
+  /* border: 2px solid #005288; */
+  cursor: pointer;
+  background: none;
+  /* background-image: linear-gradient(#005288, #005288); */
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  
+  width: 140px;
+  height: 40px;
+  line-height: 40px;
+  font-weight: 700;
 }
 
-.missionButton:hover{
-    background-size: 100% 100%;
+.blueFill {
+  transition: background-size 0.3s, color 0.3s;
+  color: white;
+  border: 2px solid #005288;
+  background-image: linear-gradient(#005288, #005288);
 }
 
-.missionButton:focus{
-    outline: none;
+.whiteFill {
+  transition: background-size 0.3s, color 0.3s;
+  border: 2px solid white;
+  background-image: linear-gradient(white, white);
 }
 
-.missionButton:hover{
-    cursor: pointer;
+.whiteFill:hover{
+  color:#005288
 }
 
-@media only screen  and (max-width: 649px) {
-  .missionButton{
+.missionButton:hover {
+  cursor: pointer;
+  background-size: 100% 100%;
+}
+
+.missionButton:focus {
+  outline: none;
+}
+
+@media only screen and (max-width: 649px) {
+  .missionButton {
     width: 90px;
   }
 }
 
-@media only screen  and (max-width: 450px) {
-  .missionButton{
+@media only screen and (max-width: 450px) {
+  .missionButton {
     width: 75px;
   }
 }

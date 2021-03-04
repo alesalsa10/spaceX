@@ -36,22 +36,33 @@ export default function Missions() {
   const [launchId, setLaunchId] = useState();
   const [launchInfo, setLaunchInfo] = useState();
   const [modalPageNumber, setModalPageNumer] = useState(1);
+  const [modalSlide, setModalSlide] = useState(0);
 
   const openModal = (e) => {
-    console.log(e.currentTarget.id);
     setLaunchId(e.currentTarget.id);
     setIsOpen(true);
   };
   const closeModal = () => {
-    setModalPageNumer(1)
+    setModalSlide(0);
+    setModalPageNumer(1);
+    setLaunchId(undefined);
     setLaunchInfo(undefined);
     setIsOpen(false);
   };
 
-  const handleModalArrowClicks = (e) =>{
-    console.log(e.currentTarget.id)
-    setModalPageNumer(parseInt(e.currentTarget.id))
-  }
+  const handleModalArrowClicks = (e) => {
+    setModalSlide('fadeSlide');
+    if (modalPageNumber === 1) {
+      setModalPageNumer(2);
+    } else {
+      setModalPageNumer(1);
+    }
+  };
+
+  const handleModalCircleClick = (e) => {
+    setModalSlide('fadeSlide');
+    setModalPageNumer(parseInt(e.currentTarget.id));
+  };
 
   const handleOpenFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -268,7 +279,7 @@ export default function Missions() {
                 </div>
               </div>
               {modalPageNumber === 1 ? (
-                <div className='launchInfoContainer'>
+                <div className={`${'launchInfoContainer'} ${modalSlide}  `} key={modalSlide} >
                   <div className='launchInfoRow'>
                     <div className='launchInfoLeft'>CORE</div>
                     <div className='launchInfoRight'></div>
@@ -333,16 +344,24 @@ export default function Missions() {
                   </div>
                 </div>
               ) : (
-                <div className='launchInfoContainer'>
-                  <div className='video'>
+                <div className={`${'launchInfoContainer'} ${modalSlide} `}>
+                  <div className='videoContainer'>
                     <iframe
                       title='Mission video'
                       className='missionVideo'
                       src={`https://www.youtube.com/embed/${launchInfo[0].links.youtube_id}?autoplay=1&mute=1`}
                     ></iframe>
                   </div>
-                  <div className="missionButtonsDiv">
-                    <Button text='Wikipedia' />
+                  <div className='missionButtonsDiv'>
+                    <div className='missionButton wikipedia'>
+                      <Button text='WIKIPEDIA' />
+                    </div>
+                    <div className='missionButton newsArticle'>
+                      <Button text='NEWS ARTICLE' />
+                    </div>
+                    <div className='missionButton pressKit'>
+                      <Button text='PRESS KIT' />
+                    </div>
                   </div>
                 </div>
               )}
@@ -359,15 +378,17 @@ export default function Missions() {
                 <div className='item circlesContainer'>
                   <div
                     className={`${'circle circleLeft'} ${
-                      pageNumber === 1 ? 'selectedPage' : ''
+                      modalPageNumber === 1 ? 'selectedPage' : ''
                     }`}
                     id={1}
+                    onClick={handleModalCircleClick}
                   ></div>
                   <div
                     className={`${'circle'} ${
-                      pageNumber === 2 ? 'selectedPage' : ''
+                      modalPageNumber === 2 ? 'selectedPage' : ''
                     } `}
                     id={2}
+                    onClick={handleModalArrowClicks}
                   ></div>
                 </div>
 
@@ -402,7 +423,7 @@ export default function Missions() {
             <h1 className='infoHeaderValues'>
               <CountUp end={successfulLandings} duration={2} />
             </h1>
-            <h4>TOTAL LANDINGS</h4>
+            <h4>SUCCESSFUL LANDINGS</h4>
           </div>
         </div>
       ) : (
@@ -438,6 +459,7 @@ export default function Missions() {
                     text={'FILTER'}
                     onClick={handleOpenFilter}
                     className={'button'}
+                    color={'blue'}
                   />
                 </div>
                 {/* <div className='filterItem'> */}

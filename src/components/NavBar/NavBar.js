@@ -78,7 +78,7 @@ export default function NavBar() {
           </div>
           <div className='missionsButtonDiv'>
             <Link  to='/missions'>
-              <Button text={'MISSIONS'}/>
+              <Button text={'MISSIONS'} color={'blue'} />
             </Link>
           </div>
         </>

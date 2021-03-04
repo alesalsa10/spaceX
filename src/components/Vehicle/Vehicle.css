@@ -10,6 +10,13 @@
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.leftCol {
+  height: 500px;
+  position: relative;
+  padding-left: 1rem;
 }
 
 @keyframes fadein {
@@ -59,8 +66,6 @@
   }
 }
 
-
-
 .vehicleH4 {
   padding-bottom: 0.5rem;
 }
@@ -83,6 +88,10 @@
   align-items: center;
   height: 50px;
   grid-template-columns: repeat(3, 1fr);
+  position: absolute;
+  left: 1rem;
+  right: 0;
+  bottom: 1rem;
 }
 
 .item {
@@ -181,7 +190,7 @@
   display: grid;
 }
 
-.fadeSlide{
+.fadeSlide {
   animation: fadeSlide 1s;
   -webkit-animation: fadeSlide 1s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadeSlide 1s; /* Firefox < 16 */
@@ -190,42 +199,41 @@
   animation-fill-mode: forwards;
 }
 
-@keyframes fadeSlide{
-  from{
+@keyframes fadeSlide {
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-@-moz-keyframes fadeSlide{
-  from{
+@-moz-keyframes fadeSlide {
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-@-o-keyframes fadeSlide{
-  from{
+@-o-keyframes fadeSlide {
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-@-webkit-keyframes fadeSlide{
-  from{
+@-webkit-keyframes fadeSlide {
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
-
 
 .vehicleRow {
   display: grid;
@@ -235,25 +243,26 @@
   height: 50px;
 }
 
+
 .buttonsRow {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
   align-content: space-around;
   justify-content: space-between;
-  position: relative;
   align-items: center;
-  /* height: 150px; */
+  position: relative;
+  height: 100%;
+  height: 50px;
 }
 
 .button2 {
   justify-self: end;
 }
 
-
 .imageDiv {
   justify-self: end;
   align-self: center;
+  padding-right: 1rem;
 }
 
 .vehicleImage {

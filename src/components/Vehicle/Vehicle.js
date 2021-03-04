@@ -56,16 +56,16 @@ export default function Vehicle() {
   };
 
   const handleNextClick = (e) => {
-    setSliderClass('fadeSlide')
-    if (pageNumber === 1){
-      setPageNumber(2)
-    }else{
-      setPageNumber(1)
+    setSliderClass('fadeSlide');
+    if (pageNumber === 1) {
+      setPageNumber(2);
+    } else {
+      setPageNumber(1);
     }
   };
 
   const cirlcePageSelector = (e) => {
-    setSliderClass('fadeSlight')
+    setSliderClass('fadeSlight');
     setPageNumber(parseInt(e.target.id));
   };
 
@@ -234,6 +234,7 @@ export default function Vehicle() {
           numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
+        console.log(data);
       } else {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
@@ -252,6 +253,7 @@ export default function Vehicle() {
           numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
+        console.log(data);
       }
     }
 
@@ -295,7 +297,10 @@ export default function Vehicle() {
               <h2 className='vehicleName'>{data.name}</h2>
               <h1 className='overview'>OVERVIEW</h1>
             </div>
-            <div className={`  ${sliderClass} ${'sliderContainer'}`} key={pageNumber}>
+            <div
+              className={`  ${sliderClass} ${'sliderContainer'}`}
+              key={pageNumber}
+            >
               {pageNumber === 1 ? (
                 <>
                   <div className='vehicleRow '>
@@ -463,22 +468,19 @@ export default function Vehicle() {
                   </div>
 
                   {data.numberOfLaunhes !== 0 ? (
-                    <div
-                      className='buttonsRow'
-                      style={{
-                        height: name === 'falconheavy' ? '150px' : '100px',
-                      }}
-                    >
+                    <div className='buttonsRow'>
                       <div className='button'>
                         <Button
                           text={'FIRST FLIGHT'}
                           onClick={() => handleFirstMission(rocketId)}
+                          color={'blue'}
                         />
                       </div>
                       <div className='button2'>
                         <Button
                           text={'LATEST MISSION'}
                           onClick={() => handleLatestMission(rocketId)}
+                          color={'blue'}
                         />
                       </div>
                     </div>
@@ -488,15 +490,7 @@ export default function Vehicle() {
                 </>
               )}
             </div>
-            <div
-              className='nextRow'
-              style={{
-                marginTop:
-                  data.numberOfLaunhes === 0 && pageNumber === 2
-                    ? '100px'
-                    : '0',
-              }}
-            >
+            <div className='nextRow'>
               <div className='item'>
                 <div
                   className='backArrow arrows'

@@ -63,6 +63,7 @@ export default function LandingPage() {
               <Button
                 text={showMore ? 'CLOSE' : 'SEE MORE'}
                 onClick={handleShowMore}
+                color={'blue'}
               />
             </div>
             <div className='timeToMission'>
