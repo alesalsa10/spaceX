@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import './Missions.css';
 import {
@@ -7,7 +8,6 @@ import {
   getAllLaunches,
   launchById,
 } from '../../Data/fetchData';
-import Buttton from '../Button/Button';
 import CountUp from 'react-countup';
 import Modal from 'react-modal';
 import Button from '../Button/Button';
@@ -231,12 +231,13 @@ export default function Missions() {
 
   const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      top: '150px',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      width: '600px'
     },
   };
 
@@ -250,6 +251,7 @@ export default function Missions() {
         shouldCloseOnOverlayClick={true}
         ariaHideApp={false}
         closeTimeoutMS={500}
+        className='missionsModal'
       >
         <>
           {launchInfo === undefined ? (
@@ -279,7 +281,10 @@ export default function Missions() {
                 </div>
               </div>
               {modalPageNumber === 1 ? (
-                <div className={`${'launchInfoContainer'} ${modalSlide}  `} key={modalSlide} >
+                <div
+                  className={`${'launchInfoContainer'} ${modalSlide}  `}
+                  key={modalSlide}
+                >
                   <div className='launchInfoRow'>
                     <div className='launchInfoLeft'>CORE</div>
                     <div className='launchInfoRight'></div>
@@ -354,13 +359,43 @@ export default function Missions() {
                   </div>
                   <div className='missionButtonsDiv'>
                     <div className='missionButton wikipedia'>
-                      <Button text='WIKIPEDIA' />
+                      {launchInfo[0].links.wikipedia !== null ? (
+                        <a
+                          href={launchInfo[0].links.wikipedia}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          <Button text='WIKIPEDIA' />
+                        </a>
+                      ) : (
+                        <div className='errorDiv'>NO WIKIPEDIA LINK</div>
+                      )}
                     </div>
                     <div className='missionButton newsArticle'>
-                      <Button text='NEWS ARTICLE' />
+                       {launchInfo[0].links.article !== null ? (
+                        <a
+                          href={launchInfo[0].links.article}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          <Button text='NEWS ARTICLE' />
+                        </a>
+                      ) : (
+                        <div className='errorDiv'>NO NEWS ARTICLE</div>
+                      )}
                     </div>
                     <div className='missionButton pressKit'>
-                      <Button text='PRESS KIT' />
+                      {launchInfo[0].links.presskit !== null ? (
+                        <a
+                          href={launchInfo[0].links.presskitt}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          <Button text='PRESS KIT' />
+                        </a>
+                      ) : (
+                        <div className='errorDiv'>NO PRESS KIT</div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -455,7 +490,7 @@ export default function Missions() {
             <div className='filter'>
               <div className='filterButtonDiv'>
                 <div className='filterItem'>
-                  <Buttton
+                  <Button
                     text={'FILTER'}
                     onClick={handleOpenFilter}
                     className={'button'}

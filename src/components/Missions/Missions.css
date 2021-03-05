@@ -1,12 +1,59 @@
 .allMissionsContainer {
   /* the animation are currently on the vehicles css */
   color: white;
-  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1s; /* Firefox < 16 */
-  -ms-animation: fadein 1s; /* Internet Explorer */
-  -o-animation: fadein 1s; /* Opera < 12.1 */
-  animation: fadein 1s;
-  margin: 100px auto;
+  -webkit-animation: missionFadeIn 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: missionFadeIn 1s; /* Firefox < 16 */
+  -ms-animation: missionFadeIn 1s; /* Internet Explorer */
+  -o-animation: missionFadeIn 1s; /* Opera < 12.1 */
+  animation: missionFadeIn 1s;
+  margin: 50px auto;
+}
+
+@keyframes missionFadeIn {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 50px;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes missionFadeIn {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 50px;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes missionFadeIn {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 50px;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes missionFadeIn {
+  from {
+    opacity: 0;
+    margin-top: 350px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 50px;
+  }
 }
 
 .loadingContainer {
@@ -391,6 +438,10 @@
   }
 }
 
+.ReactModal__Content {
+  padding: 0 !important;
+}
+
 .ReactModal__Overlay {
   z-index: 11;
   opacity: 0;
@@ -411,6 +462,10 @@
   color: white;
   padding-top: 1rem;
   background-color: #005288;
+  position: relative;
+}
+
+.missionsModal{
   position: relative;
 }
 
@@ -464,7 +519,7 @@
 
 #modalNextRow {
   position: absolute;
-  left:0;
+  left: 0;
   right: 0;
   bottom: 1rem;
   width: 90%;
@@ -490,14 +545,53 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.wikipedia{
+.wikipedia {
   justify-self: left;
 }
 
-.pressKit{
+.pressKit {
   justify-self: end;
 }
 
-.newsArticle{
+.newsArticle {
   justify-self: center;
+}
+
+.errorDiv {
+  min-height: 40px;
+  border: 2px solid white;
+  cursor: default;
+}
+
+@media only screen and (max-width: 750px) {
+  .modalContainer {
+    width: 80vw;
+    height: 450px;
+  }
+  .headerRow {
+    padding-bottom: 0.5rem;
+  }
+  .missionsModal{
+    width: 80vw !important;
+    height: 500px !important;
+  }
+  .launchInfoRow{
+    height: 40px;
+  }
+  .patchLogo{
+    height: 80px;
+    width: 80px;
+  }
+  .launchOverview{
+    font-size: 1.5rem;
+  }
+  #modalNextRow{
+    bottom: 0.5rem
+  }
+  .launchInfoContainer{
+    font-size: medium;
+  }
+  .missionVideo{
+    height: 200px;
+  }
 }
