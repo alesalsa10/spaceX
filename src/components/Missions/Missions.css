@@ -9,7 +9,7 @@
   margin: 50px auto;
 }
 
-.headerItem{
+.headerItem {
   text-align: center;
 }
 
@@ -368,17 +368,6 @@
   .filterButtonDiv {
     grid-auto-columns: 75px;
   }
-  .dropdowLeft {
-    width: 75px;
-    font-size: small;
-  }
-  .clearFilter {
-    width: 75px;
-    font-size: small;
-  }
-  .dropdownContent {
-    grid-template-columns: 75px 75px;
-  }
   .dropdownRight {
     font-size: small;
   }
@@ -388,17 +377,7 @@
 }
 
 @media only screen and (min-width: 451px) and (max-width: 649px) {
-  .filterButtonDiv {
-    grid-auto-columns: 90px;
-  }
-  .dropdowLeft {
-    width: 90px;
-    font-size: small;
-  }
-  .clearFilter {
-    width: 90px;
-    font-size: small;
-  }
+  
   .dropdownContent {
     grid-template-columns: 90px 90px;
   }
@@ -411,6 +390,13 @@
 }
 
 @media only screen and (max-width: 649px) {
+  .filterButtonDiv {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .filterValues{
+    width: 120px;
+  }
   .missionRowHeader {
     font-size: x-small;
     grid-template-columns: 0.5fr repeat(4, 1fr);
@@ -439,6 +425,18 @@
   }
   .infoHeader {
     width: 90%;
+  }
+  .dropdowLeft {
+    width: 120px;
+  }
+  .clearFilter {
+    width: 120px;
+  }
+  .dropdownRight{
+    width: 120px;
+  }
+  .dropdownContent{
+    grid-template-columns: 120px 120px;
   }
 }
 
@@ -469,7 +467,7 @@
   position: relative;
 }
 
-.missionsModal{
+.missionsModal {
   position: relative;
 }
 
@@ -579,33 +577,33 @@
   .headerRow {
     padding-bottom: 0.5rem;
   }
-  .missionsModal{
+  .missionsModal {
     width: 80vw !important;
     height: 500px !important;
   }
-  .launchInfoRow{
+  .launchInfoRow {
     height: 40px;
   }
-  .patchLogo{
+  .patchLogo {
     height: 80px;
     width: 80px;
   }
-  .launchOverview{
+  .launchOverview {
     font-size: 1.5rem;
   }
-  #modalNextRow{
-    bottom: 0.5rem
+  #modalNextRow {
+    bottom: 0.5rem;
   }
-  .launchInfoContainer{
+  .launchInfoContainer {
     font-size: medium;
   }
-  .missionVideo{
+  .missionVideo {
     height: 200px;
   }
 }
 
-@media only screen and (max-height: 600px){
-  .missionsModal{
+@media only screen and (max-height: 600px) {
+  .missionsModal {
     top: 100px !important;
   }
 }

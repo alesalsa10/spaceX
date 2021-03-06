@@ -46,7 +46,8 @@
 
 @media only screen and (max-width: 649px) {
   .missionButton {
-    width: 90px;
+    width: 120px;
+    background-color: #005288;
   }
   #vehicle {
     width: 140px;
@@ -62,9 +63,9 @@
 }
 
 @media only screen and (max-width: 550px) {
-  .missionButton {
-    width: 75px;
-  }
+  /* .missionButton {
+    width: 120px;
+  } */
   #vehicle {
     width: 120px;
     font-size: x-small;
@@ -79,9 +80,9 @@
   }
 }
 @media only screen and (max-width: 450px) {
-  .missionButton {
+  /* .missionButton {
     width: 75px;
-  }
+  } */
   #missionsButton {
     width: 90px;
     font-size: xx-small;

@@ -72,7 +72,7 @@ export default function Missions() {
   };
 
   const handleFilterParameter = (e) => {
-    if (e.target.id === 'vehicle') {
+    if (e.target.id === 'vehicleFilter') {
       setIsVehicleFilter(!isVehicleFilter);
       setIsLaunchSite(false);
       setIsOutcome(false);
@@ -545,7 +545,7 @@ export default function Missions() {
               >
                 <div className='vehicles dropdownContent'>
                   <div className='dropdowLeft'>
-                    <h4 id='vehicle' onClick={handleFilterParameter}>
+                    <h4 id='vehicleFilter' onClick={handleFilterParameter}>
                       VEHICLE
                     </h4>
                   </div>
@@ -620,6 +620,11 @@ export default function Missions() {
                     className={`${'dropdownRight'} ${
                       isOutcome ? 'activeSelection' : 'nonActiveSelection'
                     } `}
+                    style={{
+                      height: !isOutcome
+                        ? '0'
+                        : `80px`,
+                    }}
                   >
                     <h4
                       className='selectionItem outcome '

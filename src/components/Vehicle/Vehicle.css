@@ -280,6 +280,11 @@
   height: 500px;
 }
 
+.iframeContainer{
+  width: 100%;
+  text-align: center;
+}
+
 @media only screen and (max-width: 500px) {
   .vehicleContainer {
     width: 85%;

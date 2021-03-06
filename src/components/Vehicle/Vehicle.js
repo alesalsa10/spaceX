@@ -46,12 +46,10 @@ export default function Vehicle() {
 
   const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      top: '170px',
+      left: '0',
+      right: '0',
+      bottom: '0',
     },
   };
 
@@ -253,7 +251,6 @@ export default function Vehicle() {
           numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
-        console.log(data);
       }
     }
 
@@ -281,11 +278,13 @@ export default function Vehicle() {
               />
             </div>
           ) : (
-            <iframe
-              title='Mission video'
-              className='embebedVideo'
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
-            ></iframe>
+            <div className='iframeContainer'>
+              <iframe
+                title='Mission video'
+                className='embebedVideo'
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+              ></iframe>
+            </div>
           )}
         </>
       </Modal>

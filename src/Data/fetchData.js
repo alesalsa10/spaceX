@@ -216,7 +216,6 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
   }
 
   try {
-    console.log(queryObject);
     const response = await axios.post(`${baseURL}/launches/query`, {
       query: queryObject,
       options: {

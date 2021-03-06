@@ -32,7 +32,6 @@ export default function LandingPage() {
 
       let payloadsID = await upcomingMission.payloads;
       const payLoadInfo = await getPayLoadInfo(payloadsID);
-      console.log(payLoadInfo);
 
       let loadName = payLoadInfo.name.toString().toUpperCase();
       setPayloadName(loadName);

@@ -10,6 +10,4 @@ body {
   background: url('./images/spacexImage.jpg');
   font-family: 'Roboto', sans-serif;
   background-repeat: no-repeat;
-  background-size: stretch;
-  /* background-position: center; */
 }
