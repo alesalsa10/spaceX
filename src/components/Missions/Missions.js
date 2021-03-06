@@ -287,7 +287,11 @@ export default function Missions() {
                 >
                   <div className='launchInfoRow'>
                     <div className='launchInfoLeft'>CORE</div>
-                    <div className='launchInfoRight'></div>
+                    <div className='launchInfoRight'>
+                      {launchInfo[0].cores[0].core.block === null
+                        ? 'N/A'
+                        : 'BLOCK ' + launchInfo[0].cores[0].core.block}
+                    </div>
                   </div>
                   <div className='launchInfoRow'>
                     <div className='launchInfoLeft'>CORE SERIAL</div>
@@ -358,43 +362,45 @@ export default function Missions() {
                     ></iframe>
                   </div>
                   <div className='missionButtonsDiv'>
-                    <div className='missionButton wikipedia'>
+                    <div className='wikipedia'>
                       {launchInfo[0].links.wikipedia !== null ? (
                         <a
                           href={launchInfo[0].links.wikipedia}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Button text='WIKIPEDIA' />
+                          <Button text='WIKIPEDIA' id='missionsButton' />
                         </a>
                       ) : (
                         <div className='errorDiv'>NO WIKIPEDIA LINK</div>
                       )}
                     </div>
-                    <div className='missionButton newsArticle'>
-                       {launchInfo[0].links.article !== null ? (
+                    <div className='newsArticle'>
+                      {launchInfo[0].links.article !== null ? (
                         <a
                           href={launchInfo[0].links.article}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Button text='NEWS ARTICLE' />
+                          <Button text='NEWS ARTICLE' id='missionsButton' />
                         </a>
                       ) : (
                         <div className='errorDiv'>NO NEWS ARTICLE</div>
                       )}
                     </div>
-                    <div className='missionButton pressKit'>
+                    <div className='pressKit'>
                       {launchInfo[0].links.presskit !== null ? (
                         <a
                           href={launchInfo[0].links.presskitt}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Button text='PRESS KIT' />
+                          <Button text='PRESS KIT' id='missionsButton' />
                         </a>
                       ) : (
-                        <div className='errorDiv'>NO PRESS KIT</div>
+                        <div className='errorDiv'>
+                          <h3>NO PRESS KIT</h3>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -452,13 +458,13 @@ export default function Missions() {
                 className='numberSpan'
               />
             </h1>
-            <h4>TOTAL LAUNCHES</h4>
+            <h4 className='headerItem'>TOTAL LAUNCHES</h4>
           </div>
           <div className='totalLandings'>
             <h1 className='infoHeaderValues'>
               <CountUp end={successfulLandings} duration={2} />
             </h1>
-            <h4>SUCCESSFUL LANDINGS</h4>
+            <h4 className='headerItem'>SUCCESSFUL LANDINGS</h4>
           </div>
         </div>
       ) : (

@@ -10,13 +10,13 @@
   -ms-animation: fadein 1s; /* Internet Explorer */
   -o-animation: fadein 1s; /* Opera < 12.1 */
   animation: fadein 1s;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .leftCol {
   height: 500px;
   position: relative;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 @keyframes fadein {
@@ -89,8 +89,8 @@
   height: 50px;
   grid-template-columns: repeat(3, 1fr);
   position: absolute;
-  left: 1rem;
-  right: 0;
+  left: 0.5rem;
+  right: 0.5rem;
   bottom: 1rem;
 }
 

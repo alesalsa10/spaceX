@@ -474,6 +474,7 @@ export default function Vehicle() {
                           text={'FIRST FLIGHT'}
                           onClick={() => handleFirstMission(rocketId)}
                           color={'blue'}
+                          id='vehicle'
                         />
                       </div>
                       <div className='button2'>
@@ -481,6 +482,7 @@ export default function Vehicle() {
                           text={'LATEST MISSION'}
                           onClick={() => handleLatestMission(rocketId)}
                           color={'blue'}
+                          id='vehicle'
                         />
                       </div>
                     </div>

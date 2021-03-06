@@ -9,6 +9,10 @@
   margin: 50px auto;
 }
 
+.headerItem{
+  text-align: center;
+}
+
 @keyframes missionFadeIn {
   from {
     opacity: 0;
@@ -515,6 +519,7 @@
 
 .launchInfoRight {
   justify-self: end;
+  align-self: center;
 }
 
 #modalNextRow {
@@ -558,9 +563,12 @@
 }
 
 .errorDiv {
-  min-height: 40px;
+  display: grid;
+  align-content: center;
+  height: 40px;
   border: 2px solid white;
   cursor: default;
+  width: 140px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -593,5 +601,11 @@
   }
   .missionVideo{
     height: 200px;
+  }
+}
+
+@media only screen and (max-height: 600px){
+  .missionsModal{
+    top: 100px !important;
   }
 }

@@ -7,7 +7,7 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 0% 100%;
-  
+
   width: 140px;
   height: 40px;
   line-height: 40px;
@@ -27,8 +27,8 @@
   background-image: linear-gradient(white, white);
 }
 
-.whiteFill:hover{
-  color:#005288
+.whiteFill:hover {
+  color: #005288;
 }
 
 .missionButton:hover {
@@ -44,10 +44,58 @@
   .missionButton {
     width: 90px;
   }
+  #vehicle {
+    width: 140px;
+  }
+  #missionsButton {
+    width: 120px;
+    font-size: small;
+  }
+  .errorDiv {
+    width: 120px !important;
+    font-size: small;
+  }
 }
 
+@media only screen and (max-width: 550px) {
+  .missionButton {
+    width: 75px;
+  }
+  #vehicle {
+    width: 120px;
+    font-size: x-small;
+  }
+  #missionsButton {
+    width: 100px;
+    font-size: x-small;
+  }
+  .errorDiv {
+    width: 100px !important;
+    font-size: x-small;
+  }
+}
 @media only screen and (max-width: 450px) {
   .missionButton {
     width: 75px;
+  }
+  #missionsButton {
+    width: 90px;
+    font-size: xx-small;
+  }
+  .errorDiv {
+    width: 90px !important;
+    font-size: xx-small;
+    margin: auto;
+  }
+  .missionButtonsDiv{
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .pressKit{
+    width: 90%;
+    position: absolute;
+    bottom: 2.5rem;
+  }
+  .newsArticle{
+    justify-self: end !important;
   }
 }
