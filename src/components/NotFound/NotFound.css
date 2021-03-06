@@ -1,0 +1,12 @@
+#noPage{
+    position: absolute;
+    top: 200px;
+    left: 0;
+    right: 0;
+    color:white;
+}
+
+.errorHomeLink{
+    text-decoration: underline;
+    color: white;
+}
