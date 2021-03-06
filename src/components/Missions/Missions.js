@@ -391,7 +391,7 @@ export default function Missions() {
                     <div className='pressKit'>
                       {launchInfo[0].links.presskit !== null ? (
                         <a
-                          href={launchInfo[0].links.presskitt}
+                          href={launchInfo[0].links.presskit}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
