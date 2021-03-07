@@ -53,6 +53,8 @@ export default function Vehicle() {
       marginRight: 'auto',
       marginLeft: 'auto',
       width: '900px',
+      maxHeight: '100vh',
+      overflowY: 'auto'
     },
   };
 

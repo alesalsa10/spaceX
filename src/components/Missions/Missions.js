@@ -237,7 +237,9 @@ export default function Missions() {
       bottom: '0',
       marginRight: 'auto',
       marginLeft: 'auto',
-      width: '600px'
+      width: '600px',
+      maxHeight: '100vh',
+      overflowY: 'auto',
     },
   };
 

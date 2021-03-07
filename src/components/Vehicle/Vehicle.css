@@ -326,7 +326,7 @@
     justify-self: center;
   }
   .embebedVideo {
-    width: 80vw;
+    width: 100%;
     height: 450px;
   }
   .vehicleModal{
@@ -343,7 +343,7 @@
     grid-template-columns: 1.5fr 0.5fr;
   }
   .embebedVideo {
-    width: 70vw;
+    width: 100% !important;
     height: 450px;
   }
   .vehicleModal{
