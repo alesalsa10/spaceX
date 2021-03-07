@@ -483,13 +483,15 @@ export default function Missions() {
           launches[0] === undefined ||
           launches[0].length === 0 ? (
           <div className='noResultsFound'>
-            <h1 className='noResultsHeader'>OH NO!</h1>
-            <h4 className='noResultsH5'>
-              NO RESULTS WERE FOUND FOR THIS SELECTION.
-            </h4>
-            <h4 onClick={clearAllfilters} className='clearAndTryAgain'>
-              CLEAR FILTERS AND TRY AGAIN.
-            </h4>
+            <div className='noResultsSubContainer'>
+              <h1 className='noResultsHeader'>OH NO!</h1>
+              <h4 className='noResultsH5'>
+                NO RESULTS WERE FOUND FOR THIS SELECTION.
+              </h4>
+              <h4 onClick={clearAllfilters} className='clearAndTryAgain'>
+                CLEAR FILTERS AND TRY AGAIN.
+              </h4>
+            </div>
           </div>
         ) : (
           <>
@@ -621,9 +623,7 @@ export default function Missions() {
                       isOutcome ? 'activeSelection' : 'nonActiveSelection'
                     } `}
                     style={{
-                      height: !isOutcome
-                        ? '0'
-                        : `80px`,
+                      height: !isOutcome ? '0' : `80px`,
                     }}
                   >
                     <h4

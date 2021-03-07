@@ -213,10 +213,18 @@
 }
 
 .noResultsFound {
-  width: fit-content;
+  width: 100%;
+  position: absolute;
+  top: 200px;
+  left: 0;
+  right: 0;
+}
+
+.noResultsSubContainer{
   border: 5px solid #005288;
   padding: 2rem;
   text-align: center;
+  width: fit-content;
   margin: auto;
 }
 
@@ -417,7 +425,7 @@
   .launchSite {
     display: none;
   }
-  .noResultsFound {
+  .noResultsSubContainer{
     width: 80%;
   }
   .selectorCol {
