@@ -50,6 +50,9 @@ export default function Vehicle() {
       left: '0',
       right: '0',
       bottom: '0',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      width: '900px',
     },
   };
 
@@ -266,6 +269,7 @@ export default function Vehicle() {
         contentLabel='Video Modal'
         shouldCloseOnOverlayClick={true}
         ariaHideApp={false}
+        className='vehicleModal'
       >
         <>
           {videoId === undefined || rocketId === undefined ? (
