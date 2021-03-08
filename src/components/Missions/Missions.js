@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import './Missions.css';
 import {
@@ -32,6 +31,7 @@ export default function Missions() {
   const [sliderClass, setSliderClass] = useState(0);
   const [totalLaunches, setTotalLaunches] = useState();
   const [successfulLandings, setSuccessFulLandings] = useState();
+  const [reusedFlights, setReusedFlights] = useState();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [launchId, setLaunchId] = useState();
   const [launchInfo, setLaunchInfo] = useState();
@@ -195,15 +195,21 @@ export default function Missions() {
       setTotalLaunches(allLaunches.length);
 
       let count = 0;
+      let reusedCount = 0;
       allLaunches.forEach((item) => {
         item.cores.forEach((core) => {
           if (core.landing_success) {
             count++;
           }
+          if(core.flight > 1){
+            reusedCount++
+          }
         });
         return count;
       });
+      setReusedFlights(reusedCount)
       setSuccessFulLandings(count);
+
 
       let launches = splitArrray(allLaunches);
       setLaunches(launches);
@@ -446,8 +452,9 @@ export default function Missions() {
         </>
       </Modal>
 
-      {totalLaunches > 0 &&
+      {totalLaunches !== undefined &&
       successfulLandings !== undefined &&
+      reusedFlights !== undefined &&
       launches !== 'loading' ? (
         <div className='infoHeader'>
           <div className='totalLaunches'>
@@ -464,7 +471,13 @@ export default function Missions() {
             <h1 className='infoHeaderValues'>
               <CountUp end={successfulLandings} duration={2} />
             </h1>
-            <h4 className='headerItem'>SUCCESSFUL LANDINGS</h4>
+            <h4 className='headerItem'>TOTAL LANDINGS</h4>
+          </div>
+          <div className="reusedFlights">
+            <h1 className="infoHeaderValues">
+              <CountUp end={reusedFlights} duration={2}/>
+            </h1>
+            <h4 className="headerItem">REUSED FLIGHTS</h4>
           </div>
         </div>
       ) : (

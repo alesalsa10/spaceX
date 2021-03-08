@@ -65,9 +65,9 @@
 }
 
 .infoHeader {
-  width: 60%;
+  width: 70%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin-top: 100px;
   color: white;
   margin-left: auto;
@@ -381,6 +381,13 @@
   }
   .filterValues {
     font-size: small;
+  }
+  .headerItem{
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+  }
+  .infoHeaderValues{
+    font-size: 2.5rem;
   }
 }
 
