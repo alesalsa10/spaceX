@@ -238,8 +238,6 @@ export default function Missions() {
       marginRight: 'auto',
       marginLeft: 'auto',
       width: '600px',
-      maxHeight: '100vh',
-      overflowY: 'auto',
     },
   };
 

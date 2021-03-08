@@ -14,8 +14,8 @@
   font-weight: 700;
 }
 
-#home{
-  width: 140px  !important;
+#home {
+  width: 140px !important;
 }
 
 .blueFill {
@@ -80,9 +80,6 @@
   }
 }
 @media only screen and (max-width: 450px) {
-  /* .missionButton {
-    width: 75px;
-  } */
   #missionsButton {
     width: 90px;
     font-size: xx-small;
@@ -92,15 +89,21 @@
     font-size: xx-small;
     margin: auto;
   }
-  .missionButtonsDiv{
+}
+
+@media only screen and (max-width: 400px) {
+  .missionButtonsDiv {
     grid-template-columns: 1fr 1fr !important;
   }
-  .pressKit{
+  .pressKit {
     width: 90%;
     position: absolute;
     bottom: 2.5rem;
   }
-  .newsArticle{
+  .newsArticle {
+    justify-self: center;
+  }
+  .newsArticle {
     justify-self: end !important;
   }
 }

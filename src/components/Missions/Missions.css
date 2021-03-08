@@ -452,10 +452,15 @@
   padding: 0 !important;
 }
 
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
 .ReactModal__Overlay {
   z-index: 11;
   opacity: 0;
   transition: opacity 500ms ease-in-out;
+  overflow-y: auto;
 }
 
 .ReactModal__Overlay--after-open {
@@ -579,7 +584,7 @@
 
 @media only screen and (max-width: 750px) {
   .modalContainer {
-    width: 80vw;
+    width: 100%;
     height: 450px;
   }
   .headerRow {
@@ -587,7 +592,7 @@
   }
   .missionsModal {
     width: 80vw !important;
-    height: 500px !important;
+    height: 450px !important;
   }
   .launchInfoRow {
     height: 40px;
