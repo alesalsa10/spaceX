@@ -53,8 +53,6 @@ export default function Vehicle() {
       marginRight: 'auto',
       marginLeft: 'auto',
       width: '900px',
-      /* maxHeight: '100vh',
-      overflowY: 'auto' */
     },
   };
 
@@ -76,14 +74,10 @@ export default function Vehicle() {
     setIsOpen(true);
     if (name === 'dragon') {
       const dragonResponse = await getLaunchById(firstLaunchId);
-      console.log(dragonResponse);
       let videoId = await dragonResponse.links.youtube_id;
       setVideoId(videoId);
-      console.log(videoId);
     } else {
-      console.log(id);
       const rocketResponse = await getLaunchByDate(id, 'asc');
-      console.log(rocketResponse);
       setVideoId(rocketResponse);
     }
   };
@@ -94,11 +88,8 @@ export default function Vehicle() {
       const dragonResponse = await getLaunchById(latestLaunchId);
       let videoId = await dragonResponse.links.youtube_id;
       setVideoId(videoId);
-      console.log(videoId);
     } else {
-      console.log(id);
       const rocketResponse = await getLaunchByDate(id, 'desc');
-      console.log(rocketResponse);
       setVideoId(rocketResponse);
     }
   };
@@ -153,10 +144,10 @@ export default function Vehicle() {
         for await (let dragon of allDragons) {
           if (name === 'dragon' && dragon.name === 'Dragon 2') {
             let id = await dragon.id;
+            setRocketId(id);
             const response = await getRocketOrDragonByID('dragons', id);
             const res2 = await getAllDragon2Launches();
 
-            console.log(res2);
 
             let initialCount = 0;
             res2.docs.forEach((item) => {
@@ -170,7 +161,6 @@ export default function Vehicle() {
                 res2.docs[i].length !== 0
               ) {
                 firstLaunchArrayId = res2.docs[i].launches[0];
-                //console.log(firstLaunchArrayId);
                 break;
               }
             }
@@ -180,7 +170,6 @@ export default function Vehicle() {
             for (let i = res2.docs.length - 1; i >= 0; i--) {
               if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0) {
                 lastLaunchArrayId = res2.docs[i].launches[0];
-                //console.log(lastLaunchArrayId);
                 break;
               }
             }
@@ -237,7 +226,6 @@ export default function Vehicle() {
           numberOfLaunhes: numberOfLaunhes,
         };
         setData(dataObj);
-        console.log(data);
       } else {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),

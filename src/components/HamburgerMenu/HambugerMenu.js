@@ -46,19 +46,20 @@ const HambugerMenu = () => {
       >
         FALCON HEAVY
       </Link>
-      <Link
-        className='menu-item links'
-        to='/vehicles/dragon'
-        onClick={handleOnClose}
-      >
-        DRAGON
-      </Link>
+
       <Link
         className='menu-item links'
         to='/vehicles/starship'
         onClick={handleOnClose}
       >
         STARSHIP
+      </Link>
+      <Link
+        className='menu-item links'
+        to='/vehicles/dragon'
+        onClick={handleOnClose}
+      >
+        DRAGON
       </Link>
     </Menu>
   );

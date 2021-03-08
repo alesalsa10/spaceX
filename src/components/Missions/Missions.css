@@ -565,8 +565,15 @@
   margin: auto;
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
+
+.sliderContainer{
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+}
+
 
 .wikipedia {
   justify-self: left;
@@ -577,7 +584,7 @@
 }
 
 .newsArticle {
-  justify-self: center;
+  justify-self: left;
 }
 
 .errorDiv {

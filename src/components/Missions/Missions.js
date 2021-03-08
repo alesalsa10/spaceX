@@ -368,19 +368,6 @@ export default function Missions() {
                     ></iframe>
                   </div>
                   <div className='missionButtonsDiv'>
-                    <div className='wikipedia'>
-                      {launchInfo[0].links.wikipedia !== null ? (
-                        <a
-                          href={launchInfo[0].links.wikipedia}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                        >
-                          <Button text='WIKIPEDIA' id='missionsButton' />
-                        </a>
-                      ) : (
-                        <div className='errorDiv'>NO WIKIPEDIA LINK</div>
-                      )}
-                    </div>
                     <div className='newsArticle'>
                       {launchInfo[0].links.article !== null ? (
                         <a

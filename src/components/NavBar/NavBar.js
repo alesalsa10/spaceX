@@ -57,27 +57,28 @@ export default function NavBar() {
       ) : (
         <>
           <div className='falcon9'>
-            <Link  to='/vehicles/falcon9' className='link'>
+            <Link to='/vehicles/falcon9' className='link'>
               FALCON 9
             </Link>
           </div>
           <div className='falconHeavy'>
-            <Link  to='/vehicles/falconheavy' className='link'>
+            <Link to='/vehicles/falconheavy' className='link'>
               FALCON HEAVY
             </Link>
           </div>
-          <div className='dragon'>
-            <Link  to='/vehicles/dragon' className='link'>
-              DRAGON
-            </Link>
-          </div>
+
           <div className='starship'>
             <Link to='/vehicles/starship' className='link'>
               STARSHIP
             </Link>
           </div>
+          <div className='dragon'>
+            <Link to='/vehicles/dragon' className='link'>
+              DRAGON
+            </Link>
+          </div>
           <div className='missionsButtonDiv'>
-            <Link  to='/missions'>
+            <Link to='/missions'>
               <Button text={'MISSIONS'} color={'blue'} />
             </Link>
           </div>
