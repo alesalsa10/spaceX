@@ -7,7 +7,7 @@
     left: 1rem;
     top: 80px;
     color: white;
-    z-index: 1000;
+    z-index: 2;
     max-width: 400px;
 }
 
@@ -19,11 +19,12 @@
 .starlinkInfoDiv{
     position: absolute;
     right: 0;
-    bottom: 1rem;
+    bottom: 0;
     color: white;
-    z-index: 1000;
+    z-index: 2;
     width: fit-content;
     background-color: black;
+    padding: 1rem;
 }
 
 .starlinkSpam{
