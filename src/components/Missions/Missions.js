@@ -201,15 +201,14 @@ export default function Missions() {
           if (core.landing_success) {
             count++;
           }
-          if(core.flight > 1){
-            reusedCount++
+          if (core.flight > 1) {
+            reusedCount++;
           }
         });
         return count;
       });
-      setReusedFlights(reusedCount)
+      setReusedFlights(reusedCount);
       setSuccessFulLandings(count);
-
 
       let launches = splitArrray(allLaunches);
       setLaunches(launches);
@@ -443,30 +442,36 @@ export default function Missions() {
       successfulLandings !== undefined &&
       reusedFlights !== undefined &&
       launches !== 'loading' ? (
-        <div className='infoHeader'>
-          <div className='totalLaunches'>
-            <h1 className='infoHeaderValues'>
-              <CountUp
-                end={totalLaunches}
-                duration={2}
-                className='numberSpan'
-              />
-            </h1>
-            <h4 className='headerItem'>TOTAL LAUNCHES</h4>
-          </div>
-          <div className='totalLandings'>
-            <h1 className='infoHeaderValues'>
-              <CountUp end={successfulLandings} duration={2} />
-            </h1>
-            <h4 className='headerItem'>TOTAL LANDINGS</h4>
-          </div>
-          <div className="reusedFlights">
-            <h1 className="infoHeaderValues">
-              <CountUp end={reusedFlights} duration={2}/>
-            </h1>
-            <h4 className="headerItem">REUSED FLIGHTS</h4>
-          </div>
-        </div>
+        <>
+          {totalLaunches !== 0 ? (
+            <div className='infoHeader'>
+              <div className='totalLaunches'>
+                <h1 className='infoHeaderValues'>
+                  <CountUp
+                    end={totalLaunches}
+                    duration={2}
+                    className='numberSpan'
+                  />
+                </h1>
+                <h4 className='headerItem'>TOTAL LAUNCHES</h4>
+              </div>
+              <div className='totalLandings'>
+                <h1 className='infoHeaderValues'>
+                  <CountUp end={successfulLandings} duration={2} />
+                </h1>
+                <h4 className='headerItem'>TOTAL LANDINGS</h4>
+              </div>
+              <div className='reusedFlights'>
+                <h1 className='infoHeaderValues'>
+                  <CountUp end={reusedFlights} duration={2} />
+                </h1>
+                <h4 className='headerItem'>REUSED FLIGHTS</h4>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+        </>
       ) : (
         ''
       )}
