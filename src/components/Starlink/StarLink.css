@@ -1,0 +1,64 @@
+.starlinkContainer{
+    overflow: hidden;
+}
+
+.starlinkHeader{
+    position: absolute;
+    left: 1rem;
+    top: 80px;
+    color: white;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.starlinkInfoHeader{
+    color: white;
+    
+}
+
+.starlinkInfoDiv{
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    color: white;
+    z-index: 1000;
+    width: fit-content;
+    background-color: black;
+}
+
+.starlinkSpam{
+    color:white
+}
+
+#X{
+    color:red;
+    text-align: right;
+    cursor: pointer;
+}
+
+.starlinkDesc{
+    font-size: 1.2rem;
+    color: grey;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.onOrbit{
+    font-size: 1.2rem;
+    color: grey
+}
+
+.startlinkRow{
+    color: gray;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+@media only screen and (max-width: 600px){
+    .starlinkDesc{
+        font-size: medium;
+    }
+}

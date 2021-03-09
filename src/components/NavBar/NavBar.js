@@ -50,7 +50,7 @@ export default function NavBar() {
           </svg>
         </Link>
       </div>
-      {windowSize < 1000 ? (
+      {windowSize <= 1000 ? (
         <div className='sidebar'>
           <HambugerMenu />
         </div>
@@ -75,6 +75,11 @@ export default function NavBar() {
           <div className='dragon'>
             <Link to='/vehicles/dragon' className='link'>
               DRAGON
+            </Link>
+          </div>
+          <div className='starlink'>
+            <Link to='/starlink' className='link'>
+              STARLINK
             </Link>
           </div>
           <div className='missionsButtonDiv'>

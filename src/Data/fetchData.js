@@ -228,3 +228,20 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
     console.log(error);
   }
 };
+
+export const getAllStarlink = async () => {
+  try{
+    const response = await axios.get(`${baseURL}/starlink`);
+
+    const filteredResults = response.data
+      .filter(
+        (starlink) => starlink.longitude !== null || starlink.latitude !== null
+      )
+      .map((starlink,index) => ({ ...starlink,  color: 'white', pointAlt: '0.001', pointRadius: '0.40', label: starlink.spaceTrack.OBJECT_NAME, index: index}));
+    
+    return filteredResults
+  } 
+  catch(error){
+    console.log(error)
+  }
+}
