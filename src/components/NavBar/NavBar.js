@@ -73,8 +73,8 @@ export default function NavBar() {
             </Link>
           </div>
           <div className='dragon'>
-            <Link to='/vehicles/dragon' className='link'>
-              DRAGON
+            <Link to='/vehicles/dragon2' className='link'>
+              DRAGON 2
             </Link>
           </div>
           <div className='starlink'>

@@ -56,10 +56,10 @@ const HambugerMenu = () => {
       </Link>
       <Link
         className='menu-item links'
-        to='/vehicles/dragon'
+        to='/vehicles/dragon2'
         onClick={handleOnClose}
       >
-        DRAGON
+        DRAGON 2
       </Link>
       <Link
         className='menu-item links'

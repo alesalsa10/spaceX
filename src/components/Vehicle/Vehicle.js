@@ -72,7 +72,7 @@ export default function Vehicle() {
 
   const handleFirstMission = async (id) => {
     setIsOpen(true);
-    if (name === 'dragon') {
+    if (name === 'dragon2') {
       const dragonResponse = await getLaunchById(firstLaunchId);
       let videoId = await dragonResponse.links.youtube_id;
       setVideoId(videoId);
@@ -84,7 +84,7 @@ export default function Vehicle() {
 
   const handleLatestMission = async (id) => {
     setIsOpen(true);
-    if (name === 'dragon') {
+    if (name === 'dragon2') {
       const dragonResponse = await getLaunchById(latestLaunchId);
       let videoId = await dragonResponse.links.youtube_id;
       setVideoId(videoId);
@@ -139,10 +139,10 @@ export default function Vehicle() {
             return responseObj;
           }
         }
-      } else if (name === 'dragon') {
+      } else if (name === 'dragon2') {
         const allDragons = await getAllRocketOrDragons('dragons');
         for await (let dragon of allDragons) {
-          if (name === 'dragon' && dragon.name === 'Dragon 2') {
+          if (name === 'dragon2' && dragon.name === 'Dragon 2') {
             let id = await dragon.id;
             setRocketId(id);
             const response = await getRocketOrDragonByID('dragons', id);
@@ -195,7 +195,7 @@ export default function Vehicle() {
     async function updateData() {
       let info = await fetchData();
       const { rocketOrDragonInfo, numberOfLaunhes } = info;
-      if (name === 'dragon') {
+      if (name === 'dragon2') {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
           metricHeight: rocketOrDragonInfo.height_w_trunk.meters,
@@ -327,14 +327,14 @@ export default function Vehicle() {
                   <div className='vehicleRow '>
                     <div className='left'>
                       <h4>
-                        {name === 'dragon' ? 'LAUNCH PAYLOAD MASS' : 'MASS'}
+                        {name === 'dragon2' ? 'LAUNCH PAYLOAD MASS' : 'MASS'}
                       </h4>
                     </div>
                     <div className='right'>
                       <p>
                         <span>
                           {' '}
-                          {name === 'dragon'
+                          {name === 'dragon2'
                             ? data.metricLaunchPayloadMass
                             : data.totalImperialMass}{' '}
                           kg
@@ -343,7 +343,7 @@ export default function Vehicle() {
                         <span className='imperial'>
                           {' '}
                           /
-                          {name === 'dragon'
+                          {name === 'dragon2'
                             ? data.totalMetricMass
                             : data.totalImperialMass}{' '}
                           lb
@@ -434,14 +434,14 @@ export default function Vehicle() {
                   <div className='vehicleRow'>
                     <div className='left'>
                       <h4>
-                        {name === 'dragon'
+                        {name === 'dragon2'
                           ? 'CREW CAPACITY'
                           : 'COST PER LAUNCH'}
                       </h4>
                     </div>
                     <div className='right'>
                       <p>
-                        {name === 'dragon'
+                        {name === 'dragon2'
                           ? data.crewCapacity
                           : data.costPerLaunch}
                       </p>
@@ -524,7 +524,7 @@ export default function Vehicle() {
             <img
               className='vehicleImage'
               src={`${
-                name === 'dragon'
+                name === 'dragon2'
                   ? Dragon
                   : name === 'falcon9'
                   ? Falcon9
