@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Modal from 'react-modal';
-import Loader from 'react-loader-spinner';
+import VehicleModalContainer from '../VehicleModalContainer/VehicleModalContainer';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -44,17 +43,6 @@ export default function Vehicle() {
     }
   }, [name]);
 
-  const customStyles = {
-    content: {
-      top: '170px',
-      left: '0',
-      right: '0',
-      bottom: '0',
-      marginRight: 'auto',
-      marginLeft: 'auto',
-      width: '900px',
-    },
-  };
 
   const handleNextClick = (e) => {
     setSliderClass('fadeSlide');
@@ -147,7 +135,6 @@ export default function Vehicle() {
             setRocketId(id);
             const response = await getRocketOrDragonByID('dragons', id);
             const res2 = await getAllDragon2Launches();
-
 
             let initialCount = 0;
             res2.docs.forEach((item) => {
@@ -252,36 +239,12 @@ export default function Vehicle() {
 
   return (
     <>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel='Video Modal'
-        shouldCloseOnOverlayClick={true}
-        ariaHideApp={false}
-        className='vehicleModal'
-      >
-        <>
-          {videoId === undefined || rocketId === undefined ? (
-            <div className='spinner'>
-              <Loader
-                type='TailSpin'
-                color='#005288'
-                height={100}
-                width={100}
-              />
-            </div>
-          ) : (
-            <div className='iframeContainer'>
-              <iframe
-                title='Mission video'
-                className='embebedVideo'
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
-              ></iframe>
-            </div>
-          )}
-        </>
-      </Modal>
+      <VehicleModalContainer
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        videoId={videoId}
+        rocketId={rocketId}
+      />
 
       {data !== undefined ? (
         <div className='vehicleContainer' key={name}>

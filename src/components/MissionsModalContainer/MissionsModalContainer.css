@@ -1,0 +1,164 @@
+.missionsModal {
+  position: relative;
+}
+
+.spinner {
+  margin: auto;
+  text-align: center;
+}
+
+.modalContainer {
+  width: 600px;
+  height: 600px;
+  color: white;
+  padding-top: 1rem;
+  background-color: #005288;
+  position: relative;
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1.5rem;
+  width: 90%;
+  margin: auto;
+  padding-bottom: 1rem;
+}
+
+.leftHeader {
+  align-self: center;
+}
+
+.launchName {
+  margin-bottom: 0.5rem;
+}
+
+.launchOverview {
+  font-size: 2.5rem;
+}
+
+.rightHeader {
+  justify-self: end;
+  align-self: center;
+}
+
+.patchLogo {
+  height: 100px;
+  width: 100px;
+}
+
+.launchInfoContainer {
+  width: 90%;
+  margin: auto;
+}
+.launchInfoRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 50px;
+  border-bottom: 1px solid grey;
+  align-content: center;
+}
+
+.launchInfoRight {
+  justify-self: end;
+  align-self: center;
+}
+.missionVideo {
+  width: 100%;
+  height: 300px;
+}
+
+.missionButtonsDiv {
+  padding-top: 1rem;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.newsArticle {
+  justify-self: left;
+}
+
+.errorDiv {
+  display: grid;
+  align-content: center;
+  height: 40px;
+  border: 2px solid white;
+  cursor: default;
+  width: 140px;
+}
+
+.pressKit {
+  justify-self: end;
+}
+
+#modalNextRow {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  width: 90%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 750px) {
+  .missionsModal {
+    width: 80vw !important;
+    height: 450px !important;
+  }
+  .modalContainer {
+    width: 100%;
+    height: 450px;
+  }
+  .headerRow {
+    padding-bottom: 0.5rem;
+  }
+  .launchOverview {
+    font-size: 1.5rem;
+  }
+  .patchLogo {
+    height: 80px;
+    width: 80px;
+  }
+  .launchInfoContainer {
+    font-size: medium;
+  }
+  .launchInfoRow {
+    height: 40px;
+  }
+  .missionVideo {
+    height: 200px;
+  }
+  #modalNextRow {
+    bottom: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 649px) {
+  .errorDiv {
+    width: 120px !important;
+    font-size: small;
+  }
+}
+
+@media only screen and (max-height: 600px) {
+  .missionsModal {
+    top: 100px !important;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .errorDiv {
+    width: 100px !important;
+    font-size: x-small;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .errorDiv {
+    width: 90px !important;
+    font-size: xx-small;
+    margin: auto;
+  }
+}
+

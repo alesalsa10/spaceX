@@ -12,11 +12,6 @@
   animation: fadein 1s;
 }
 
-
-.vehicleModal{
-  position: relative;
-}
-
 .leftCol {
   height: 500px;
   position: relative;
@@ -248,7 +243,6 @@
   height: 50px;
 }
 
-
 .buttonsRow {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -275,17 +269,6 @@
   height: 350px;
 }
 
-.ReactModal__Content {
-  background: none !important;
-  outline: none !important;
-  border: none !important;
-}
-
-.embebedVideo {
-  width: 900px;
-  height: 500px;
-}
-
 
 
 @media only screen and (max-width: 500px) {
@@ -296,14 +279,6 @@
   }
   .vehicleImage {
     height: 250px;
-  }
-  .vehicleModal{
-    width: 300px !important;
-    height: 300px !important;
-  }
-  .embebedVideo {
-    width: 300px;
-    height: 300px;
   }
   .left {
     font-size: smaller;
@@ -326,14 +301,6 @@
     align-self: center;
     justify-self: center;
   }
-  .embebedVideo {
-    width: 100%;
-    height: 450px;
-  }
-  .vehicleModal{
-    width: 80vw !important;
-    height: 450px !important;
-  }
 }
 
 @media only screen and (min-width: 1001px) and (max-width: 1250px) {
@@ -342,13 +309,5 @@
   }
   .vehicleContainer {
     grid-template-columns: 1.5fr 0.5fr;
-  }
-  .embebedVideo {
-    width: 100% !important;
-    height: 450px;
-  }
-  .vehicleModal{
-    width: 70vw;
-    height: 450px;
   }
 }

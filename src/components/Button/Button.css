@@ -1,9 +1,7 @@
 .missionButton {
   color: white;
-  /* border: 2px solid #005288; */
   cursor: pointer;
   background: none;
-  /* background-image: linear-gradient(#005288, #005288); */
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 0% 100%;
@@ -56,16 +54,9 @@
     width: 120px;
     font-size: small;
   }
-  .errorDiv {
-    width: 120px !important;
-    font-size: small;
-  }
 }
 
 @media only screen and (max-width: 550px) {
-  /* .missionButton {
-    width: 120px;
-  } */
   #vehicle {
     width: 120px;
     font-size: x-small;
@@ -74,36 +65,12 @@
     width: 100px;
     font-size: x-small;
   }
-  .errorDiv {
-    width: 100px !important;
-    font-size: x-small;
-  }
 }
 @media only screen and (max-width: 450px) {
   #missionsButton {
     width: 90px;
     font-size: xx-small;
   }
-  .errorDiv {
-    width: 90px !important;
-    font-size: xx-small;
-    margin: auto;
-  }
 }
 
-@media only screen and (max-width: 400px) {
-  .missionButtonsDiv {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .pressKit {
-    width: 90%;
-    position: absolute;
-    bottom: 2.5rem;
-  }
-  .newsArticle {
-    justify-self: center;
-  }
-  .newsArticle {
-    justify-self: end !important;
-  }
-}
+

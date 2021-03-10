@@ -220,7 +220,7 @@
   right: 0;
 }
 
-.noResultsSubContainer{
+.noResultsSubContainer {
   border: 5px solid #005288;
   padding: 2rem;
   text-align: center;
@@ -317,11 +317,6 @@
   margin-bottom: 1rem;
 }
 
-.spinner {
-  margin: auto;
-  text-align: center;
-}
-
 .noResultsHeader {
   margin-bottom: 1rem;
 }
@@ -382,17 +377,16 @@
   .filterValues {
     font-size: small;
   }
-  .headerItem{
+  .headerItem {
     font-size: 0.8rem;
     padding-right: 0.5rem;
   }
-  .infoHeaderValues{
+  .infoHeaderValues {
     font-size: 2.5rem;
   }
 }
 
 @media only screen and (min-width: 451px) and (max-width: 649px) {
-  
   .dropdownContent {
     grid-template-columns: 90px 90px;
   }
@@ -409,7 +403,7 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .filterValues{
+  .filterValues {
     width: 120px;
   }
   .missionRowHeader {
@@ -432,7 +426,7 @@
   .launchSite {
     display: none;
   }
-  .noResultsSubContainer{
+  .noResultsSubContainer {
     width: 80%;
   }
   .selectorCol {
@@ -447,10 +441,10 @@
   .clearFilter {
     width: 120px;
   }
-  .dropdownRight{
+  .dropdownRight {
     width: 120px;
   }
-  .dropdownContent{
+  .dropdownContent {
     grid-template-columns: 120px 120px;
   }
 }
@@ -478,159 +472,54 @@
   opacity: 0;
 }
 
-.modalContainer {
-  width: 600px;
-  height: 600px;
-  color: white;
-  padding-top: 1rem;
-  background-color: #005288;
-  position: relative;
-}
-
-.missionsModal {
-  position: relative;
-}
-
-.headerRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 1.5rem;
-  width: 90%;
-  margin: auto;
-  padding-bottom: 1rem;
-}
-
-.launchOverview {
-  font-size: 2.5rem;
-}
-
-.launchName {
-  margin-bottom: 0.5rem;
-}
-
-.leftHeader {
-  align-self: center;
-}
-
-.rightHeader {
-  justify-self: end;
-  align-self: center;
-}
-
-.patchLogo {
-  height: 100px;
-  width: 100px;
-}
-
-.launchInfoContainer {
-  width: 90%;
-  margin: auto;
-}
-
-.launchInfoRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 50px;
-  border-bottom: 1px solid grey;
-  align-content: center;
-}
-
-.launchInfoRight {
-  justify-self: end;
-  align-self: center;
-}
-
-#modalNextRow {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 1rem;
-  width: 90%;
-  margin: auto;
-}
-
 .videoContianer {
   margin: auto;
   width: 90%;
   text-align: center;
 }
 
-.missionVideo {
-  width: 100%;
-  height: 300px;
-}
-
-.missionButtonsDiv {
-  padding-top: 1rem;
-  margin: auto;
-  text-align: center;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.sliderContainer{
+.sliderContainer {
   display: flex;
   flex-direction: column;
   height: 350px;
 }
 
+@media only screen and (max-width: 500px) {
+  .mainInfo {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 
-.wikipedia {
-  justify-self: left;
-}
+  .information {
+    order: 1;
+  }
 
-.pressKit {
-  justify-self: end;
-}
-
-.newsArticle {
-  justify-self: left;
-}
-
-.errorDiv {
-  display: grid;
-  align-content: center;
-  height: 40px;
-  border: 2px solid white;
-  cursor: default;
-  width: 140px;
-}
-
-@media only screen and (max-width: 750px) {
-  .modalContainer {
+  .selectorCol {
     width: 100%;
-    height: 450px;
+    display: grid;
+    grid-template-columns: 35px 1fr 35px;
+    margin-bottom: 0;
+    margin-top: 0;
+    order: 2;
   }
-  .headerRow {
-    padding-bottom: 0.5rem;
+
+  .circlesCont {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.2rem;
+    height: fit-content;
+    width: 100%;
   }
-  .missionsModal {
-    width: 80vw !important;
-    height: 450px !important;
+  .upArrowContainer {
+    margin-left: 0.5rem;
   }
-  .launchInfoRow {
-    height: 40px;
-  }
-  .patchLogo {
-    height: 80px;
-    width: 80px;
-  }
-  .launchOverview {
-    font-size: 1.5rem;
-  }
-  #modalNextRow {
-    bottom: 0.5rem;
-  }
-  .launchInfoContainer {
-    font-size: medium;
-  }
-  .missionVideo {
-    height: 200px;
+  .downArrowContainer {
+    margin-right: 0.5rem;
   }
 }
-
-@media only screen and (max-height: 600px) {
-  .missionsModal {
-    top: 100px !important;
+@media only screen and (max-width: 400px){
+  .circle{
+    height: 10px;
+    width: 10px;
   }
 }
