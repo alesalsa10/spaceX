@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import VehicleModalContainer from '../VehicleModalContainer/VehicleModalContainer';
+import VehicleRow from '../VehicleRow/VehicleRow';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -42,7 +43,6 @@ export default function Vehicle() {
       setPageNumber(1);
     }
   }, [name]);
-
 
   const handleNextClick = (e) => {
     setSliderClass('fadeSlide');
@@ -259,169 +259,114 @@ export default function Vehicle() {
             >
               {pageNumber === 1 ? (
                 <>
-                  <div className='vehicleRow '>
-                    <div className='left'>
-                      <h4>HEIGHT</h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        <span>{data.metricHeight}</span> m
-                        <span className='imperial'>
-                          {' '}
-                          / {data.imperialHeight} ft
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className='vehicleRow '>
-                    <div className='left'>
-                      <h4>DIAMETER</h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        <span>{data.diameter.meters}</span> m
-                        <span className='imperial'>
-                          {' '}
-                          / {data.diameter.feet} ft
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className='vehicleRow '>
-                    <div className='left'>
-                      <h4>
-                        {name === 'dragon2' ? 'LAUNCH PAYLOAD MASS' : 'MASS'}
-                      </h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        <span>
-                          {' '}
-                          {name === 'dragon2'
-                            ? data.metricLaunchPayloadMass
-                            : data.totalImperialMass}{' '}
-                          kg
-                        </span>
+                  <VehicleRow
+                    leftCol={'HEIGHT'}
+                    metric={data.metricHeight}
+                    imperial={data.imperialHeight}
+                    metricUnit={'m'}
+                    imperialUnit={'ft'}
+                  />
 
-                        <span className='imperial'>
-                          {' '}
-                          /
-                          {name === 'dragon2'
-                            ? data.totalMetricMass
-                            : data.totalImperialMass}{' '}
-                          lb
-                        </span>
-                      </p>
-                    </div>
-                  </div>
+                  <VehicleRow
+                    leftCol={'DIAMETER  '}
+                    metric={data.diameter.meters}
+                    imperial={data.diameter.feet}
+                    metricUnit={'m'}
+                    imperialUnit={'ft'}
+                  />
 
-                  {name !== 'dragon' && data.payloadWeights !== undefined ? (
+                  <VehicleRow
+                    leftCol={
+                      name === 'dragon2' ? 'LAUNCH PAYLOAD MASS' : 'MASS'
+                    }
+                    metric={
+                      name === 'dragon2'
+                        ? data.metricLaunchPayloadMass
+                        : data.totalMetricMass
+                    }
+                    imperial={
+                      name === 'dragon2'
+                        ? data.imperialLaunchPayloadMass
+                        : data.totalImperialMass
+                    }
+                    metricUnit={'kg'}
+                    imperialUnit={'lb'}
+                  />
+
+                  {name !== 'dragon2' && data.payloadWeights !== undefined ? (
                     data.payloadWeights.map((payload) => (
-                      <div className='vehicleRow ' key={payload.id}>
-                        <div className='left'>
-                          <h4>{`PAYLOAD TO ${payload.id.toUpperCase()}`}</h4>
-                        </div>
-                        <div className='right'>
-                          <p>
-                            <span>{`${payload.kg} kg`}</span>
-                            <span className='imperial'>{` / ${payload.lb} lb`}</span>
-                          </p>
-                        </div>
-                      </div>
+                      <VehicleRow
+                        key={payload.id}
+                        leftCol={`PAYLOAD TO ${payload.id.toUpperCase()}`}
+                        metric={payload.kg}
+                        imperial={payload.lb}
+                        metricUnit={'kg'}
+                        imperialUnit={'lb'}
+                      />
                     ))
                   ) : (
                     <>
-                      <div className='vehicleRow'>
-                        <div className='left'>
-                          <h4>RETURN PAYLOAD MASS</h4>
-                        </div>
-                        <div className='right'>
-                          <p>
-                            <span>{`${data.metricReturnPayloadMass} kg`}</span>
-                            <span className='imperial'>
-                              {` / ${data.imperialReturnPayloadMass} kg`}
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className='vehicleRow'>
-                        <div className='left'>
-                          <h4>LAUNCH PAYLOAD VOL</h4>
-                        </div>
-                        <div className='right'>
-                          <p>
-                            <span>{`${data.metricLaunchPayloadVol} m3`}</span>
-                            <span className='imperial'>
-                              {` / ${data.imperialLaunchPayloadVol} ft3`}
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className='vehicleRow'>
-                        <div className='left'>
-                          <h4>RETURN PAYLOAD VOL</h4>
-                        </div>
-                        <div className='right'>
-                          <p>
-                            <span>{`${data.metricReturnPayloadVol} m3`}</span>
-                            <span className='imperial'>
-                              {` / ${data.imperialReturnPayloadVol} ft3`}
-                            </span>
-                          </p>
-                        </div>
-                      </div>
+                      <VehicleRow
+                        leftCol={'RETURN PAYLOAD MASS'}
+                        metric={data.metricReturnPayloadMass}
+                        imperial={data.imperialReturnPayloadMass}
+                        metricUnit={'kg'}
+                        imperialUnit={'lb'}
+                      />
+
+                      <VehicleRow
+                        leftCol={'LAUNCH PAYLOAD VOL'}
+                        metric={data.metricLaunchPayloadVol}
+                        imperial={data.imperialLaunchPayloadVol}
+                        metricUnit={'m3'}
+                        imperialUnit={'ft3'}
+                      />
+
+                      <VehicleRow
+                        leftCol={'RETURN PAYLOAD VOL'}
+                        metric={data.metricReturnPayloadVol}
+                        imperial={data.imperialReturnPayloadVol}
+                        metricUnit={'m3'}
+                        imperialUnit={'ft3'}
+                      />
                     </>
                   )}
                 </>
               ) : (
                 <>
-                  <div className='vehicleRow'>
-                    <div className='left'>
-                      <h4>FIRST LAUNCH</h4>
-                    </div>
-                    <div className='right'>
-                      <p>{data.firstLaunch}</p>
-                    </div>
-                  </div>
-                  <div className='vehicleRow'>
-                    <div className='left'>
-                      <h4>ENGINES</h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        <span>{data.engineNumber}</span>
-                        <span className='imperial'> / {data.engineType}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className='vehicleRow'>
-                    <div className='left'>
-                      <h4>
-                        {name === 'dragon2'
-                          ? 'CREW CAPACITY'
-                          : 'COST PER LAUNCH'}
-                      </h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        {name === 'dragon2'
-                          ? data.crewCapacity
-                          : data.costPerLaunch}
-                      </p>
-                    </div>
-                  </div>
-                  <div className='vehicleRow'>
-                    <div className='left'>
-                      <h4>TOTAL LAUNCHES</h4>
-                    </div>
-                    <div className='right'>
-                      <p>
-                        {data.numberOfLaunhes === 0
-                          ? 'NO LAUNCHES'
-                          : data.numberOfLaunhes}
-                      </p>
-                    </div>
-                  </div>
+                  <VehicleRow
+                    rowType={'basic'}
+                    leftCol={'FIRST LAUNCH'}
+                    right={data.firstLaunch}
+                  />
+
+                  <VehicleRow
+                    rowType='basic'
+                    leftCol='ENGINES'
+                    engineType={data.engineType}
+                    engineNumber={data.engineNumber}
+                  />
+
+                  <VehicleRow
+                    rowType='basic'
+                    leftCol={
+                      name === 'dragon2' ? 'CREW CAPACITY' : 'COST PER LAUNCH'
+                    }
+                    right={
+                      name === 'dragon2'
+                        ? data.crewCapacity
+                        : data.costPerLaunch
+                    }
+                  />
+                  <VehicleRow
+                    rowType='basic'
+                    leftCol='TOTAL LAUNCHES'
+                    right={
+                      data.numberOfLaunhes === 0
+                        ? 'NO LAUNCHES'
+                        : data.numberOfLaunhes
+                    }
+                  />
 
                   {data.numberOfLaunhes !== 0 ? (
                     <div className='buttonsRow'>

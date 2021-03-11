@@ -1,0 +1,31 @@
+.vehicleRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  border-bottom: 1px solid grey;
+  height: 100%;
+}
+
+.right {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.imperial {
+  color: grey;
+}
+
+@media only screen and (max-width: 500px) {
+  .left {
+    font-size: smaller;
+  }
+  .right {
+    font-size: smaller;
+  }
+}
+
+@media only screen and (min-width: 1001px) and (max-width: 1250px) {
+  .left {
+    font-size: small;
+  }
+}
