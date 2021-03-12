@@ -192,6 +192,89 @@ export default function Missions() {
         filterValues.launchPadId,
         filterValues.outcome
       );
+
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+      allLaunches.push(allLaunches[0]);
+
       setTotalLaunches(allLaunches.length);
 
       let count = 0;
@@ -220,17 +303,9 @@ export default function Missions() {
     setSliderClass('fadeSlide');
     let id = e.target.id;
     if (id === 'next') {
-      if (pageNumber === launches.length - 1) {
-        setPageNumber(0);
-      } else {
-        setPageNumber(pageNumber + 1);
-      }
+      setPageNumber(pageNumber + 1);
     } else {
-      if (pageNumber === 0) {
-        setPageNumber(launches.length - 1);
-      } else {
-        setPageNumber(pageNumber - 1);
-      }
+      setPageNumber(pageNumber - 1);
     }
   };
 
@@ -464,7 +539,7 @@ export default function Missions() {
             <div className='mainInfo'>
               <div className='selectorCol'>
                 <div className='upArrowContainer'>
-                  {launches.length === 1 ? (
+                  {launches.length === 1 || pageNumber === 0 ? (
                     <div className='upArrow disabledUpArrow' id={'back'}></div>
                   ) : (
                     <div
@@ -480,7 +555,7 @@ export default function Missions() {
                     <div
                       className={`${'circle'} ${
                         index === pageNumber ? 'selectedPage' : ''
-                      } `}
+                      }  ${pageNumber - index > 14 ? 'hiddenCircle':''} ${index < pageNumber} `}
                       key={index}
                       id={index}
                       onClick={handleCirclePageClick}
@@ -489,7 +564,8 @@ export default function Missions() {
                 </div>
 
                 <div className='downArrowContainer'>
-                  {launches.length === 1 ? (
+                  {launches.length === 1 ||
+                  pageNumber === launches.length - 1 ? (
                     <div
                       className='downArrow disabledDownArrow'
                       id={'next'}

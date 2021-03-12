@@ -126,6 +126,10 @@
   border: 1px solid white;
 }
 
+.hiddenCircle{
+  display: none;
+}
+
 .circleLeft {
   justify-self: end;
   margin-right: 0.5rem;

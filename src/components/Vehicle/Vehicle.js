@@ -9,7 +9,7 @@ import {
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
   getLaunchByDate,
-  getLaunchById,
+  launchById
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 import Dragon from '../../images/dragon2.png';
@@ -61,8 +61,8 @@ export default function Vehicle() {
   const handleFirstMission = async (id) => {
     setIsOpen(true);
     if (name === 'dragon2') {
-      const dragonResponse = await getLaunchById(firstLaunchId);
-      let videoId = await dragonResponse.links.youtube_id;
+      const dragonResponse = await launchById(firstLaunchId);
+      let videoId = await dragonResponse[0].links.youtube_id;
       setVideoId(videoId);
     } else {
       const rocketResponse = await getLaunchByDate(id, 'asc');
@@ -73,8 +73,8 @@ export default function Vehicle() {
   const handleLatestMission = async (id) => {
     setIsOpen(true);
     if (name === 'dragon2') {
-      const dragonResponse = await getLaunchById(latestLaunchId);
-      let videoId = await dragonResponse.links.youtube_id;
+      const dragonResponse = await launchById(latestLaunchId);
+      let videoId = await dragonResponse[0].links.youtube_id;
       setVideoId(videoId);
     } else {
       const rocketResponse = await getLaunchByDate(id, 'desc');
@@ -99,7 +99,7 @@ export default function Vehicle() {
             const res2 = await numberOfLaunchesByVehicle(id);
             const responseObj = {
               rocketOrDragonInfo: response,
-              numberOfLaunhes: res2.totalDocs,
+              numberOfLaunches: res2.totalDocs,
             };
             return responseObj;
           } else if (name === 'starship' && rocket.name === 'Starship') {
@@ -110,7 +110,7 @@ export default function Vehicle() {
 
             const responseObj = {
               rocketOrDragonInfo: response,
-              numberOfLaunhes: res2.totalDocs,
+              numberOfLaunches: res2.totalDocs,
             };
             return responseObj;
           } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
@@ -121,7 +121,7 @@ export default function Vehicle() {
 
             const responseObj = {
               rocketOrDragonInfo: response,
-              numberOfLaunhes: res2.totalDocs,
+              numberOfLaunches: res2.totalDocs,
             };
 
             return responseObj;
@@ -163,7 +163,7 @@ export default function Vehicle() {
             setLatestLaunch(lastLaunchArrayId);
             const responseObj = {
               rocketOrDragonInfo: response,
-              numberOfLaunhes: initialCount,
+              numberOfLaunches: initialCount,
             };
 
             return responseObj;
@@ -181,7 +181,7 @@ export default function Vehicle() {
 
     async function updateData() {
       let info = await fetchData();
-      const { rocketOrDragonInfo, numberOfLaunhes } = info;
+      const { rocketOrDragonInfo, numberOfLaunches } = info;
       if (name === 'dragon2') {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
@@ -210,7 +210,7 @@ export default function Vehicle() {
             .toUpperCase(),
           engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
           engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
-          numberOfLaunhes: numberOfLaunhes,
+          numberOfLaunches: numberOfLaunches,
         };
         setData(dataObj);
       } else {
@@ -228,7 +228,7 @@ export default function Vehicle() {
           engineNumber: rocketOrDragonInfo.engines.number,
           engineType: rocketOrDragonInfo.engines.type.toUpperCase(),
           costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000} m`,
-          numberOfLaunhes: numberOfLaunhes,
+          numberOfLaunches: numberOfLaunches,
         };
         setData(dataObj);
       }
@@ -362,13 +362,13 @@ export default function Vehicle() {
                     rowType='basic'
                     leftCol='TOTAL LAUNCHES'
                     right={
-                      data.numberOfLaunhes === 0
+                      data.numberOfLaunches === 0
                         ? 'NO LAUNCHES'
-                        : data.numberOfLaunhes
+                        : data.numberOfLaunches
                     }
                   />
 
-                  {data.numberOfLaunhes !== 0 ? (
+                  {data.numberOfLaunches !== 0 ? (
                     <div className='buttonsRow'>
                       <div className='button'>
                         <Button

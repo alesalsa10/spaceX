@@ -96,14 +96,6 @@ export const getLaunchByDate = async (id, order) => {
   }
 };
 
-export const getLaunchById = async (id) => {
-  try {
-    const response = await axios.get(`${baseURL}/launches/${id}`);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const launchById = async (launchId) => {
   try {
