@@ -27,7 +27,7 @@ export default function Missions() {
     launchPadName: '',
     outcomeName: '',
   });
-  const [pageNumber, setPageNumber] = useState(0);
+  const [slideNumber, setslideNumber] = useState(0);
   const [sliderClass, setSliderClass] = useState(0);
   const [totalLaunches, setTotalLaunches] = useState();
   const [successfulLandings, setSuccessFulLandings] = useState();
@@ -35,8 +35,10 @@ export default function Missions() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [launchId, setLaunchId] = useState();
   const [launchInfo, setLaunchInfo] = useState();
-  const [modalPageNumber, setModalPageNumer] = useState(1);
+  const [modalslideNumber, setModalPageNumer] = useState(1);
   const [modalSlide, setModalSlide] = useState(0);
+  const [chunckNumber, setChunckNumber] = useState(0);
+  const [circleChunks, setCircleChunks] = useState();
 
   const openModal = (e) => {
     setLaunchId(e.currentTarget.id);
@@ -52,7 +54,7 @@ export default function Missions() {
 
   const handleModalArrowClicks = (e) => {
     setModalSlide('fadeSlide');
-    if (modalPageNumber === 1) {
+    if (modalslideNumber === 1) {
       setModalPageNumer(2);
     } else {
       setModalPageNumer(1);
@@ -129,13 +131,13 @@ export default function Missions() {
     setIsFilterOpen(false);
   };
 
-  const splitArrray = (arr) => {
+  const splitArrray = (arr, length) => {
     let newArray = [];
-    if (arr.length <= 8) {
+    if (arr.length <= length) {
       newArray[0] = arr.slice(0, arr.length);
     } else {
-      for (let i = 0; i <= arr.length; i += 8) {
-        newArray.push(arr.slice(i, i + 8));
+      for (let i = 0; i <= arr.length; i += length) {
+        newArray.push(arr.slice(i, i + length));
       }
     }
     if (newArray[newArray.length - 1].length === 0) {
@@ -146,7 +148,7 @@ export default function Missions() {
 
   const handleCirclePageClick = (e) => {
     setSliderClass('fadeSlide');
-    setPageNumber(parseInt(e.target.id));
+    setslideNumber(parseInt(e.target.id));
   };
 
   const clearAllfilters = () => {
@@ -173,7 +175,6 @@ export default function Missions() {
       if (launchId !== undefined) {
         const launch = await launchById(launchId);
         setLaunchInfo(launch);
-        console.log(launch);
       }
     }
     fetchData();
@@ -193,88 +194,6 @@ export default function Missions() {
         filterValues.outcome
       );
 
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-      allLaunches.push(allLaunches[0]);
-
       setTotalLaunches(allLaunches.length);
 
       let count = 0;
@@ -293,8 +212,17 @@ export default function Missions() {
       setReusedFlights(reusedCount);
       setSuccessFulLandings(count);
 
-      let launches = splitArrray(allLaunches);
+      let launches = splitArrray(allLaunches, 8);
       setLaunches(launches);
+
+      let circlesArray = new Array(allLaunches.length);
+
+      for (let i = 0; i < circlesArray.length; i++) {
+        circlesArray[i] = i;
+      }
+
+      let formattedCirclesArray = splitArrray(circlesArray, 15);
+      setCircleChunks(formattedCirclesArray);
     }
     fetchData();
   }, [filterValues]);
@@ -303,9 +231,27 @@ export default function Missions() {
     setSliderClass('fadeSlide');
     let id = e.target.id;
     if (id === 'next') {
-      setPageNumber(pageNumber + 1);
+      if (
+        slideNumber ===
+        parseInt(e.currentTarget.parentNode.parentNode.children[1].lastChild.id)
+      ) {
+        setChunckNumber(chunckNumber + 1);
+        setslideNumber(slideNumber + 1);
+      } else {
+        setslideNumber(slideNumber + 1);
+      }
     } else {
-      setPageNumber(pageNumber - 1);
+      if (
+        slideNumber ===
+        parseInt(
+          e.currentTarget.parentNode.parentNode.children[1].firstChild.id
+        )
+      ) {
+        setChunckNumber(chunckNumber - 1);
+        setslideNumber(slideNumber - 1);
+      } else {
+        setslideNumber(slideNumber - 1);
+      }
     }
   };
 
@@ -315,7 +261,7 @@ export default function Missions() {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         launchInfo={launchInfo}
-        modalPageNumber={modalPageNumber}
+        modalPageNumber={modalslideNumber}
         modalSlide={modalSlide}
         options={options}
         handleModalArrowClicks={handleModalArrowClicks}
@@ -364,7 +310,7 @@ export default function Missions() {
           launches === 'loading' ? 'loadingContainer' : 'allMissionsContainer'
         }`}
       >
-        {launches === 'loading' ? (
+        {launches === 'loading' || circleChunks === undefined ? (
           <div className='spinner'>
             <Loader type='TailSpin' color='#005288' height={100} width={100} />
           </div>
@@ -539,7 +485,7 @@ export default function Missions() {
             <div className='mainInfo'>
               <div className='selectorCol'>
                 <div className='upArrowContainer'>
-                  {launches.length === 1 || pageNumber === 0 ? (
+                  {launches.length === 1 || slideNumber === 0 ? (
                     <div className='upArrow disabledUpArrow' id={'back'}></div>
                   ) : (
                     <div
@@ -551,13 +497,13 @@ export default function Missions() {
                 </div>
 
                 <div className='circlesCont'>
-                  {launches.map((launch, index) => (
+                  {circleChunks[chunckNumber].map((circle, index) => (
                     <div
                       className={`${'circle'} ${
-                        index === pageNumber ? 'selectedPage' : ''
-                      }  ${pageNumber - index > 14 ? 'hiddenCircle':''} ${index < pageNumber} `}
+                        circle === slideNumber ? 'selectedPage' : ''
+                      } ${circle > launches.length - 1 ? 'hiddenCircle' : ''}`}
                       key={index}
-                      id={index}
+                      id={circle}
                       onClick={handleCirclePageClick}
                     ></div>
                   ))}
@@ -565,7 +511,7 @@ export default function Missions() {
 
                 <div className='downArrowContainer'>
                   {launches.length === 1 ||
-                  pageNumber === launches.length - 1 ? (
+                  slideNumber === launches.length - 1 ? (
                     <div
                       className='downArrow disabledDownArrow'
                       id={'next'}
@@ -589,16 +535,16 @@ export default function Missions() {
                   <div className='topRowItem customer '>CUSTOMER</div>
                   <div className='topRowItem'>OUTCOME</div>
                 </div>
-                <div className={`${sliderClass}`} key={pageNumber}>
-                  {launches[pageNumber] !== undefined ||
-                  launches[pageNumber].length !== 0 ? (
+                <div className={`${sliderClass}`} key={slideNumber}>
+                  {launches[slideNumber] !== undefined ||
+                  launches[slideNumber].length !== 0 ? (
                     <>
-                      {launches[pageNumber].map((launch, index) => (
+                      {launches[slideNumber].map((launch, index) => (
                         <div
                           className={` ${'informationRow'} ${
                             index % 2 === 0 ? 'darkItem' : ''
                           }  ${
-                            index === launches[pageNumber].length - 1
+                            index === launches[slideNumber].length - 1
                               ? 'lastItem'
                               : ''
                           } `}
