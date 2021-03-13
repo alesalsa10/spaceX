@@ -125,6 +125,7 @@ export default function Missions() {
       });
     }
     setLaunches('loading');
+    setCircleChunks()
     setIsLaunchSite(false);
     setIsVehicleFilter(false);
     setIsOutcome(false);
@@ -537,7 +538,7 @@ export default function Missions() {
                   <div className='topRowItem'>OUTCOME</div>
                 </div>
                 <div className={`${sliderClass}`} key={slideNumber}>
-                  {launches[slideNumber] !== undefined ||
+                  { launches !== undefined || launches[slideNumber] !== undefined ||
                   launches[slideNumber].length !== 0 ? (
                     <>
                       {launches[slideNumber].map((launch, index) => (
