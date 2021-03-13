@@ -153,6 +153,7 @@ export default function Missions() {
 
   const clearAllfilters = () => {
     setLaunches('loading');
+    setCircleChunks()
     setFilterValues({
       rocketId: '',
       launchPadId: '',
