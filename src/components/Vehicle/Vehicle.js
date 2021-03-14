@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import VehicleModalContainer from '../VehicleModalContainer/VehicleModalContainer';
 import VehicleRow from '../VehicleRow/VehicleRow';
+import NotFound from '../NotFound/NotFound';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
@@ -9,7 +10,7 @@ import {
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
   getLaunchByDate,
-  launchById
+  launchById,
 } from '../../Data/fetchData';
 import Button from '../Button/Button';
 import Dragon from '../../images/dragon2.png';
@@ -169,6 +170,8 @@ export default function Vehicle() {
             return responseObj;
           }
         }
+      } else {
+        return 'Not found';
       }
     }
 
@@ -213,7 +216,11 @@ export default function Vehicle() {
           numberOfLaunches: numberOfLaunches,
         };
         setData(dataObj);
-      } else {
+      } else if (
+        name === 'falconheavy' ||
+        name === 'falcon9' ||
+        name === 'starship'
+      ) {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
           metricHeight: rocketOrDragonInfo.height.meters,
@@ -231,6 +238,8 @@ export default function Vehicle() {
           numberOfLaunches: numberOfLaunches,
         };
         setData(dataObj);
+      } else {
+        setData('Not found');
       }
     }
 
@@ -246,7 +255,9 @@ export default function Vehicle() {
         rocketId={rocketId}
       />
 
-      {data !== undefined ? (
+      {data === 'Not found' ? (
+        <NotFound />
+      ) : data !== undefined ? (
         <div className='vehicleContainer' key={name}>
           <div className='leftCol '>
             <div className='nameSection'>

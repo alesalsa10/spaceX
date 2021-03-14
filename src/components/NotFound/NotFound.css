@@ -4,6 +4,9 @@
     left: 0;
     right: 0;
     color:white;
+    width: fit-content;
+    margin: auto;
+    padding: 1rem;
 }
 
 .errorHomeLink{
