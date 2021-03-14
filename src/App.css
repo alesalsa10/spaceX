@@ -4,12 +4,13 @@
   box-sizing: border-box;
 }
 
-html {
+body {
   height: 100%;
   width: 100%;
   background: url('./images/spacexImage.jpg');
   font-family: 'Roboto', sans-serif;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   background-position: center center;
 }
