@@ -30,6 +30,7 @@ export default function Vehicle() {
 
   let { name } = useParams();
   const preName = usePrevious(name);
+  let rocketString = 'falcon9 starship falconheavy';
 
   function usePrevious(value) {
     const ref = useRef();
@@ -90,7 +91,7 @@ export default function Vehicle() {
 
   useEffect(() => {
     async function fetchData() {
-      if (name === 'falcon9' || name === 'starship' || name === 'falconheavy') {
+      if (rocketString.includes(name)) {
         const allRockets = await getAllRocketOrDragons('rockets');
         for await (let rocket of allRockets) {
           if (name === 'falcon9' && rocket.name === 'Falcon 9') {
@@ -216,11 +217,7 @@ export default function Vehicle() {
           numberOfLaunches: numberOfLaunches,
         };
         setData(dataObj);
-      } else if (
-        name === 'falconheavy' ||
-        name === 'falcon9' ||
-        name === 'starship'
-      ) {
+      } else if (rocketString.includes(name)) {
         let dataObj = {
           name: rocketOrDragonInfo.name.toUpperCase(),
           metricHeight: rocketOrDragonInfo.height.meters,
