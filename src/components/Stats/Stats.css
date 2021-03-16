@@ -1,0 +1,8 @@
+.chartContainer {
+  width: 60%;
+  height: 600px;
+  margin: auto;
+  margin-top: 150px;
+  background-color: rgba(0,0,0,0.4);
+  padding: 1rem;
+}

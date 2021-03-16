@@ -195,7 +195,6 @@ export default function Vehicle() {
           totalMetricMass: rocketOrDragonInfo.dry_mass_kg,
           totalImperialMass: rocketOrDragonInfo.dry_mass_lb,
           metricLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.kg,
-
           imperialLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.lb,
           metricLaunchPayloadVol:
             rocketOrDragonInfo.launch_payload_vol.cubic_meters,

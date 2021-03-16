@@ -96,7 +96,6 @@ export const getLaunchByDate = async (id, order) => {
   }
 };
 
-
 export const launchById = async (launchId) => {
   try {
     const response = await axios.post(`${baseURL}/launches/query`, {
@@ -142,10 +141,12 @@ export const getAllLaunchpads = async () => {
   }
 };
 
-export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
-  let queryObject = {
+export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
+  let queryObject = !all ? { upcoming: false } : {};
+
+  /* let queryObject = {
     upcoming: false,
-  };
+  }; */
 
   if (rocketId !== '') {
     //rocket, launchpad, and outcome
@@ -221,19 +222,38 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome) => {
   }
 };
 
+/* export const allLaunches = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/launches/query`, {
+      options:{
+        populate: ['rocket', 'launchpad']
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}; */
+
 export const getAllStarlink = async () => {
-  try{
+  try {
     const response = await axios.get(`${baseURL}/starlink`);
 
     const filteredResults = response.data
       .filter(
         (starlink) => starlink.longitude !== null || starlink.latitude !== null
       )
-      .map((starlink,index) => ({ ...starlink,  color: 'white', pointAlt: '0.001', pointRadius: '0.40', label: starlink.spaceTrack.OBJECT_NAME, index: index}));
-    
-    return filteredResults
-  } 
-  catch(error){
-    console.log(error)
+      .map((starlink, index) => ({
+        ...starlink,
+        color: 'white',
+        pointAlt: '0.001',
+        pointRadius: '0.40',
+        label: starlink.spaceTrack.OBJECT_NAME,
+        index: index,
+      }));
+
+    return filteredResults;
+  } catch (error) {
+    console.log(error);
   }
-}
+};

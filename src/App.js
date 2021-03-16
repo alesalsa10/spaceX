@@ -6,6 +6,7 @@ import Vehicle from './components/Vehicle/Vehicle';
 import Missions from './components/Missions/Missions';
 import NotFound from './components/NotFound/NotFound';
 import StarLink from './components/Starlink/StarLink';
+import Stats from './components/Stats/Stats';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path='/' component={LandingPage} />
           <Route path='/vehicles/:name' component={Vehicle} />
           <Route path='/missions' component={Missions} />
+          <Route path='/stats' component={Stats} />
           <Route path='/starlink' component={StarLink}></Route>
           <Route component={NotFound} />
         </Switch>
