@@ -1,12 +1,14 @@
 export const pieChartDataFormatter = (data, allRockets) => {
   const options = {
     scales: {
-      
       maintainAspectRatio: false,
     },
     legend: {
       display: true,
       position: 'bottom',
+      labels: {
+        fontColor: 'white',
+      },
     },
   };
 

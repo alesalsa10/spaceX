@@ -31,3 +31,9 @@
   text-decoration-color: white;
   text-decoration-thickness: 2px;
 }
+
+.chartSpinner{
+  padding-top: 150px;
+  text-align: center;
+  margin: auto;
+}

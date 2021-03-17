@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { getAllLaunches } from '../../Data/fetchData';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { chartDataFormatter } from './Charts/yearChart';
-import {pieChartDataFormatter} from './Charts/rocketChart';
+import { pieChartDataFormatter } from './Charts/rocketChart';
+import Loader from 'react-loader-spinner';
+
 
 export default function Stats() {
   //need to get launch history(per year, rocket, launchpad, success rate)
@@ -12,6 +14,8 @@ export default function Stats() {
   const [options, setOptions] = useState();
 
   const handleChartFilterClick = (e) => {
+    setGraphData()
+    setOptions()
     setGraphFilter(e.currentTarget.id);
   };
 
@@ -55,7 +59,7 @@ export default function Stats() {
   }, [graphFilter]);
   return (
     <>
-      {graphData !== undefined ? (
+      {graphData !== undefined && options !== undefined ? (
         <>
           <div className='chartHeader'>
             <h1>LAUNCH HISTORY - {graphFilter}</h1>
@@ -106,7 +110,9 @@ export default function Stats() {
           </div>
         </>
       ) : (
-        ''
+        <div className='chartSpinner'>
+          <Loader type='TailSpin' color='#005288' height={100} width={100} />
+        </div>
       )}
     </>
   );

@@ -29,8 +29,10 @@ export const chartDataFormatter = (data, years) => {
     legend: {
       display: true,
       position: 'bottom',
+      labels: {
+        fontColor: 'white',
+      },
     },
-    
   };
 
   const formattedData = {
