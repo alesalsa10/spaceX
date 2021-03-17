@@ -1,11 +1,9 @@
 .navBarContainer {
   color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 40%;
+  display: flex;
   align-items:center;
   justify-items: center;
   justify-content: space-between;
-  /* padding: 0.5rem; */
   position: fixed;
   top: 0;
   left: 0;
@@ -60,13 +58,7 @@ a.link:hover:before {
 }
 
 
-@media only screen and (max-width: 1600px) {
-  .navBarContainer {
-    grid-template-columns: 1fr 0.8fr 1.2fr 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1050) {
   .navBarContainer {
     grid-template-columns: repeat(2, 1fr);
   }

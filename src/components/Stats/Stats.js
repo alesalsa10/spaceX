@@ -4,18 +4,21 @@ import { getAllLaunches } from '../../Data/fetchData';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { chartDataFormatter } from './Charts/yearChart';
 import { pieChartDataFormatter } from './Charts/rocketChart';
+import {launchpadDataFormatter} from './Charts/launchpadChart';
 import Loader from 'react-loader-spinner';
-
 
 export default function Stats() {
   //need to get launch history(per year, rocket, launchpad, success rate)
-  const [graphFilter, setGraphFilter] = useState('PER ROCKET');
-  const [graphData, setGraphData] = useState();
-  const [options, setOptions] = useState();
+  const [graphFilter, setGraphFilter] = useState('PER YEAR');
+  const [yearData, setYearData] = useState();
+  const [yearOptions, setYearOptions] = useState();
+  const [rocketData, setRocketData] = useState();
+  const [doughnutChartOptions, setDoughnutChartOptions] = useState();
+  const [launchpadData, setLaunchpadData] = useState()
+
+
 
   const handleChartFilterClick = (e) => {
-    setGraphData()
-    setOptions()
     setGraphFilter(e.currentTarget.id);
   };
 
@@ -24,42 +27,24 @@ export default function Stats() {
       const allLaunches = await getAllLaunches('', '', '', 'all');
       console.log(allLaunches);
 
-      if (graphFilter === 'PER YEAR') {
-        let years = [];
-        allLaunches.forEach((launch) => {
-          if (!years.includes(new Date(launch.date_local).getFullYear())) {
-            years.push(new Date(launch.date_local).getFullYear());
-          }
-        });
+      const yearData = chartDataFormatter(allLaunches);
+      const { formattedData, options } = yearData;
+      setYearData(formattedData);
+      setYearOptions(options);
 
-        const data = chartDataFormatter(allLaunches, years);
-        const { formattedData, options } = data;
-        setGraphData(formattedData);
-        setOptions(options);
+      const rocketData = pieChartDataFormatter(allLaunches);
+      const { formattedRocketData, doughnutChartOptions } = rocketData;
+      setRocketData(formattedRocketData);
+      setDoughnutChartOptions(doughnutChartOptions);
 
-      } else if (graphFilter === 'PER ROCKET'){
-        let allRockets = [];
-        allLaunches.forEach(launch => {
-          if(!allRockets.includes(launch.rocket.name)){
-            allRockets.push(launch.rocket.name)
-          }
-        });
-
-        console.log(allRockets)
-
-        const data = pieChartDataFormatter(allLaunches, allRockets);
-
-        const {formattedData, options} = data;
-        console.log(formattedData)
-        setGraphData(formattedData);
-        setOptions(options)
-      }
+      const launchpadData = launchpadDataFormatter(allLaunches)
+      setLaunchpadData(launchpadData)
     };
     fetchAllLaunches();
-  }, [graphFilter]);
+  }, []);
   return (
     <>
-      {graphData !== undefined && options !== undefined ? (
+      {yearData !== undefined && yearOptions !== undefined ? (
         <>
           <div className='chartHeader'>
             <h1>LAUNCH HISTORY - {graphFilter}</h1>
@@ -101,11 +86,19 @@ export default function Stats() {
               </div>
             </div>
             {graphFilter === 'PER YEAR' ? (
-              <Bar data={graphData} options={options} />
+              <Bar data={yearData} options={yearOptions} key={graphFilter} />
             ) : graphFilter === 'PER ROCKET' ? (
-              <Doughnut data={graphData} options={options} />
+              <Doughnut
+                data={rocketData}
+                options={doughnutChartOptions}
+                key={graphFilter}
+              />
             ) : (
-              ''
+              <Doughnut
+                data={launchpadData}
+                options={doughnutChartOptions}
+                key={graphFilter}
+              />
             )}
           </div>
         </>

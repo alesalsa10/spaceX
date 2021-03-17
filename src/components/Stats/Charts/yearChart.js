@@ -1,4 +1,10 @@
-export const chartDataFormatter = (data, years) => {
+export const chartDataFormatter = (data) => {
+  let years = [];
+  data.forEach((launch) => {
+    if (!years.includes(new Date(launch.date_local).getFullYear())) {
+      years.push(new Date(launch.date_local).getFullYear());
+    }
+  });
   const options = {
     scales: {
       xAxes: [

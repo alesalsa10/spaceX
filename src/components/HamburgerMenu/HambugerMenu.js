@@ -61,12 +61,11 @@ const HambugerMenu = () => {
       >
         DRAGON 2
       </Link>
-      <Link
-        className='menu-item links'
-        to='/starlink'
-        onClick={handleOnClose}
-      >
+      <Link className='menu-item links' to='/starlink' onClick={handleOnClose}>
         STARLINK
+      </Link>
+      <Link className='menu-item links' to='/stats' onClick={handleOnClose}>
+        STATS
       </Link>
     </Menu>
   );

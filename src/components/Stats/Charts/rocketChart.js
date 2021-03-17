@@ -1,7 +1,15 @@
-export const pieChartDataFormatter = (data, allRockets) => {
-  const options = {
+export const pieChartDataFormatter = (data) => {
+
+  let allRockets = [];
+  data.forEach((launch) => {
+    if (!allRockets.includes(launch.rocket.name)) {
+      allRockets.push(launch.rocket.name);
+    }
+  });
+
+  const doughnutChartOptions = {
     scales: {
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
     },
     legend: {
       display: true,
@@ -29,17 +37,14 @@ export const pieChartDataFormatter = (data, allRockets) => {
     ).length
   );
 
-  console.log(dataSetData)
-
-  const formattedData = {
+  const formattedRocketData = {
     labels: allRockets,
     datasets: [
       {
-        
-        backgroundColor: ['#003f5c', '#444e86', '#955196'],
-        data: dataSetData
+        backgroundColor: ['#003f5c', '#bc5090', '#ffa600'],
+        data: dataSetData,
       },
     ],
   };
-  return { formattedData, options };
+  return { formattedRocketData, doughnutChartOptions };
 };
