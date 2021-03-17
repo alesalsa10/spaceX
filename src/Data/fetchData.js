@@ -222,18 +222,7 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
   }
 };
 
-/* export const allLaunches = async () => {
-  try {
-    const response = await axios.get(`${baseURL}/launches/query`, {
-      options:{
-        populate: ['rocket', 'launchpad']
-      }
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-}; */
+
 
 export const getAllStarlink = async () => {
   try {
