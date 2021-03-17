@@ -1,8 +1,33 @@
 .chartContainer {
   width: 60%;
-  height: 600px;
+  height: auto;
   margin: auto;
-  margin-top: 150px;
+  margin-top: 50px;
   background-color: rgba(0,0,0,0.4);
   padding: 1rem;
+}
+
+.chartHeader{
+  margin-top: 100px;
+  color:white;
+  text-align: center;
+}
+
+.chartFilterDiv{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color:white;
+  width: 50%;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chartRow{
+  cursor: pointer;
+}
+
+.selectedChartRow{
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-decoration-thickness: 2px;
 }
