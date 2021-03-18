@@ -1,39 +1,76 @@
 .chartContainer {
-  width: 60%;
-  height: auto;
+  width: 70%;
   margin: auto;
-  margin-top: 50px;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 1rem;
+  position: relative;
+  height: 60vh;
 }
 
-.chartHeader{
+
+.chartHeader {
   margin-top: 100px;
-  color:white;
+  color: white;
   text-align: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .chartFilterDiv{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  color:white;
-  width: 50%;
-  margin-bottom: 1rem;
+  color: white;
+  width: fit-content;
   margin-top: 0.5rem;
+  width: 70%;
+  margin: auto;
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
 }
 
-.chartRow{
+
+.chartRow {
   cursor: pointer;
+  margin-left: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
-.selectedChartRow{
+.selectedChartRow {
   text-decoration: underline;
   text-decoration-color: white;
   text-decoration-thickness: 2px;
 }
 
-.chartSpinner{
+.chartSpinner {
   padding-top: 150px;
   text-align: center;
   margin: auto;
 }
+
+@media only screen and (max-width: 800px) {
+  .chartContainer {
+    width: 80%;
+  }
+  .chartFilterDiv{
+    width: 80%;
+  }
+  .chartRow {
+    font-size: small;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .chartContainer {
+    width: 95%;
+    height: 50vh;
+  }
+  .chartFilterDiv{
+    width: 95%;
+  }
+  .chartHeader{
+    font-size: 1rem;
+  }
+}
+
+

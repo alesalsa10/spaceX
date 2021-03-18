@@ -31,6 +31,7 @@ export const chartDataFormatter = (data) => {
         },
       ],
       maintainAspectRatio: false,
+      
     },
     legend: {
       display: true,

@@ -1,11 +1,13 @@
 import './Stats.css';
 import React, { useState, useEffect } from 'react';
 import { getAllLaunches } from '../../Data/fetchData';
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut, Bar, defaults } from 'react-chartjs-2';
 import { chartDataFormatter } from './Charts/yearChart';
 import { pieChartDataFormatter } from './Charts/rocketChart';
-import {launchpadDataFormatter} from './Charts/launchpadChart';
+import { launchpadDataFormatter } from './Charts/launchpadChart';
 import Loader from 'react-loader-spinner';
+
+defaults.global.maintainAspectRatio = false;
 
 export default function Stats() {
   //need to get launch history(per year, rocket, launchpad, success rate)
@@ -14,9 +16,7 @@ export default function Stats() {
   const [yearOptions, setYearOptions] = useState();
   const [rocketData, setRocketData] = useState();
   const [doughnutChartOptions, setDoughnutChartOptions] = useState();
-  const [launchpadData, setLaunchpadData] = useState()
-
-
+  const [launchpadData, setLaunchpadData] = useState();
 
   const handleChartFilterClick = (e) => {
     setGraphFilter(e.currentTarget.id);
@@ -37,8 +37,8 @@ export default function Stats() {
       setRocketData(formattedRocketData);
       setDoughnutChartOptions(doughnutChartOptions);
 
-      const launchpadData = launchpadDataFormatter(allLaunches)
-      setLaunchpadData(launchpadData)
+      const launchpadData = launchpadDataFormatter(allLaunches);
+      setLaunchpadData(launchpadData);
     };
     fetchAllLaunches();
   }, []);
@@ -49,42 +49,43 @@ export default function Stats() {
           <div className='chartHeader'>
             <h1>LAUNCH HISTORY - {graphFilter}</h1>
           </div>
-          <div className='chartContainer'>
-            <div className='chartFilterDiv'>
-              <div className='chartRow'>
-                <h3
-                  className={`${
-                    graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER YEAR'
-                  onClick={handleChartFilterClick}
-                >
-                  PER YEAR
-                </h3>
-              </div>
-              <div className='chartRow'>
-                <h3
-                  className={`${
-                    graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER ROCKET'
-                  onClick={handleChartFilterClick}
-                >
-                  PER ROCKET
-                </h3>
-              </div>
-              <div className='chartRow'>
-                <h3
-                  className={`${
-                    graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER LAUNCHPAD'
-                  onClick={handleChartFilterClick}
-                >
-                  PER LAUNCHPAD
-                </h3>
-              </div>
+
+          <div className='chartFilterDiv'>
+            <div className='chartRow'>
+              <h3
+                className={`${
+                  graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
+                }`}
+                id='PER YEAR'
+                onClick={handleChartFilterClick}
+              >
+                PER YEAR
+              </h3>
             </div>
+            <div className='chartRow'>
+              <h3
+                className={`${
+                  graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
+                }`}
+                id='PER ROCKET'
+                onClick={handleChartFilterClick}
+              >
+                PER ROCKET
+              </h3>
+            </div>
+            <div className='chartRow'>
+              <h3
+                className={`${
+                  graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
+                }`}
+                id='PER LAUNCHPAD'
+                onClick={handleChartFilterClick}
+              >
+                PER LAUNCHPAD
+              </h3>
+            </div>
+          </div>
+          <div className='chartContainer'>
             {graphFilter === 'PER YEAR' ? (
               <Bar data={yearData} options={yearOptions} key={graphFilter} />
             ) : graphFilter === 'PER ROCKET' ? (
@@ -101,6 +102,8 @@ export default function Stats() {
               />
             )}
           </div>
+
+          {/* </div> */}
         </>
       ) : (
         <div className='chartSpinner'>
