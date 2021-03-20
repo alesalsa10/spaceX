@@ -28,8 +28,6 @@ export default function Stats() {
   useEffect(() => {
     const fetchAllLaunches = async () => {
       const allLaunches = await getAllLaunches('', '', '', 'all');
-      console.log(allLaunches);
-
       const yearData = chartDataFormatter(allLaunches);
       const { formattedData, options } = yearData;
       setYearData(formattedData);

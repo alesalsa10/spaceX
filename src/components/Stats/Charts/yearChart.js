@@ -16,6 +16,11 @@ export const chartDataFormatter = (data) => {
           ticks: {
             fontColor: 'white', // this here
           },
+          scaleLabel: {
+            display: true,
+            labelString: 'Year',
+            fontColor: 'white'
+          },
         },
       ],
       yAxes: [
@@ -28,9 +33,13 @@ export const chartDataFormatter = (data) => {
           ticks: {
             fontColor: 'white',
           },
+          scaleLabel: {
+            display: true,
+            labelString: 'Number Of Launches',
+            fontColor: 'white'
+          },
         },
       ],
-      
     },
     legend: {
       display: true,

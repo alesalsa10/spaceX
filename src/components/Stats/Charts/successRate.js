@@ -9,6 +9,11 @@ export const successRateFormatter = (data) => {
           ticks: {
             fontColor: 'white', // this here
           },
+          scaleLabel: {
+            display: true,
+            labelString: 'Launch Number',
+            fontColor: 'white',
+          },
         },
       ],
       yAxes: [
@@ -18,6 +23,11 @@ export const successRateFormatter = (data) => {
             color: 'white',
           },
           ticks: {
+            fontColor: 'white',
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Success Percentage',
             fontColor: 'white',
           },
         },
@@ -36,7 +46,7 @@ export const successRateFormatter = (data) => {
   const pastLaunches = data.filter((item) => !item.upcoming);
   
 
-  const yearLabels = pastLaunches.map((item) => `#${item.flight_number}`);
+  const yearLabels = pastLaunches.map((item) => item.flight_number);
 
   let percentagesArray = [];
   let successCount = 0;
