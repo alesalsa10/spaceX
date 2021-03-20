@@ -6,7 +6,6 @@ export const launchpadDataFormatter = (data) => {
       allLaunchpads.push(launch.launchpad.name);
     }
   });
-  console.log(allLaunchpads);
   let dataSetData = [];
   dataSetData.push(
     data.filter(

@@ -1,10 +1,11 @@
 import './Stats.css';
 import React, { useState, useEffect } from 'react';
 import { getAllLaunches } from '../../Data/fetchData';
-import { Doughnut, Bar, defaults } from 'react-chartjs-2';
+import { Doughnut, Bar, defaults, Line } from 'react-chartjs-2';
 import { chartDataFormatter } from './Charts/yearChart';
 import { pieChartDataFormatter } from './Charts/rocketChart';
 import { launchpadDataFormatter } from './Charts/launchpadChart';
+import { successRateFormatter } from './Charts/successRate';
 import Loader from 'react-loader-spinner';
 
 defaults.global.maintainAspectRatio = false;
@@ -17,6 +18,8 @@ export default function Stats() {
   const [rocketData, setRocketData] = useState();
   const [doughnutChartOptions, setDoughnutChartOptions] = useState();
   const [launchpadData, setLaunchpadData] = useState();
+  const [successData,setSuccessData] = useState();
+  const [lineOptions, setLineOptions] = useState();
 
   const handleChartFilterClick = (e) => {
     setGraphFilter(e.currentTarget.id);
@@ -39,6 +42,11 @@ export default function Stats() {
 
       const launchpadData = launchpadDataFormatter(allLaunches);
       setLaunchpadData(launchpadData);
+
+      const successRate = successRateFormatter(allLaunches);
+      const { formattedSuccessData, lineOptions } = successRate
+      setSuccessData(formattedSuccessData)
+      setLineOptions(lineOptions)
     };
     fetchAllLaunches();
   }, []);
@@ -52,7 +60,7 @@ export default function Stats() {
 
           <div className='chartFilterDiv'>
             <div className='chartRow'>
-              <h3
+              <h5
                 className={`${
                   graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
                 }`}
@@ -60,10 +68,10 @@ export default function Stats() {
                 onClick={handleChartFilterClick}
               >
                 PER YEAR
-              </h3>
+              </h5>
             </div>
             <div className='chartRow'>
-              <h3
+              <h5
                 className={`${
                   graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
                 }`}
@@ -71,10 +79,10 @@ export default function Stats() {
                 onClick={handleChartFilterClick}
               >
                 PER ROCKET
-              </h3>
+              </h5>
             </div>
             <div className='chartRow'>
-              <h3
+              <h5
                 className={`${
                   graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
                 }`}
@@ -82,7 +90,18 @@ export default function Stats() {
                 onClick={handleChartFilterClick}
               >
                 PER LAUNCHPAD
-              </h3>
+              </h5>
+            </div>
+            <div className='chartRow'>
+              <h5
+                className={`${
+                  graphFilter === 'SUCCESS RATE' ? 'selectedChartRow' : ''
+                }`}
+                id='SUCCESS RATE'
+                onClick={handleChartFilterClick}
+              >
+                SUCCESS RATE
+              </h5>
             </div>
           </div>
           <div className='chartContainer'>
@@ -94,16 +113,16 @@ export default function Stats() {
                 options={doughnutChartOptions}
                 key={graphFilter}
               />
-            ) : (
+            ) : graphFilter === 'PER LAUNCHPAD' ? (
               <Doughnut
                 data={launchpadData}
                 options={doughnutChartOptions}
                 key={graphFilter}
               />
+            ) : (
+              <Line  data={successData}  options={lineOptions} key={graphFilter} />
             )}
           </div>
-
-          {/* </div> */}
         </>
       ) : (
         <div className='chartSpinner'>
