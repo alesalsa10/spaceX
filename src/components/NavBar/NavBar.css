@@ -57,6 +57,10 @@ a.link:hover:before {
   width: 100%;
 }
 
+.activeLink{
+  border-bottom: 2px solid white;
+}
+
 
 @media only screen and (max-width: 1050) {
   .navBarContainer {

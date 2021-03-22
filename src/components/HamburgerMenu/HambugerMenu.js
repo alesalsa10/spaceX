@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './HamburgerMenu.css';
 import { stack as Menu } from 'react-burger-menu';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 const HambugerMenu = () => {
@@ -29,44 +29,44 @@ const HambugerMenu = () => {
       right
       outerContainerId={'outer-container'}
     >
-      <Link className='menu-item links' to='/missions' onClick={handleOnClose}>
+      <NavLink className='menu-item links' to='/missions' onClick={handleOnClose} activeClassName='activeLink'>
         MISSIONS
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         className='menu-item links'
         to='/vehicles/falcon9'
-        onClick={handleOnClose}
+        onClick={handleOnClose} activeClassName='activeLink'
       >
         FALCON 9
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         className='menu-item links'
         to='/vehicles/falconheavy'
-        onClick={handleOnClose}
+        onClick={handleOnClose} activeClassName='activeLink'
       >
         FALCON HEAVY
-      </Link>
+      </NavLink>
 
-      <Link
+      <NavLink
         className='menu-item links'
         to='/vehicles/starship'
-        onClick={handleOnClose}
+        onClick={handleOnClose} activeClassName='activeLink'
       >
         STARSHIP
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         className='menu-item links'
         to='/vehicles/dragon2'
-        onClick={handleOnClose}
+        onClick={handleOnClose} activeClassName='activeLink'
       >
         DRAGON 2
-      </Link>
-      <Link className='menu-item links' to='/starlink' onClick={handleOnClose}>
+      </NavLink>
+      <NavLink className='menu-item links' to='/starlink' onClick={handleOnClose} activeClassName='activeLink'>
         STARLINK
-      </Link>
-      <Link className='menu-item links' to='/stats' onClick={handleOnClose}>
+      </NavLink>
+      <NavLink className='menu-item links' to='/stats' onClick={handleOnClose} activeClassName='activeLink'>
         STATS
-      </Link>
+      </NavLink>
     </Menu>
   );
 };

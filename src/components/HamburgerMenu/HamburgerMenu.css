@@ -82,3 +82,7 @@ a.links {
 a.links:focus {
   outline: none;
 }
+
+.activeLink{
+  border-bottom: 2px solid white;
+}

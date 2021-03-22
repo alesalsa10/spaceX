@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './NavBar.css';
-import Button from '../Button/Button';
 import HambugerMenu from '../HamburgerMenu/HambugerMenu';
 
 export default function NavBar() {
@@ -25,7 +24,7 @@ export default function NavBar() {
   return (
     <nav className='navBarContainer'>
       <div className='logo'>
-        <Link to='/'>
+        <NavLink to='/'>
           <svg
             enableBackground='new 0 0 331.644 40.825'
             height='40.825'
@@ -48,7 +47,7 @@ export default function NavBar() {
               fill='#a7a9ac'
             />
           </svg>
-        </Link>
+        </NavLink>
       </div>
       {windowSize <= 1050 ? (
         <div className='sidebar'>
@@ -57,40 +56,40 @@ export default function NavBar() {
       ) : (
         <>
           <div className='falcon9'>
-            <Link to='/vehicles/falcon9' className='link'>
+            <NavLink to='/vehicles/falcon9' className='link' activeClassName='activeLink' >
               FALCON 9
-            </Link>
+            </NavLink>
           </div>
           <div className='falconHeavy'>
-            <Link to='/vehicles/falconheavy' className='link'>
+            <NavLink to='/vehicles/falconheavy' className='link' activeClassName='activeLink' >
               FALCON HEAVY
-            </Link>
+            </NavLink>
           </div>
 
           <div className='starship'>
-            <Link to='/vehicles/starship' className='link'>
+            <NavLink to='/vehicles/starship' className='link' activeClassName='activeLink' >
               STARSHIP
-            </Link>
+            </NavLink>
           </div>
           <div className='dragon'>
-            <Link to='/vehicles/dragon2' className='link'>
+            <NavLink to='/vehicles/dragon2' className='link' activeClassName='activeLink' >
               DRAGON 2
-            </Link>
+            </NavLink>
           </div>
           <div className='starlink'>
-            <Link to='/starlink' className='link'>
+            <NavLink to='/starlink' className='link' activeClassName='activeLink' >
               STARLINK
-            </Link>
+            </NavLink>
           </div>
           <div className='stats'>
-            <Link to='/stats' className='link'>
+            <NavLink to='/stats' className='link' activeClassName='activeLink' >
               STATS
-            </Link>
+            </NavLink>
           </div>
-          <div className='missionsButtonDiv'>
-            <Link to='/missions'>
-              <Button text={'MISSIONS'} color={'blue'} />
-            </Link>
+          <div className='missions'>
+            <NavLink to='/missions'  className='link' activeClassName='activeLink' >
+              MISSIONS
+            </NavLink>
           </div>
         </>
       )}

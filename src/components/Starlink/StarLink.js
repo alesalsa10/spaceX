@@ -13,7 +13,6 @@ export default function StarLink() {
     async function fetchData() {
       let response = await getAllStarlink();
 
-      console.log(response);
       setStarlinkCount(response.length);
       setAllStarlink(response);
     }
@@ -23,7 +22,6 @@ export default function StarLink() {
   const handlePointClick = (e) => {
     setStarlinkIndex(e.index);
     setIsOpenStarlink(true);
-    console.log(e);
   };
 
   const closeMoreInfo = () =>{
