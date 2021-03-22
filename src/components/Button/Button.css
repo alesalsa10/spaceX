@@ -5,7 +5,6 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 0% 100%;
-
   width: 140px;
   height: 40px;
   line-height: 40px;
@@ -45,8 +44,10 @@
 @media only screen and (max-width: 649px) {
   .missionButton {
     width: 120px;
-    background-color: #005288;
+    background-color: #005288 !important;
   }
+
+
   #vehicle {
     width: 140px;
   }
@@ -72,5 +73,3 @@
     font-size: xx-small;
   }
 }
-
-

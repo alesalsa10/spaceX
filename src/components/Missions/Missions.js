@@ -39,6 +39,7 @@ export default function Missions() {
   const [modalSlide, setModalSlide] = useState(0);
   const [chunckNumber, setChunckNumber] = useState(0);
   const [circleChunks, setCircleChunks] = useState();
+  const [isFilterBlue, setIsFilterBlue] = useState(false);
 
   const openModal = (e) => {
     setLaunchId(e.currentTarget.id);
@@ -71,6 +72,7 @@ export default function Missions() {
     setIsVehicleFilter(false);
     setIsOutcome(false);
     setIsLaunchSite(false);
+    setIsFilterBlue(!isFilterBlue)
   };
 
   const handleFilterParameter = (e) => {
@@ -342,6 +344,7 @@ export default function Missions() {
                     onClick={handleOpenFilter}
                     className={'button'}
                     color={'blue'}
+                    inlineColor={isFilterBlue? '#005288': 'transparent'}
                   />
                 </div>
                 {filterValues.rocketName !== '' ? (
