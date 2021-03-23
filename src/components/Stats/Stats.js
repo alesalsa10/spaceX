@@ -42,7 +42,7 @@ export default function Stats() {
       setLaunchpadData(launchpadData);
 
       const successRate = successRateFormatter(allLaunches);
-      const { formattedSuccessData, lineOptions } = successRate
+      const { formattedSuccessData, lineOptions } = successRate;
       setSuccessData(formattedSuccessData)
       setLineOptions(lineOptions)
     };

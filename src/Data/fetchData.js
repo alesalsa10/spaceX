@@ -144,9 +144,6 @@ export const getAllLaunchpads = async () => {
 export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
   let queryObject = !all ? { upcoming: false } : {};
 
-  /* let queryObject = {
-    upcoming: false,
-  }; */
 
   if (rocketId !== '') {
     //rocket, launchpad, and outcome
@@ -216,13 +213,15 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
         populate: ['rocket', 'payloads', 'launchpad'],
       },
     });
-    return response.data.docs;
+
+    let sortedLaunches = response.data.docs.sort(
+      (a, b) => a.flight_number - b.flight_number
+    );
+    return sortedLaunches;
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 export const getAllStarlink = async () => {
   try {

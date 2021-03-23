@@ -56,39 +56,63 @@ export default function NavBar() {
       ) : (
         <>
           <div className='falcon9'>
-            <NavLink to='/vehicles/falcon9' className='link' activeClassName='activeLink' >
+            <NavLink
+              to='/vehicles/falcon9'
+              className='link'
+              activeClassName='activeLink'
+            >
               FALCON 9
             </NavLink>
           </div>
           <div className='falconHeavy'>
-            <NavLink to='/vehicles/falconheavy' className='link' activeClassName='activeLink' >
+            <NavLink
+              to='/vehicles/falconheavy'
+              className='link'
+              activeClassName='activeLink'
+            >
               FALCON HEAVY
             </NavLink>
           </div>
 
           <div className='starship'>
-            <NavLink to='/vehicles/starship' className='link' activeClassName='activeLink' >
+            <NavLink
+              to='/vehicles/starship'
+              className='link'
+              activeClassName='activeLink'
+            >
               STARSHIP
             </NavLink>
           </div>
           <div className='dragon'>
-            <NavLink to='/vehicles/dragon2' className='link' activeClassName='activeLink' >
+            <NavLink
+              to='/vehicles/dragon2'
+              className='link'
+              activeClassName='activeLink'
+            >
               DRAGON 2
             </NavLink>
           </div>
           <div className='starlink'>
-            <NavLink to='/starlink' className='link' activeClassName='activeLink' >
+            <NavLink
+              to='/starlink'
+              className='link'
+              activeClassName='activeLink'
+            >
               STARLINK
             </NavLink>
           </div>
-          <div className='stats'>
-            <NavLink to='/stats' className='link' activeClassName='activeLink' >
-              STATS
+          <div className='missions'>
+            <NavLink
+              to='/missions'
+              className='link'
+              activeClassName='activeLink'
+            >
+              MISSIONS
             </NavLink>
           </div>
-          <div className='missions'>
-            <NavLink to='/missions'  className='link' activeClassName='activeLink' >
-              MISSIONS
+          <div className='stats'>
+            <NavLink to='/stats' className='link' activeClassName='activeLink'>
+              STATS
             </NavLink>
           </div>
         </>
