@@ -570,10 +570,10 @@ export default function Missions() {
                               .toUpperCase()}
                           </div>
 
-                          <div className='infoItem launchSite'>
+                          <div className='infoItem'>
                             {launch.launchpad.name.toUpperCase()}
                           </div>
-                          <div className='infoItem'>
+                          <div className='infoItem payload'>
                             {launch.name.toUpperCase()}
                           </div>
                           <div className='infoItem customer'>
