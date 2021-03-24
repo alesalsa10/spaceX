@@ -64,6 +64,12 @@
   font-size: 4rem;
 }
 
+.graphInfo{
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1rem;
+}
+
 @media only screen and (max-width: 800px) {
   .chartContainer {
     width: 80%;

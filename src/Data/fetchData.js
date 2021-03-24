@@ -223,6 +223,8 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
   }
 };
 
+
+
 export const getAllStarlink = async () => {
   try {
     const response = await axios.get(`${baseURL}/starlink`);

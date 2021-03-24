@@ -1,14 +1,17 @@
 import './Stats.css';
 import React, { useState, useEffect } from 'react';
-import CountUp from 'react-countup';
+import LaunchHistoryChart from '../LaunchHistoryChart/LaunchHistoryChart';
+import LandingHistoryChart from '../LandingHistoryChart/LandingHistoryChart';
 import { getAllLaunches } from '../../Data/fetchData';
-import { Doughnut, Bar, defaults, Line } from 'react-chartjs-2';
+import { defaults } from 'react-chartjs-2';
 import { chartDataFormatter } from './Charts/yearChart';
 import { pieChartDataFormatter } from './Charts/rocketChart';
 import { launchpadDataFormatter } from './Charts/launchpadChart';
 import { successRateFormatter } from './Charts/successRate';
 import { calculateBoostersLanded } from './Charts/boostersLanded';
 import { formatLandingHistoryData } from './Charts/landingHistory';
+import { formatFairingRecovery } from './Charts/fairingsRecovery';
+import { getHeaviestLanded } from './Charts/heaviestPayloadLanded';
 import Loader from 'react-loader-spinner';
 
 defaults.global.maintainAspectRatio = false;
@@ -26,7 +29,10 @@ export default function Stats() {
   const [lineOptions, setLineOptions] = useState();
   const [boostersLanded, setBoostersLanded] = useState();
   const [landingHistory, setLandingHistory] = useState();
-  const[landingHistoryOptions, setLandingHistoryOptions] = useState()
+  const [landingHistoryOptions, setLandingHistoryOptions] = useState();
+  const [fairingsRecovery, setFairingsRecovery] = useState();
+  const [fairingsRecoveryOptions, setFairingsRecoveryOptions] = useState();
+  const [heaviestLanded, setHeaviestLanded] = useState();
 
   const handleChartFilterClick = (e) => {
     setGraphFilter(e.currentTarget.id);
@@ -44,11 +50,6 @@ export default function Stats() {
       const { formattedData, options } = yearData;
       setYearData(formattedData);
       setYearOptions(options);
-
-      console.log(options);
-      let landingHistoryOptions = options;
-      landingHistoryOptions.scales.yAxes[0].scaleLabel.labelString = 'Number of Landings';
-      setLandingHistoryOptions(landingHistoryOptions)
 
       const rocketData = pieChartDataFormatter(allLaunches);
       const { formattedRocketData, doughnutChartOptions } = rocketData;
@@ -68,6 +69,20 @@ export default function Stats() {
 
       const landingHistory = formatLandingHistoryData(allLaunches);
       setLandingHistory(landingHistory);
+      let landingHistoryOptions = options;
+      landingHistoryOptions.scales.yAxes[0].scaleLabel.labelString =
+        'Number of Landings';
+      setLandingHistoryOptions(landingHistoryOptions);
+
+      const fairingsRecovery = formatFairingRecovery(allLaunches);
+      setFairingsRecovery(fairingsRecovery);
+      let fairingsOptions = options;
+      fairingsOptions.scales.yAxes[0].scaleLabel.labelString =
+        'Number of Fairings Recovered';
+      setFairingsRecoveryOptions(fairingsOptions);
+
+      const heaviestLanded = getHeaviestLanded(allLaunches);
+      setHeaviestLanded(heaviestLanded);
     };
     fetchAllLaunches();
   }, []);
@@ -75,159 +90,27 @@ export default function Stats() {
     <>
       {yearData !== undefined && yearOptions !== undefined ? (
         <>
-          <div className='chartsContainer'>
-            <div className='chartHeader'>
-              <h1>LAUNCH HISTORY - {graphFilter}</h1>
-            </div>
-            <div className='chartFilterDiv'>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER YEAR'
-                  onClick={handleChartFilterClick}
-                >
-                  PER YEAR
-                </h5>
-              </div>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER ROCKET'
-                  onClick={handleChartFilterClick}
-                >
-                  PER ROCKET
-                </h5>
-              </div>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
-                  }`}
-                  id='PER LAUNCHPAD'
-                  onClick={handleChartFilterClick}
-                >
-                  PER LAUNCHPAD
-                </h5>
-              </div>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    graphFilter === 'SUCCESS RATE' ? 'selectedChartRow' : ''
-                  }`}
-                  id='SUCCESS RATE'
-                  onClick={handleChartFilterClick}
-                >
-                  SUCCESS RATE
-                </h5>
-              </div>
-            </div>
-            <div className='chartContainer'>
-              {graphFilter === 'PER YEAR' ? (
-                <Bar data={yearData} options={yearOptions} key={graphFilter} />
-              ) : graphFilter === 'PER ROCKET' ? (
-                <Doughnut
-                  data={rocketData}
-                  options={doughnutChartOptions}
-                  key={graphFilter}
-                />
-              ) : graphFilter === 'PER LAUNCHPAD' ? (
-                <Doughnut
-                  data={launchpadData}
-                  options={doughnutChartOptions}
-                  key={graphFilter}
-                />
-              ) : (
-                <Line
-                  data={successData}
-                  options={lineOptions}
-                  key={graphFilter}
-                />
-              )}
-            </div>
-          </div>
-          <div className='chartsContainer'>
-            <div className='chartHeader'>
-              <h1>RECOVERY - {landingFilter}</h1>
-            </div>
-            <div className='chartFilterDiv'>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    landingFilter === 'BOOSTERS LANDED'
-                      ? 'selectedChartRow'
-                      : ''
-                  }`}
-                  id='BOOSTERS LANDED'
-                  onClick={landingHistoryChartClick}
-                >
-                  BOOSTERS LANDED
-                </h5>
-              </div>
-              <div className='chartRow'>
-                <h5
-                  className={`${
-                    landingFilter === 'LANDING HISTORY'
-                      ? 'selectedChartRow'
-                      : ''
-                  }`}
-                  id='LANDING HISTORY'
-                  onClick={landingHistoryChartClick}
-                >
-                  LANDING HISTORY
-                </h5>
-              </div>
-              {/* <div className='chartRow'>
-                <h5
-                  className={`${
-                    landingFilter === 'HEAVIEST' ? 'selectedChartRow' : ''
-                  }`}
-                  id='HEAVIEST'
-                  onClick={landingHistoryChartClick}
-                >
-                  HEAVIEST
-                </h5>
-              </div> */}
-              {/* <div className='chartRow'>
-                <h5
-                  className={`${
-                    landingFilter === 'FAIRINGS RECOVERY'
-                      ? 'selectedChartRow'
-                      : ''
-                  }`}
-                  id='FAIRINGS RECOVERY'
-                  onClick={landingHistoryChartClick}
-                >
-                  FAIRINGS RECOVERY
-                </h5>
-              </div> */}
-            </div>
-            <div className='chartContainer'>
-              {landingFilter === 'BOOSTERS LANDED' ? (
-                <div className='boostersContainer'>
-                  <h1 className='boostersLanded'>
-                    {boostersLanded !== undefined ? (
-                      <CountUp end={boostersLanded} />
-                    ) : (
-                      ''
-                    )}
-                  </h1>
-                  <h1>LANDED</h1>
-                </div>
-              ) : landingFilter === 'LANDING HISTORY' ? (
-                <Bar
-                  data={landingHistory}
-                  options={landingHistoryOptions}
-                  key={landingFilter}
-                />
-              ) : (
-                ''
-              )}
-            </div>
-          </div>
+          <LaunchHistoryChart
+            graphFilter={graphFilter}
+            handleChartFilterClick={handleChartFilterClick}
+            yearData={yearData}
+            yearOptions={yearOptions}
+            rocketData={rocketData}
+            doughnutChartOptions={doughnutChartOptions}
+            launchpadData={launchpadData}
+            successData={successData}
+            lineOptions={lineOptions}
+          />
+          <LandingHistoryChart
+            landingFilter={landingFilter}
+            landingHistoryChartClick={landingHistoryChartClick}
+            boostersLanded={boostersLanded}
+            landingHistory={landingHistory}
+            landingHistoryOptions={landingHistoryOptions}
+            fairingsRecovery={fairingsRecovery}
+            fairingsRecoveryOptions={fairingsRecoveryOptions}
+            heaviestLanded={heaviestLanded}
+          />
         </>
       ) : (
         <div className='chartSpinner'>
