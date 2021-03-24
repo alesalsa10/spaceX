@@ -115,19 +115,6 @@ export const launchById = async (launchId) => {
   }
 };
 
-export const getAllRockets = async () => {
-  try {
-    let rocketNames = [];
-    const response = await axios.get(`${baseURL}/rockets`);
-    response.data.forEach((rocket) => {
-      rocketNames.push({ name: rocket.name.toUpperCase(), id: rocket.id });
-    });
-    return rocketNames;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getAllLaunchpads = async () => {
   try {
     let launchPadArray = [];
@@ -222,8 +209,6 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
     console.log(error);
   }
 };
-
-
 
 export const getAllStarlink = async () => {
   try {

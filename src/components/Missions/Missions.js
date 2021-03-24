@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import './Missions.css';
 import {
-  getAllRockets,
   getAllLaunchpads,
   getAllLaunches,
   launchById,
+  getAllRocketOrDragons,
 } from '../../Data/fetchData';
 import CountUp from 'react-countup';
 import MissionsModalContainer from '../MissionsModalContainer/MissionsModalContainer';
@@ -188,7 +188,7 @@ export default function Missions() {
 
   useEffect(() => {
     async function fetchData() {
-      const rockets = await getAllRockets();
+      const rockets = await getAllRocketOrDragons('rockets');
       setRockets(rockets);
 
       const launchPads = await getAllLaunchpads();
