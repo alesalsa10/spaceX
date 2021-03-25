@@ -1,5 +1,6 @@
 export const getHeaviestLanded = (data) => {
   let heaviest = 0;
+  let missionName;
   for (let i = 0; i < data.length; i++) {
     if (data[i].cores[0].landing_success) {
       let currentWeight = 0;
@@ -7,9 +8,11 @@ export const getHeaviestLanded = (data) => {
         currentWeight += data[i].payloads[j].mass_kg;
         if (currentWeight > heaviest) {
           heaviest = currentWeight;
+          missionName = data[i].name
         }
       }
     }
   }
-  return heaviest;
+  let heaviestObj = {heaviest, missionName}
+  return heaviestObj;
 };

@@ -197,7 +197,7 @@ export const getAllLaunches = async (rocketId, launchPadId, outcome, all) => {
       query: queryObject,
       options: {
         pagination: false,
-        populate: ['rocket', 'payloads', 'launchpad', 'cores.landpad'],
+        populate: ['rocket', 'payloads', 'launchpad', 'cores.landpad', 'cores.core'],
       },
     });
 

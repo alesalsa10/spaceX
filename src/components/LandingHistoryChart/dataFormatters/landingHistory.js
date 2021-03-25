@@ -1,5 +1,51 @@
 export const formatLandingHistoryData = (data) => {
   //["Failure", "Ocean", "ASDS", "RTLS"]
+
+  const options = {
+    scales: {
+      xAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            fontColor: 'white', // this here
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Year',
+            fontColor: 'white',
+          },
+        },
+      ],
+      yAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: true,
+            color: 'white',
+          },
+          ticks: {
+            fontColor: 'white',
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Number Of Landings',
+            fontColor: 'white',
+          },
+        },
+      ],
+    },
+    legend: {
+      display: true,
+      position: 'bottom',
+      labels: {
+        fontColor: 'white',
+      },
+    },
+  };
+
   let dataWithoutUpcoming = data.filter((launch) => !launch.upcoming);
   let years = [];
   dataWithoutUpcoming.forEach((launch) => {
@@ -75,6 +121,6 @@ export const formatLandingHistoryData = (data) => {
     ],
   };
   
-  return landingHistoryData;
+  return {landingHistoryData, options};
 
 };
