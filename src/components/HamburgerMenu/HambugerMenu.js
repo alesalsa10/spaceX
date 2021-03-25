@@ -40,7 +40,7 @@ const HambugerMenu = ({ allRockets, dragon }) => {
           {allRockets.map((rocket) => (
             <NavLink
               className='menu-item links'
-              to={`/vehicles/rocket/${rocket.id}`}
+              to={`/vehicles/${rocket.name.split(' ').join('')}/${rocket.id}`}
               onClick={handleOnClose}
               activeClassName='activeLink'
               key={rocket.id}
@@ -51,7 +51,7 @@ const HambugerMenu = ({ allRockets, dragon }) => {
           {dragon.map((dragon) => (
             <NavLink
               className='menu-item links'
-              to={`/vehicles/dragon/${dragon.id}`}
+              to={`/vehicles/${dragon.name.split(' ').join('')}/${dragon.id}`}
               onClick={handleOnClose}
               activeClassName='activeLink'
               key={dragon.id}

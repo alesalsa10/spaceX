@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import Loader from 'react-loader-spinner';
 
-export default function VehicleModalContainer({modalIsOpen, closeModal, videoId, rocketId}) {
+export default function VehicleModalContainer({modalIsOpen, closeModal, videoId, vehicleId}) {
 
     const customStyles = {
       content: {
@@ -28,7 +28,7 @@ export default function VehicleModalContainer({modalIsOpen, closeModal, videoId,
           className='vehicleModal'
         >
           <>
-            {videoId === undefined || rocketId === undefined ? (
+            {videoId === undefined || vehicleId === undefined ? (
               <div className='spinner'>
                 <Loader
                   type='TailSpin'

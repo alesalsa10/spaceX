@@ -16,7 +16,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path='/' component={LandingPage} />
-          <Route path='/vehicles/:name' component={Vehicle} />
+          <Route path='/vehicles/:name/:id' component={Vehicle} />
           <Route path='/missions' component={Missions} />
           <Route path='/stats' component={Stats} />
           <Route path='/starlink' component={StarLink}></Route>

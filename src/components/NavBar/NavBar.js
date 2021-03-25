@@ -69,14 +69,16 @@ export default function NavBar() {
           </div>
           {windowSize <= 1050 ? (
             <div className='sidebar'>
-              <HambugerMenu allRockets={allRockets} dragon={dragon}/>
+              <HambugerMenu allRockets={allRockets} dragon={dragon} />
             </div>
           ) : (
             <>
               {allRockets.map((rocket) => (
                 <div className='navBarItem' key={rocket.id}>
                   <NavLink
-                    to={`/vehicles/rocket/${rocket.id}`}
+                    to={`/vehicles/${rocket.name.split(' ').join('')}/${
+                      rocket.id
+                    }`}
                     className='link'
                     activeClassName='activeLink'
                   >
@@ -87,7 +89,9 @@ export default function NavBar() {
               {dragon.map((dragon) => (
                 <div className='navBarItem' key={dragon.id}>
                   <NavLink
-                    to={`/vehicles/dragon/${dragon.id}`}
+                    to={`/vehicles/${dragon.name.split(' ').join('')}/${
+                      dragon.id
+                    }`}
                     className='link'
                     activeClassName='activeLink'
                   >

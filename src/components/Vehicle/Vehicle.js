@@ -5,7 +5,6 @@ import NotFound from '../NotFound/NotFound';
 import { useParams } from 'react-router-dom';
 import './Vehicle.css';
 import {
-  getAllRocketOrDragons,
   getRocketOrDragonByID,
   numberOfLaunchesByVehicle,
   getAllDragon2Launches,
@@ -21,7 +20,7 @@ import Starship from '../../images/starship.png';
 export default function Vehicle() {
   const [data, setData] = useState();
   const [pageNumber, setPageNumber] = useState(1);
-  const [rocketId, setRocketId] = useState();
+  const [vehicleId, setVehicleId] = useState();
   const [videoId, setVideoId] = useState();
   const [firstLaunchId, setFirstLaunchId] = useState();
   const [latestLaunchId, setLatestLaunch] = useState();
@@ -29,8 +28,15 @@ export default function Vehicle() {
   const [sliderClass, setSliderClass] = useState('');
 
   let { name } = useParams();
+  let { id } = useParams();
   const preName = usePrevious(name);
-  let rocketString = 'falcon9 starship falconheavy';
+  let allRockets = ['Falcon9', 'FalconHeavy', 'Starship'];
+  let ids = [
+    '5e9d0d95eda69973a809d1ec',
+    '5e9d0d95eda69974db09d1ed',
+    '5e9d0d96eda699382d09d1ee',
+    '5e9d058859b1ffd8e2ad5f90',
+  ];
 
   function usePrevious(value) {
     const ref = useRef();
@@ -62,7 +68,7 @@ export default function Vehicle() {
 
   const handleFirstMission = async (id) => {
     setIsOpen(true);
-    if (name === 'dragon2') {
+    if (name === 'Dragon2') {
       const dragonResponse = await launchById(firstLaunchId);
       let videoId = await dragonResponse[0].links.youtube_id;
       setVideoId(videoId);
@@ -74,7 +80,7 @@ export default function Vehicle() {
 
   const handleLatestMission = async (id) => {
     setIsOpen(true);
-    if (name === 'dragon2') {
+    if (name === 'Dragon2') {
       const dragonResponse = await launchById(latestLaunchId);
       let videoId = await dragonResponse[0].links.youtube_id;
       setVideoId(videoId);
@@ -90,89 +96,51 @@ export default function Vehicle() {
   };
 
   useEffect(() => {
+    setVehicleId(id);
     async function fetchData() {
-      if (rocketString.includes(name)) {
-        const allRockets = await getAllRocketOrDragons('rockets');
-        for await (let rocket of allRockets) {
-          if (name === 'falcon9' && rocket.name === 'Falcon 9') {
-            let id = await rocket.id;
-            setRocketId(id);
-            const response = await getRocketOrDragonByID('rockets', id);
-            const res2 = await numberOfLaunchesByVehicle(id);
-            const responseObj = {
-              rocketOrDragonInfo: response,
-              numberOfLaunches: res2.totalDocs,
-            };
-            return responseObj;
-          } else if (name === 'starship' && rocket.name === 'Starship') {
-            let id = await rocket.id;
-            setRocketId(id);
-            const response = await getRocketOrDragonByID('rockets', id);
-            const res2 = await numberOfLaunchesByVehicle(id);
+      if (allRockets.includes(name) && ids.includes(id)) {
+        const vehicleInfo = await getRocketOrDragonByID('rockets', id);
+        const numberOfLaunches = await numberOfLaunchesByVehicle(id);
+        const responseObj = {
+          rocketOrDragonInfo: vehicleInfo,
+          numberOfLaunches: numberOfLaunches.totalDocs,
+        };
+        return responseObj;
+      } else if (name === 'Dragon2' && ids.includes(id)) {
+        const response = await getRocketOrDragonByID('dragons', id);
+        const res2 = await getAllDragon2Launches();
 
-            const responseObj = {
-              rocketOrDragonInfo: response,
-              numberOfLaunches: res2.totalDocs,
-            };
-            return responseObj;
-          } else if (name === 'falconheavy' && rocket.name === 'Falcon Heavy') {
-            let id = await rocket.id;
-            setRocketId(id);
-            const response = await getRocketOrDragonByID('rockets', id);
-            const res2 = await numberOfLaunchesByVehicle(id);
+        let initialCount = 0;
+        res2.docs.forEach((item) => {
+          initialCount += item.launches.length;
+        });
 
-            const responseObj = {
-              rocketOrDragonInfo: response,
-              numberOfLaunches: res2.totalDocs,
-            };
-
-            return responseObj;
+        let firstLaunchArrayId;
+        for (let i = 0; i < res2.docs.length; i++) {
+          if (
+            res2.docs[i].launches !== undefined ||
+            res2.docs[i].length !== 0
+          ) {
+            firstLaunchArrayId = res2.docs[i].launches[0];
+            break;
           }
         }
-      } else if (name === 'dragon2') {
-        const allDragons = await getAllRocketOrDragons('dragons');
-        for await (let dragon of allDragons) {
-          if (name === 'dragon2' && dragon.name === 'Dragon 2') {
-            let id = await dragon.id;
-            setRocketId(id);
-            const response = await getRocketOrDragonByID('dragons', id);
-            const res2 = await getAllDragon2Launches();
+        setFirstLaunchId(firstLaunchArrayId);
 
-            let initialCount = 0;
-            res2.docs.forEach((item) => {
-              initialCount += item.launches.length;
-            });
-
-            let firstLaunchArrayId;
-            for (let i = 0; i < res2.docs.length; i++) {
-              if (
-                res2.docs[i].launches !== undefined ||
-                res2.docs[i].length !== 0
-              ) {
-                firstLaunchArrayId = res2.docs[i].launches[0];
-                break;
-              }
-            }
-            setFirstLaunchId(firstLaunchArrayId);
-
-            let lastLaunchArrayId;
-            for (let i = res2.docs.length - 1; i >= 0; i--) {
-              if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0) {
-                lastLaunchArrayId = res2.docs[i].launches[0];
-                break;
-              }
-            }
-            setLatestLaunch(lastLaunchArrayId);
-            const responseObj = {
-              rocketOrDragonInfo: response,
-              numberOfLaunches: initialCount,
-            };
-
-            return responseObj;
+        let lastLaunchArrayId;
+        for (let i = res2.docs.length - 1; i >= 0; i--) {
+          if (res2.docs[i].launches !== undefined || res2.docs[i] !== 0) {
+            lastLaunchArrayId = res2.docs[i].launches[0];
+            break;
           }
         }
-      } else {
-        return 'Not found';
+        setLatestLaunch(lastLaunchArrayId);
+        const responseObj = {
+          rocketOrDragonInfo: response,
+          numberOfLaunches: initialCount,
+        };
+
+        return responseObj;
       }
     }
 
@@ -184,63 +152,70 @@ export default function Vehicle() {
     };
 
     async function updateData() {
-      let info = await fetchData();
-      const { rocketOrDragonInfo, numberOfLaunches } = info;
-      if (name === 'dragon2') {
-        let dataObj = {
-          name: rocketOrDragonInfo.name.toUpperCase(),
-          metricHeight: rocketOrDragonInfo.height_w_trunk.meters,
-          imperialHeight: rocketOrDragonInfo.height_w_trunk.feet,
-          diameter: rocketOrDragonInfo.diameter,
-          totalMetricMass: rocketOrDragonInfo.dry_mass_kg,
-          totalImperialMass: rocketOrDragonInfo.dry_mass_lb,
-          metricLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.kg,
-          imperialLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.lb,
-          metricLaunchPayloadVol:
-            rocketOrDragonInfo.launch_payload_vol.cubic_meters,
-          imperialLaunchPayloadVol:
-            rocketOrDragonInfo.launch_payload_vol.cubic_feet,
-          crewCapacity: rocketOrDragonInfo.crew_capacity,
-          metricReturnPayloadMass: rocketOrDragonInfo.return_payload_mass.kg,
-          imperialReturnPayloadMass: rocketOrDragonInfo.return_payload_mass.lb,
-          metricReturnPayloadVol:
-            rocketOrDragonInfo.return_payload_vol.cubic_meters,
-          imperialReturnPayloadVol:
-            rocketOrDragonInfo.return_payload_vol.cubic_feet,
+      if (
+        ids.includes(id) &&
+        (name === 'Dragon2' || allRockets.includes(name))
+      ) {
+        let info = await fetchData();
+        const { rocketOrDragonInfo, numberOfLaunches } = info;
+        if (name === 'Dragon2') {
+          let dataObj = {
+            name: rocketOrDragonInfo.name.toUpperCase(),
+            metricHeight: rocketOrDragonInfo.height_w_trunk.meters,
+            imperialHeight: rocketOrDragonInfo.height_w_trunk.feet,
+            diameter: rocketOrDragonInfo.diameter,
+            totalMetricMass: rocketOrDragonInfo.dry_mass_kg,
+            totalImperialMass: rocketOrDragonInfo.dry_mass_lb,
+            metricLaunchPayloadMass: rocketOrDragonInfo.launch_payload_mass.kg,
+            imperialLaunchPayloadMass:
+              rocketOrDragonInfo.launch_payload_mass.lb,
+            metricLaunchPayloadVol:
+              rocketOrDragonInfo.launch_payload_vol.cubic_meters,
+            imperialLaunchPayloadVol:
+              rocketOrDragonInfo.launch_payload_vol.cubic_feet,
+            crewCapacity: rocketOrDragonInfo.crew_capacity,
+            metricReturnPayloadMass: rocketOrDragonInfo.return_payload_mass.kg,
+            imperialReturnPayloadMass:
+              rocketOrDragonInfo.return_payload_mass.lb,
+            metricReturnPayloadVol:
+              rocketOrDragonInfo.return_payload_vol.cubic_meters,
+            imperialReturnPayloadVol:
+              rocketOrDragonInfo.return_payload_vol.cubic_feet,
 
-          firstLaunch: new Date(rocketOrDragonInfo.first_flight)
-            .toLocaleDateString('en-US', options)
-            .toUpperCase(),
-          engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
-          engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
-          numberOfLaunches: numberOfLaunches,
-        };
-        setData(dataObj);
-      } else if (rocketString.includes(name)) {
-        let dataObj = {
-          name: rocketOrDragonInfo.name.toUpperCase(),
-          metricHeight: rocketOrDragonInfo.height.meters,
-          imperialHeight: rocketOrDragonInfo.height.feet,
-          diameter: rocketOrDragonInfo.diameter,
-          totalMetricMass: rocketOrDragonInfo.mass.kg,
-          totalImperialMass: rocketOrDragonInfo.mass.lb,
-          payloadWeights: rocketOrDragonInfo.payload_weights,
-          firstLaunch: new Date(rocketOrDragonInfo.first_flight)
-            .toLocaleDateString('en-US', options)
-            .toUpperCase(),
-          engineNumber: rocketOrDragonInfo.engines.number,
-          engineType: rocketOrDragonInfo.engines.type.toUpperCase(),
-          costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000} m`,
-          numberOfLaunches: numberOfLaunches,
-        };
-        setData(dataObj);
+            firstLaunch: new Date(rocketOrDragonInfo.first_flight)
+              .toLocaleDateString('en-US', options)
+              .toUpperCase(),
+            engineNumber: `${rocketOrDragonInfo.thrusters[0].amount} + ${rocketOrDragonInfo.thrusters[1].amount}`,
+            engineType: `${rocketOrDragonInfo.thrusters[0].type} + ${rocketOrDragonInfo.thrusters[1].type}`,
+            numberOfLaunches: numberOfLaunches,
+          };
+          setData(dataObj);
+        } else if (allRockets.includes(name)) {
+          let dataObj = {
+            name: rocketOrDragonInfo.name.toUpperCase(),
+            metricHeight: rocketOrDragonInfo.height.meters,
+            imperialHeight: rocketOrDragonInfo.height.feet,
+            diameter: rocketOrDragonInfo.diameter,
+            totalMetricMass: rocketOrDragonInfo.mass.kg,
+            totalImperialMass: rocketOrDragonInfo.mass.lb,
+            payloadWeights: rocketOrDragonInfo.payload_weights,
+            firstLaunch: new Date(rocketOrDragonInfo.first_flight)
+              .toLocaleDateString('en-US', options)
+              .toUpperCase(),
+            engineNumber: rocketOrDragonInfo.engines.number,
+            engineType: rocketOrDragonInfo.engines.type.toUpperCase(),
+            costPerLaunch: `$${rocketOrDragonInfo.cost_per_launch / 1000000} m`,
+            numberOfLaunches: numberOfLaunches,
+          };
+          setData(dataObj);
+        }
       } else {
         setData('Not found');
       }
     }
 
     updateData();
-  }, [name]);
+  }, [name, vehicleId]);
 
   return (
     <>
@@ -248,7 +223,7 @@ export default function Vehicle() {
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         videoId={videoId}
-        rocketId={rocketId}
+        vehicleId={vehicleId}
       />
 
       {data === 'Not found' ? (
@@ -257,7 +232,7 @@ export default function Vehicle() {
         <div className='vehicleContainer' key={name}>
           <div className='leftCol '>
             <div className='nameSection'>
-              <h2 className='vehicleName'>{data.name}</h2>
+              <h2 className='vehicleName'>{data.name.toUpperCase()}</h2>
               <h1 className='overview'>OVERVIEW</h1>
             </div>
             <div
@@ -273,7 +248,6 @@ export default function Vehicle() {
                     metricUnit={'m'}
                     imperialUnit={'ft'}
                   />
-
                   <VehicleRow
                     leftCol={'DIAMETER  '}
                     metric={data.diameter.meters}
@@ -281,26 +255,24 @@ export default function Vehicle() {
                     metricUnit={'m'}
                     imperialUnit={'ft'}
                   />
-
                   <VehicleRow
                     leftCol={
-                      name === 'dragon2' ? 'LAUNCH PAYLOAD MASS' : 'MASS'
+                      name === 'Dragon2' ? 'LAUNCH PAYLOAD MASS' : 'MASS'
                     }
                     metric={
-                      name === 'dragon2'
+                      name === 'Dragon2'
                         ? data.metricLaunchPayloadMass
                         : data.totalMetricMass
                     }
                     imperial={
-                      name === 'dragon2'
+                      name === 'Dragon2'
                         ? data.imperialLaunchPayloadMass
                         : data.totalImperialMass
                     }
                     metricUnit={'kg'}
                     imperialUnit={'lb'}
                   />
-
-                  {name !== 'dragon2' && data.payloadWeights !== undefined ? (
+                  {name !== 'Dragon2' && data.payloadWeights !== undefined ? (
                     data.payloadWeights.map((payload) => (
                       <VehicleRow
                         key={payload.id}
@@ -357,10 +329,10 @@ export default function Vehicle() {
                   <VehicleRow
                     rowType='basic'
                     leftCol={
-                      name === 'dragon2' ? 'CREW CAPACITY' : 'COST PER LAUNCH'
+                      name === 'Dragon2' ? 'CREW CAPACITY' : 'COST PER LAUNCH'
                     }
                     right={
-                      name === 'dragon2'
+                      name === 'Dragon2'
                         ? data.crewCapacity
                         : data.costPerLaunch
                     }
@@ -380,7 +352,7 @@ export default function Vehicle() {
                       <div className='button'>
                         <Button
                           text={'FIRST FLIGHT'}
-                          onClick={() => handleFirstMission(rocketId)}
+                          onClick={() => handleFirstMission(vehicleId)}
                           color={'blue'}
                           id='vehicle'
                         />
@@ -388,7 +360,7 @@ export default function Vehicle() {
                       <div className='button2'>
                         <Button
                           text={'LATEST MISSION'}
-                          onClick={() => handleLatestMission(rocketId)}
+                          onClick={() => handleLatestMission(vehicleId)}
                           color={'blue'}
                           id='vehicle'
                         />
@@ -439,11 +411,11 @@ export default function Vehicle() {
             <img
               className='vehicleImage'
               src={`${
-                name === 'dragon2'
+                name === 'Dragon2'
                   ? Dragon
-                  : name === 'falcon9'
+                  : name === 'Falcon9'
                   ? Falcon9
-                  : name === 'starship'
+                  : name === 'Starship'
                   ? Starship
                   : Falconheavy
               }`}
