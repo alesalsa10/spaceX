@@ -5,6 +5,7 @@ import { formatFairingRecovery } from './dataFormatters/fairingsRecovery';
 import { getHeaviestLanded } from './dataFormatters/heaviestPayloadLanded';
 import CountUp from 'react-countup';
 import { Bar } from 'react-chartjs-2';
+import Chartfilter from '../ChartFilter/ChartFilter';
 
 export default function LandingHistoryChart({ data }) {
   const [landingFilter, setLandingFilter] = useState('BOOSTERS LANDED');
@@ -46,58 +47,20 @@ export default function LandingHistoryChart({ data }) {
   return (
     <>
       {data !== undefined ? (
-        <div className='chartsContainer'>
+        <div className='chartsContainer' id='landingChart'>
           <div className='chartHeader'>
             <h1>RECOVERY - {landingFilter}</h1>
           </div>
-          <div className='chartFilterDiv'>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  landingFilter === 'BOOSTERS LANDED' ? 'selectedChartRow' : ''
-                }`}
-                id='BOOSTERS LANDED'
-                onClick={landingHistoryChartClick}
-              >
-                BOOSTERS LANDED
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  landingFilter === 'LANDING HISTORY' ? 'selectedChartRow' : ''
-                }`}
-                id='LANDING HISTORY'
-                onClick={landingHistoryChartClick}
-              >
-                LANDING HISTORY
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  landingFilter === 'HEAVIEST' ? 'selectedChartRow' : ''
-                }`}
-                id='HEAVIEST'
-                onClick={landingHistoryChartClick}
-              >
-                HEAVIEST
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  landingFilter === 'FAIRINGS RECOVERY'
-                    ? 'selectedChartRow'
-                    : ''
-                }`}
-                id='FAIRINGS RECOVERY'
-                onClick={landingHistoryChartClick}
-              >
-                FAIRINGS RECOVERY
-              </h5>
-            </div>
-          </div>
+          <Chartfilter
+            filter={landingFilter}
+            onClick={landingHistoryChartClick}
+            values={[
+              'BOOSTERS LANDED',
+              'LANDING HISTORY',
+              'HEAVIEST',
+              'FAIRINGS RECOVERY',
+            ]}
+          />
           <div className='chartContainer'>
             {landingFilter === 'BOOSTERS LANDED' ? (
               <div className='boostersContainer'>

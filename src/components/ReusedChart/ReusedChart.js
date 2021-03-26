@@ -1,81 +1,60 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { reusedFlights } from './dataFormatters/reusedFlights';
+import CountUp from 'react-countup';
+import ChartFilter from '../ChartFilter/ChartFilter';
 
+export default function ReusedChart({ data }) {
+  const [reusedCount, setReusedCount] = useState();
+  const [reusedFilter, setReusedFilter] = useState('REUSED FLIGHTS');
+  const handleReusedChartFilterClick = (e) => {
+    setReusedFilter(e.currentTarget.id);
+  };
 
-export default function ReusedChart() {
+  useEffect(() => {
+    const getData = () => {
+      const reusedFlightsCount = reusedFlights(data);
+      setReusedCount(reusedFlightsCount);
+    };
+    getData();
+  }, []);
 
-    const [reusedCount, setReusedCount] = useState();
-    
-    return (
-      {/* <div className='chartsContainer'>
-        <div className='chartHeader'>
-          <h1>LAUNCH HISTORY - {graphFilter}</h1>
-        </div>
-        <div className='chartFilterDiv'>
-          <div className='chartRow'>
-            <h5
-              className={`${
-                graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
-              }`}
-              id='PER YEAR'
-              onClick={handleChartFilterClick}
-            >
-              PER YEAR
-            </h5>
+  return (
+    <>
+      {data !== undefined ? (
+        <div className='chartsContainer' id='reusedCharts'>
+          <div className='chartHeader'>
+            <h1>REUSE - {reusedFilter}</h1>
           </div>
-          <div className='chartRow'>
-            <h5
-              className={`${
-                graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
-              }`}
-              id='PER ROCKET'
-              onClick={handleChartFilterClick}
-            >
-              PER ROCKET
-            </h5>
-          </div>
-          <div className='chartRow'>
-            <h5
-              className={`${
-                graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
-              }`}
-              id='PER LAUNCHPAD'
-              onClick={handleChartFilterClick}
-            >
-              PER LAUNCHPAD
-            </h5>
-          </div>
-          <div className='chartRow'>
-            <h5
-              className={`${
-                graphFilter === 'SUCCESS RATE' ? 'selectedChartRow' : ''
-              }`}
-              id='SUCCESS RATE'
-              onClick={handleChartFilterClick}
-            >
-              SUCCESS RATE
-            </h5>
+          <ChartFilter
+            filter={reusedFilter}
+            onClick={handleReusedChartFilterClick}
+            values={[
+              'REUSED FLIGHTS',
+              'MOST LAUNCHES',
+              'QUICKEST TURNAROUND',
+              'FAIRINGS',
+            ]}
+          />
+          <div className='chartContainer'>
+            {reusedFilter === 'REUSED FLIGHTS' ? (
+              <div className='boostersContainer'>
+                <h1 className='boostersLanded'>
+                  {reusedCount !== undefined ? (
+                    <CountUp end={reusedCount} />
+                  ) : (
+                    ''
+                  )}
+                </h1>
+                <h1>REUSED FLIGHTS</h1>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
-        <div className='chartContainer'>
-          {graphFilter === 'PER YEAR' ? (
-            <Bar data={yearData} options={yearOptions} key={graphFilter} />
-          ) : graphFilter === 'PER ROCKET' ? (
-            <Doughnut
-              data={rocketData}
-              options={doughnutChartOptions}
-              key={graphFilter}
-            />
-          ) : graphFilter === 'PER LAUNCHPAD' ? (
-            <Doughnut
-              data={launchpadData}
-              options={doughnutChartOptions}
-              key={graphFilter}
-            />
-          ) : (
-            <Line data={successData} options={lineOptions} key={graphFilter} />
-          )}
-        </div>
-      </div> */}
-    );
+      ) : (
+        ''
+      )}
+    </>
+  );
 }

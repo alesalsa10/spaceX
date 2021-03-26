@@ -4,6 +4,8 @@ import { pieChartDataFormatter } from './dataFormatters/rocketChart';
 import { launchpadDataFormatter } from './dataFormatters/launchpadChart';
 import { successRateFormatter } from './dataFormatters/successRate';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import Chartfilter from '../ChartFilter/ChartFilter';
+
 
 export default function LaunchHistoryChart({ data }) {
   const [graphFilter, setGraphFilter] = useState('PER YEAR');
@@ -49,53 +51,12 @@ export default function LaunchHistoryChart({ data }) {
           <div className='chartHeader'>
             <h1>LAUNCH HISTORY - {graphFilter}</h1>
           </div>
-          <div className='chartFilterDiv'>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  graphFilter === 'PER YEAR' ? 'selectedChartRow' : ''
-                }`}
-                id='PER YEAR'
-                onClick={handleChartFilterClick}
-              >
-                PER YEAR
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  graphFilter === 'PER ROCKET' ? 'selectedChartRow' : ''
-                }`}
-                id='PER ROCKET'
-                onClick={handleChartFilterClick}
-              >
-                PER ROCKET
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  graphFilter === 'PER LAUNCHPAD' ? 'selectedChartRow' : ''
-                }`}
-                id='PER LAUNCHPAD'
-                onClick={handleChartFilterClick}
-              >
-                PER LAUNCHPAD
-              </h5>
-            </div>
-            <div className='chartRow'>
-              <h5
-                className={`${
-                  graphFilter === 'SUCCESS RATE' ? 'selectedChartRow' : ''
-                }`}
-                id='SUCCESS RATE'
-                onClick={handleChartFilterClick}
-              >
-                SUCCESS RATE
-              </h5>
-            </div>
-          </div>
-          <div className='chartContainer'>
+          <Chartfilter
+            filter={graphFilter}
+            onClick={handleChartFilterClick}
+            values={['PER YEAR', 'PER ROCKET', 'PER LAUNCHPAD', 'SUCCESS RATE']}
+          />
+          <div className='chartContainer' id='launchCharts'>
             {graphFilter === 'PER YEAR' ? (
               <Bar data={yearData} options={yearOptions} key={graphFilter} />
             ) : graphFilter === 'PER ROCKET' ? (

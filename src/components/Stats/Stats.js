@@ -29,6 +29,7 @@ export default function Stats() {
         <>
           <LaunchHistoryChart data={data} />
           <LandingHistoryChart data={data} />
+          <ReusedChart data={data} />
         </>
       ) : (
         <div className='chartSpinner'>
