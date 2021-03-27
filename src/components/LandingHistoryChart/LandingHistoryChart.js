@@ -7,6 +7,7 @@ import CountUp from 'react-countup';
 import { Bar } from 'react-chartjs-2';
 import Chartfilter from '../ChartFilter/ChartFilter';
 import ChartArrows from '../CharArrows/ChartArrows';
+import './LandingHistoryChart.css';
 
 export default function LandingHistoryChart({ data }) {
   const [landingFilter, setLandingFilter] = useState('BOOSTERS LANDED');

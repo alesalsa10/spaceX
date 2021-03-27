@@ -1,0 +1,7 @@
+#landingChart{
+    background-image: url('../../images/landing.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+}

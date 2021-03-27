@@ -7,7 +7,6 @@ import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import ChartArrows from '../CharArrows/ChartArrows';
 import Chartfilter from '../ChartFilter/ChartFilter';
 import './LaunchHistory.css';
-import launch from '../../images/launch.jpg';
 
 
 export default function LaunchHistoryChart({ data }) {

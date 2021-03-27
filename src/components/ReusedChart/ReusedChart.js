@@ -3,6 +3,7 @@ import { reusedFlights } from './dataFormatters/reusedFlights';
 import CountUp from 'react-countup';
 import ChartFilter from '../ChartFilter/ChartFilter';
 import ChartArrows from '../CharArrows/ChartArrows';
+import './ReusedChart.css'
 
 export default function ReusedChart({ data }) {
   const [reusedCount, setReusedCount] = useState();
