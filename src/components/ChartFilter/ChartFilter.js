@@ -5,7 +5,7 @@ export default function ChartFilter({ filter, onClick, values }) {
   return (
     <div className='chartFilterDiv'>
       {values.map((value) => (
-        <div className='chartRow'>
+        <div className='chartRow' key={value}>
           <h5
             className={`${filter === value ? 'selectedChartRow' : ''}`}
             id={value}

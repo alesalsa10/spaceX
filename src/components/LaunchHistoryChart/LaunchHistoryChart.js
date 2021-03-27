@@ -4,7 +4,10 @@ import { pieChartDataFormatter } from './dataFormatters/rocketChart';
 import { launchpadDataFormatter } from './dataFormatters/launchpadChart';
 import { successRateFormatter } from './dataFormatters/successRate';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
+import ChartArrows from '../CharArrows/ChartArrows';
 import Chartfilter from '../ChartFilter/ChartFilter';
+import './LaunchHistory.css';
+import launch from '../../images/launch.jpg';
 
 
 export default function LaunchHistoryChart({ data }) {
@@ -47,7 +50,7 @@ export default function LaunchHistoryChart({ data }) {
   return (
     <>
       {yearData !== undefined && yearOptions !== undefined ? (
-        <div className='chartsContainer'>
+        <div className='chartsContainer' id='launchCharts'>
           <div className='chartHeader'>
             <h1>LAUNCH HISTORY - {graphFilter}</h1>
           </div>
@@ -56,7 +59,7 @@ export default function LaunchHistoryChart({ data }) {
             onClick={handleChartFilterClick}
             values={['PER YEAR', 'PER ROCKET', 'PER LAUNCHPAD', 'SUCCESS RATE']}
           />
-          <div className='chartContainer' id='launchCharts'>
+          <div className='chartContainer'>
             {graphFilter === 'PER YEAR' ? (
               <Bar data={yearData} options={yearOptions} key={graphFilter} />
             ) : graphFilter === 'PER ROCKET' ? (
@@ -79,6 +82,7 @@ export default function LaunchHistoryChart({ data }) {
               />
             )}
           </div>
+          <ChartArrows type='down' hrefId='#landingChart' />
         </div>
       ) : (
         ''

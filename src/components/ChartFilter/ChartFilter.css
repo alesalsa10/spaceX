@@ -8,12 +8,27 @@
   padding-top: 1rem;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 10px;
+}
+
+.selectedChartRow {
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-decoration-thickness: 2px;
+}
+
+.chartRow {
+  cursor: pointer;
+  margin-left: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
 @media only screen and (max-width: 800px) {
   .chartFilterDiv {
     width: 80%;
+  }
+  .chartRow {
+    font-size: small;
   }
 }
 

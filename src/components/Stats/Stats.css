@@ -1,6 +1,11 @@
-.chartsContainer{
+.chartsContainer {
   margin-bottom: 1rem;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+  overflow-y: hidden;
 }
+
+
 
 .chartContainer {
   width: 70%;
@@ -13,26 +18,14 @@
 }
 
 .chartHeader {
-  margin-top: 100px;
   color: white;
   text-align: center;
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-
-
-
-.chartRow {
-  cursor: pointer;
-  margin-left: 1.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.selectedChartRow {
-  text-decoration: underline;
-  text-decoration-color: white;
-  text-decoration-thickness: 2px;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: 100px auto 0;
 }
 
 .chartSpinner {
@@ -41,7 +34,7 @@
   margin: auto;
 }
 
-.boostersContainer{
+.boostersContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -49,11 +42,11 @@
   justify-content: center;
 }
 
-.boostersLanded{
+.boostersLanded {
   font-size: 4rem;
 }
 
-.graphInfo{
+.graphInfo {
   position: absolute;
   bottom: 0.5rem;
   left: 1rem;
@@ -63,8 +56,8 @@
   .chartContainer {
     width: 80%;
   }
-  .chartRow {
-    font-size: small;
+  .chartHeader{
+    width: 80%;
   }
 }
 
@@ -73,12 +66,8 @@
     width: 95%;
     height: 50vh;
   }
-  .chartFilterDiv{
+  .chartHeader {
+    font-size: 0.8rem;
     width: 95%;
   }
-  .chartHeader{
-    font-size: 1rem;
-  }
 }
-
-

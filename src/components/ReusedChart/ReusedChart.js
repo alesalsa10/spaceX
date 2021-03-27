@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { reusedFlights } from './dataFormatters/reusedFlights';
 import CountUp from 'react-countup';
 import ChartFilter from '../ChartFilter/ChartFilter';
+import ChartArrows from '../CharArrows/ChartArrows';
 
 export default function ReusedChart({ data }) {
   const [reusedCount, setReusedCount] = useState();
@@ -23,7 +24,10 @@ export default function ReusedChart({ data }) {
       {data !== undefined ? (
         <div className='chartsContainer' id='reusedCharts'>
           <div className='chartHeader'>
-            <h1>REUSE - {reusedFilter}</h1>
+            <div className='headerText'>
+              <h1>REUSE - {reusedFilter}</h1>
+            </div>
+            <ChartArrows hrefId='#landingChart' type='up' />
           </div>
           <ChartFilter
             filter={reusedFilter}

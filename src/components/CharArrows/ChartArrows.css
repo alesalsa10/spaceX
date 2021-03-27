@@ -1,0 +1,38 @@
+
+.anchorDownArrowContainer{
+  width: 70%;
+  margin: auto;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.anchorUpArrowContainer{
+  margin-left: auto;
+}
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+}
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+@media only screen and (max-width: 800px) {
+  .anchorDownArrowContainer{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .anchorDownArrowContainer{
+    width: 95%;
+  }
+}

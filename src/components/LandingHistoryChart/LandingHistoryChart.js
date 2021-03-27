@@ -6,6 +6,7 @@ import { getHeaviestLanded } from './dataFormatters/heaviestPayloadLanded';
 import CountUp from 'react-countup';
 import { Bar } from 'react-chartjs-2';
 import Chartfilter from '../ChartFilter/ChartFilter';
+import ChartArrows from '../CharArrows/ChartArrows';
 
 export default function LandingHistoryChart({ data }) {
   const [landingFilter, setLandingFilter] = useState('BOOSTERS LANDED');
@@ -49,7 +50,10 @@ export default function LandingHistoryChart({ data }) {
       {data !== undefined ? (
         <div className='chartsContainer' id='landingChart'>
           <div className='chartHeader'>
-            <h1>RECOVERY - {landingFilter}</h1>
+            <div className='headerText'>
+              <h1>RECOVERY - {landingFilter}</h1>
+            </div>
+            <ChartArrows type='up' hrefId='#launchCharts' />
           </div>
           <Chartfilter
             filter={landingFilter}
@@ -106,6 +110,7 @@ export default function LandingHistoryChart({ data }) {
               </div>
             )}
           </div>
+          <ChartArrows type='down' hrefId='#reusedCharts' />
         </div>
       ) : (
         ''

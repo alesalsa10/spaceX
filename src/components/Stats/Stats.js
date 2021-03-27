@@ -30,7 +30,7 @@ export default function Stats() {
           <LaunchHistoryChart data={data} />
           <LandingHistoryChart data={data} />
           <ReusedChart data={data} />
-        </>
+      </>
       ) : (
         <div className='chartSpinner'>
           <Loader type='TailSpin' color='#005288' height={100} width={100} />
