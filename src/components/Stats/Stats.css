@@ -34,7 +34,7 @@
   margin: auto;
 }
 
-.boostersContainer {
+.countUpContainer {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -42,8 +42,8 @@
   justify-content: center;
 }
 
-.boostersLanded {
-  font-size: 4rem;
+.innerCountUp {
+  font-size: 5rem;
 }
 
 .graphInfo {

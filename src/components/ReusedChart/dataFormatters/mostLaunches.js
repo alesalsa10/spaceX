@@ -25,18 +25,16 @@ export const getMostLaunches = (data) => {
 
   uniqueBoosters.sort((a, b) => b.reuse_count - a.reuse_count);
 
-  console.log(uniqueBoosters);
-
   const options = {
     scales: {
       xAxes: [
         {
-          stacked: false,
+          stacked: true,
           gridLines: {
             display: false,
           },
           ticks: {
-            fontColor: 'white',
+            fontColor: 'white', // this here
           },
           scaleLabel: {
             display: true,
@@ -47,7 +45,7 @@ export const getMostLaunches = (data) => {
       ],
       yAxes: [
         {
-          stacked: false,
+          stacked: true,
           gridLines: {
             display: true,
             color: 'white',
@@ -56,7 +54,7 @@ export const getMostLaunches = (data) => {
             fontColor: 'white',
           },
           scaleLabel: {
-            display: false,
+            display: true,
             labelString: 'Number Of Launches',
             fontColor: 'white',
           },
@@ -82,42 +80,42 @@ export const getMostLaunches = (data) => {
       {
         label: labels[0],
         backgroundColor: '#003f5c',
-        data: uniqueBoosters[0].reuse_count,
+        data: [uniqueBoosters[0].reuse_count, 0, 0,0,0,0,0,0],
       },
       {
         label: labels[1],
         backgroundColor: '#2f4b7c',
-        data: uniqueBoosters[1].reuse_count,
+        data: [0,uniqueBoosters[1].reuse_count, 0,0,0,0,0,0],
       },
       {
         label: labels[2],
         backgroundColor: '#665191',
-        data: uniqueBoosters[2].reuse_count,
+        data: [0,0,uniqueBoosters[2].reuse_count,0,0,0,0,0],
       },
       {
         label: labels[3],
         backgroundColor: '#a05195',
-        data: uniqueBoosters[3].reuse_count,
+        data: [0,0,0,uniqueBoosters[3].reuse_count,0,0,0,0],
       },
       {
         label: labels[4],
         backgroundColor: '#d45087',
-        data: uniqueBoosters[4].reuse_count,
+        data: [0,0,0,0,uniqueBoosters[4].reuse_count,0,0,0],
       },
       {
         label: labels[5],
         backgroundColor: '#d45087',
-        data: uniqueBoosters[5].reuse_count,
+        data: [0,0,0,0,0,uniqueBoosters[5].reuse_count,0,0],
       },
       {
         label: labels[6],
         backgroundColor: '#ff7c43',
-        data: uniqueBoosters[6].reuse_count,
+        data: [0,0,0,0,0,0,uniqueBoosters[6].reuse_count,0],
       },
       {
         label: labels[7],
         backgroundColor: '#ffa600',
-        data: uniqueBoosters[7].reuse_count,
+        data: [0,0,0,0,0,0,0,uniqueBoosters[7].reuse_count],
       },
     ],
   };

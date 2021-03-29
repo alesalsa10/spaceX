@@ -407,6 +407,7 @@ export default function Vehicle() {
               </div>
             </div>
           </div>
+          
           <div className='imageDiv'>
             <img
               className='vehicleImage'

@@ -18,8 +18,6 @@ export default function Stats() {
       setData(allLaunches);
       console.log(allLaunches);
 
-      /* const reused = reusedFlights(allLaunches);
-      setReusedCount(reused);  */
     };
     fetchAllLaunches();
   }, []);
