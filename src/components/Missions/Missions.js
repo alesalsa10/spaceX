@@ -537,8 +537,8 @@ export default function Missions() {
                   <div className='topRowItem'>FLIGHT NO</div>
                   <div className='topRowItem'>VEHICLE</div>
                   <div className='topRowItem'>DATE</div>
-                  <div className='topRowItem launchSite '>LAUNCH SITE</div>
-                  <div className='topRowItem'>PAYLOAD</div>
+                  <div className='topRowItem '>LAUNCH SITE</div>
+                  <div className='topRowItem payload'>PAYLOAD</div>
                   <div className='topRowItem customer '>CUSTOMER</div>
                   <div className='topRowItem'>OUTCOME</div>
                 </div>

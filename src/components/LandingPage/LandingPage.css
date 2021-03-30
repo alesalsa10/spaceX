@@ -94,7 +94,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   color: white;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
   margin-bottom: 1rem;
 }

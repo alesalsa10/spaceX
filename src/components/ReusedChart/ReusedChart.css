@@ -1,6 +1,8 @@
-#reusedCharts{
-    background-image: url('../../images/reused.jpg');
-    height: 100vh;
-    background-size: cover;
-    margin: 0;
+#reusedCharts {
+  background-image: url('../../images/reused.jpg');
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }

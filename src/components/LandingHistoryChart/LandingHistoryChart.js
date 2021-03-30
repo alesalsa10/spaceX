@@ -68,8 +68,8 @@ export default function LandingHistoryChart({ data }) {
           />
           <div className='chartContainer'>
             {landingFilter === 'BOOSTERS LANDED' ? (
-              <div className='boostersContainer'>
-                <h1 className='boostersLanded'>
+              <div className='countUpContainer'>
+                <h1 className='innerCountUp'>
                   {boostersLanded !== undefined ? (
                     <CountUp end={boostersLanded} />
                   ) : (
@@ -95,8 +95,8 @@ export default function LandingHistoryChart({ data }) {
                 key={landingFilter}
               />
             ) : (
-              <div className='boostersContainer'>
-                <h1 className='boostersLanded'>
+              <div className='countUpContainer'>
+                <h1 className='innerCountUp'>
                   {heaviestLanded !== undefined ? (
                     <CountUp end={heaviestLanded.heaviest} />
                   ) : (

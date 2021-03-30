@@ -1,6 +1,7 @@
-#launchCharts{
-    background-image: url('../../images/launch.jpg');
-    height: 100vh;
-    background-size: cover;
-    margin: 0;
+#launchCharts {
+  background-image: url('../../images/launch.jpg');
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

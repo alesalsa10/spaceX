@@ -76,9 +76,9 @@ export default function NavBar() {
               {allRockets.map((rocket) => (
                 <div className='navBarItem' key={rocket.id}>
                   <NavLink
-                    to={`/vehicles/${rocket.name.split(' ').join('')}/${
-                      rocket.id
-                    }`}
+                    to={`/vehicles/${rocket.id}/${rocket.name
+                      .split(' ')
+                      .join('')}`}
                     className='link'
                     activeClassName='activeLink'
                   >
@@ -89,9 +89,9 @@ export default function NavBar() {
               {dragon.map((dragon) => (
                 <div className='navBarItem' key={dragon.id}>
                   <NavLink
-                    to={`/vehicles/${dragon.name.split(' ').join('')}/${
-                      dragon.id
-                    }`}
+                    to={`/vehicles/${dragon.id}/${dragon.name
+                      .split(' ')
+                      .join('')}`}
                     className='link'
                     activeClassName='activeLink'
                   >
