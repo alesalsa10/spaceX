@@ -1,5 +1,5 @@
 import React from 'react';
-import './app.css';
+import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import LandingPage from './components/LandingPage/LandingPage';
 import Vehicle from './components/Vehicle/Vehicle';
