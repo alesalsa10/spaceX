@@ -1,11 +1,16 @@
 .dateContainer {
   width: fit-content;
   display: grid;
-  grid-template-columns: repeat(4, 70px);
+  /* grid-template-columns: repeat(4, 70px); */
+  grid-template-columns: repeat(4, auto);
   align-items: baseline;
   justify-items: center;
   justify-content: space-between;
   grid-column-gap: 15px;
+}
+.flex{
+  display: flex;
+  gap: 5px;
 }
 
 .timeParts {
@@ -14,12 +19,15 @@
 }
 
 .time {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 5px;
   align-items: baseline;
   justify-items: center;
-  justify-content: space-between;
+  justify-content: space-between; */
+  display: flex;
+  flex-direction: row;
+  gap:2px
 }
 
 .part {
@@ -30,17 +38,20 @@
 }
 
 @media only screen and (max-width: 400px) {
-  .dateContainer {
+  /* .dateContainer {
     grid-template-columns: repeat(4, 60px);
     grid-column-gap: 10px;
   }
   .part{
     width: 25px;
+  } */
+  .part{
+    width: 30px;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .dateContainer {
+  /* .dateContainer {
     grid-template-columns: repeat(4, 65px);
-  }
+  } */
 }

@@ -24,7 +24,6 @@ export default function LandingPage() {
     async function fetchnextMissionInfo() {
       const upcomingMission = await fetchUpcomingMission();
       setNextMissionInfo(upcomingMission);
-
       let launchPadID = await upcomingMission.launchpad;
       const launchSite = await getLaunchSiteInfo(launchPadID);
       let name = await launchSite.name.toUpperCase();

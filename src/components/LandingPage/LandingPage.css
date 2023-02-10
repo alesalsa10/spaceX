@@ -129,6 +129,11 @@
   margin-right: 0.5rem;
 }
 
+.flex{
+  display: flex;
+  flex-direction: row;
+}
+
 @media only screen and (max-width: 450px) {
   .missionInfoContainer {
     font-size: small;
@@ -223,3 +228,4 @@
     font-size: 2rem;
   }
 }
+

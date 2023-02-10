@@ -44,7 +44,13 @@ export default function DateFormatter({ end }) {
     } else {
       days = `${days}`;
     }
-    return { days, hours, minutes, seconds };
+    // return { days, hours, minutes, seconds };
+    return {
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    };
   };
 
   useEffect(() => {
@@ -56,7 +62,31 @@ export default function DateFormatter({ end }) {
 
   return (
     <>
-      <div className='dateContainer'>
+      {remainingTime ? (
+        <div className='dateContainer'>
+          {Object.entries(remainingTime).map(([key, value]) => {
+            return (
+              <div className='timeParts' key={key}>
+                <div className='header'>
+                  <p>{key.toUpperCase()}</p>
+                </div>
+                <div className='flex'>
+                  {value.split('').map((item, index) => (
+                    <div className='time' key={index}>
+                      <div className='part'>
+                        <h1 className='number'>{item}</h1>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <></>
+      )}
+      {/* <div className='dateContainer'>
         <div className='timeParts'>
           <div className='header'>
             <p>DAYS</p>
@@ -137,7 +167,7 @@ export default function DateFormatter({ end }) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
